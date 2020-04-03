@@ -1,0 +1,146 @@
+/* pages/myWork/myWork.wxss */
+.myWork{
+  padding: 0 40rpx 180rpx 40rpx;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+.myWork .section{
+  margin-right: 30rpx;
+}
+.myWork .section-title{
+  font-size: 28rpx;
+  color:#333;
+}
+.myWork .section-check{
+  width: 16rpx;
+  height: 14rpx;
+  display: inline-block;
+  margin-left: 12rpx;
+}
+.myWork .myWork-ul{
+  margin-top: 50rpx;
+}
+.myWork .myWork-ul .myWork-li{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.myWork .myWork-ul .myWork-li .bg-img{
+  width: 125rpx;
+  height: 125rpx;
+  margin-right: 20rpx;
+  background-color: #2896fe;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.myWork .myWork-ul .myWork-li .bg-img .subject-img{
+  width: 100rpx;
+  height: 100rpx;
+}
+.myWork .myWork-ul .myWork-li .center{
+  flex: 1;
+}
+.myWork .myWork-ul .myWork-li .center .center-top{
+  display: block;
+  text-align: left;
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+}
+.myWork .myWork-ul .myWork-li .center .center-page{
+  display: block;
+  text-align: left;
+  font-size: 30rpx;
+}
+.myWork .myWork-ul .myWork-li .img-right{
+  height: 30rpx;
+  width: 20rpx;
+}
+.myWork .myWork-ul .myWork-bot{
+  display: flex;
+  margin: 30rpx 0 50rpx 0;
+}
+.myWork .myWork-ul .myWork-bot .img-time{
+  width: 20rpx;
+  height: 20rpx;
+  display: inline-block;
+  margin-right: 6rpx;
+  vertical-align: middle;
+}
+.myWork .myWork-ul .myWork-bot text{
+  font-size: 26rpx;
+}
+.myWork .myWork-ul .myWork-bot .book-time{
+  width: 146rpx;
+  display: inline-block;
+}
+.myWork .myWork-ul .myWork-bot .book-name{
+  width: 450rpx;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.myWork .myWork-ul .myWork-bot .img-book{
+  width: 16rpx;
+  height: 22rpx;
+  display: inline-block;
+  margin: 0 6rpx 0 16rpx;
+  vertical-align: middle;
+}
+
+.scan{
+  position: fixed;
+  bottom: 200rpx;
+  right: 44rpx;
+  height: 200rpx;
+  width: 200rpx;
+  background-color: rgba(126, 192, 254, .6);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.scan image{
+  height: 60rpx;
+  width: 60rpx;
+}
+.scan text {
+  font-size: 30rpx;
+  color: #fff;
+  margin-top: 14rpx;
+}
+
+.footer{
+  position: fixed;
+  width: 100%;
+  height: 140rpx;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  border-top: 2rpx solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.footer .footer-workpng{
+  width: 56rpx;
+  height: 56rpx;
+}
+.footer .footer-mypng {
+  width: 48rpx;
+  height: 56rpx;
+  margin-left: 4rpx;
+}
+.footer .text {
+  font-size: 30rpx;
+  color:#9f9f9f
+}
+.footer .active-text{
+  color: #2896fe;
+}

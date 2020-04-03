@@ -1,0 +1,67 @@
+/* pages/login.wxss */
+.login{
+  background-color: #f2faf2;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  padding-top: 100rpx;
+}
+.login .login-logo{
+  height: 300rpx;
+  width: 300rpx;
+  margin: 0 auto ;
+}
+.login .title{
+  font-size: 34rpx;
+  color: #333;
+  text-align: center;
+  margin: 63rpx 0 30rpx 0;
+}
+.login .title-little{
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+
+}
+.login .login-wx{
+  width: 506rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  background-color: #53bd3e;
+  color: #fff;
+  margin-top: 60rpx;
+  box-sizing: border-box;
+}
+.login .login-phone{
+  width: 506rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  border: 2rpx solid #ddd;
+  color: #333;
+  margin-top: 30rpx;
+}
+.login .bottom{
+  position: absolute;
+  bottom: 70rpx;
+  width: 100%;
+  text-align: center;
+}
+.login .bottom label{
+  display: inline-block;
+}
+.login .bottom label .checkbox .wx-checkbox-input{
+  width: 30rpx;
+  height: 30rpx;
+}
+.login .bottom .agree{
+  font-size: 24rpx;
+  color: #999;
+}
+.login .bottom .reg{
+  font-size: 24rpx;
+  color: #333;
+}

@@ -1,0 +1,48 @@
+.button{
+  margin:0;
+  padding:0;
+  background-color:rgba(0,0,0,0);
+  line-height:inherit;
+  border-radius:0;
+  border:none;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight: normal;
+}
+.button::after{
+  border: none;
+}
+.button-hover {
+  background-color:rgba(0, 0, 0, 0);
+}
+image{
+  display: block;
+}
+view,text,input,button{
+  box-sizing: border-box;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0
+}
+
+.show{
+  display: block !important;
+}
+.none{
+  display: none !important;
+}
+html,body{
+  -webkit-overflow-scrolling: touch;
+}
+.left{
+  float: left;
+}
+.right{
+  float: right;
+}

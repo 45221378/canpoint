@@ -1,0 +1,78 @@
+<!--pages/myWork/myWork.wxml-->
+<view class="myWork ">
+  <view class="clearfix">
+    <view class="section left">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          <text class="section-title">{{index===''?'筛选学段':array[index]}}</text><image class="section-check" src='/images/check-bottom.png'></image>
+        </view> 
+      </picker>  
+    </view>
+    <view class="section left">
+      <picker bindchange="changeObject" value="{{objectIndex}}" range="{{objectArray}}">
+        <view class="picker">
+          <text class="section-title">{{objectIndex===''?'筛选学科':objectArray[objectIndex]}}</text><image class="section-check" src='/images/check-bottom.png'></image>
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="myWork-ul">
+    <view class="myWork-li">
+      <view class="bg-img">
+        <image class="subject-img" src='/images/subject/biology.png'></image>
+      </view>
+      <view class="center">
+        <text class="center-top">小学语文</text>
+        <text class="center-page">第1课  勇气的来源</text>
+      </view>
+      <image class="img-right" src='/images/right.png'></image>
+    </view>
+    <view class="myWork-bot">
+      <view>
+        <image class="img-time" src='/images/time.png'></image>
+        <text>2019-10-25</text>
+      </view>
+      <view>
+        <image class="img-book" src='/images/book.png'></image>
+        <text class="book-name">全品学练考小学语文人教版八年级上册</text>
+      </view>
+    </view>
+
+    <view class="myWork-li">
+      <view class="bg-img">
+        <image class="subject-img" src='/images/subject/biology.png'></image>
+      </view>
+      <view class="center">
+        <text class="center-top">小学语文</text>
+        <text class="center-page">第1课  勇气的来源</text>
+      </view>
+      <image class="img-right" src='/images/right.png'></image>
+    </view>
+    <view class="myWork-bot">
+      <view>
+        <image class="img-time" src='/images/time.png'></image>
+        <text class="book-time">2019-0-25</text>
+      </view>
+      <view>
+        <image class="img-book" src='/images/book.png'></image>
+        <text class="book-name">全品学练考小学语文人教版八年级上册</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="scan">
+    <image src="/images/scan.png"></image>
+    <text>扫一扫</text>
+  </view>
+  <view class="footer">
+    <view>
+      <image class="footer-workpng"  src='/images/homework-1.png'></image>
+      <text class="text work active-text">作业</text>
+    </view>
+    <view>
+      <image class="footer-mypng" src='/images/mine-1.png'></image>
+      <text class="text my">我的</text>
+    </view>
+  </view>
+</view>
+

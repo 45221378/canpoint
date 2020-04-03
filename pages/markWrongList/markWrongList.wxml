@@ -1,0 +1,70 @@
+<!--pages/markWrongList/markWrongList.wxml-->
+<view class="markWrongList">
+  <text class="top">当前作业：周滚动练习</text>
+  <view class="question">
+    <view class="easy">
+      <text class="right-answer">1，正确答案：<text> D</text></text>
+      <view class="taps">
+          <text class="left">标记我的答案：</text>
+          <view class="answer clearfix">
+            <view class="ques ">A</view>
+            <view class="ques checked ">B</view>
+            <view class="ques ">C</view>
+            <view class="ques ">D</view>
+          </view>
+      </view>
+    </view>
+    <view class="easy">
+      <text class="right-answer">2，正确答案：<text> C</text></text>
+      <view class="taps">
+          <text class="left">标记我的答案：</text>
+          <view class="answer clearfix">
+            <view class="ques ">A</view>
+            <view class="ques  ">B</view>
+            <view class="ques checked">C</view>
+            <view class="ques ">D</view>
+          </view>
+      </view>
+    </view>
+    <view class="easy">
+      <text class="right-answer">3，正确答案：<text> A</text></text>
+      <view class="taps">
+          <text class="left">标记我的答案：</text>
+          <view class="answer clearfix">
+            <view class="ques checked">A</view>
+            <view class="ques  ">B</view>
+            <view class="ques ">C</view>
+            <view class="ques ">D</view>
+          </view>
+      </view>
+    </view>
+    <view class="easy">
+      <text class="right-answer">4，正确答案：<text> B</text></text>
+      <view class="taps">
+          <text class="left">标记我的答案：</text>
+          <view class="answer clearfix">
+            <view class="ques ">A</view>
+            <view class="ques checked ">B</view>
+            <view class="ques ">C</view>
+            <view class="ques ">D</view>
+          </view>
+      </view>
+    </view>
+    <view class="easy ">
+      <text class="right-answer">5，正确答案：<text> 答案不唯一，如图。</text></text>
+      <view class='answer-img'>
+        <image  src='/images/logo.png' ></image>
+      </view>
+      <view class="taps">
+          <text class="left">标记我的答案：</text>
+          <view class="answer clearfix">
+            <view class="ques unormal checked ">我答对了</view>
+            <view class="ques unormal">标为错题</view>
+          </view>
+      </view>
+    </view>
+
+  </view>  
+  <button class="submit button">提交</button>
+</view>
+
