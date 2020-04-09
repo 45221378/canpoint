@@ -12,10 +12,11 @@
 }
 .phoneReg .border{
   border-bottom: 1px solid #ddd;
-  padding:  20rpx 0;
 }
 .phoneReg .border input{
   font-size: 24rpx;
+  padding:  40rpx 0 10rpx 0;
+  height: 110rpx;
 }
 .black{
   color: #e6e6e6;
@@ -24,6 +25,11 @@
   font-size: 24rpx;
   color: #999;
   float: right;
+  width: 160rpx;
+  background-color: #f7f7f7;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  margin: 46rpx 10rpx 0 0;
 }
 .phoneReg .form .reg{
   width: 506rpx;

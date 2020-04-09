@@ -15,26 +15,54 @@ Page({
   onLoad: function (options) {
 
   },
-  getUserInfos: function(e) {
-    let self = this
-    let userInfos = e.detail.userInfo;
-    console.log(e.detail);
+  // getUserInfos: function(e) {
+  //   let self = this
+  //   console.log(e.detail);
+  //   if (e.detail.errMsg == "getUserInfo:ok") {
+  //     let url = wx.getStorageSync('requstURL') +'user/auth';
+  //     let resCode = wx.getStorageSync('resCode');
+  //     let data = {
+  //       method: 2,
+  //       code: resCode,
+  //       encryptedData:e.detail.encryptedData,
+  //       iv:e.detail.iv,
+  //     }
+  //     ajax.requestLoad(url,data,'POST').then(res=>{
+  //       console.log(res)
+  //     })
 
-    if (e.detail.errMsg == "getUserInfo:ok") {
-      let url = 'http://zywx.canpoint.net:9200/user/auth';
-      let data = {
-        method: 2,
-        // code:,
-        // encryptedData:,
-        // iv:,
-        // cid: wx.getStorageSync('cid'),
-        // wxLoc: userInfos.avatarUrl,
-        // name: userInfos.nickName,
-      }
-      // ajax(url, data, "POST").then(res => {
-      //   conosle.log(res)
-      // })
+  //   }
+  // },
+  getPhoneNumber (e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
+    let url = wx.getStorageSync('requstURL') +'user/auth';
+    let resCode = wx.getStorageSync('resCode');
+    let data = {
+      method: 2,
+      code: resCode,
+      encryptedData:e.detail.encryptedData,
+      iv:e.detail.iv,
     }
+    ajax.requestLoad(url,data,'POST').then(res=>{
+      if(res.code===20000){
+        wx.switchTab({
+          url: '/pages/scanWork/scanWork',
+        })
+      }
+    })
+
+  },
+  phoneReg(){
+    wx.navigateTo({
+      url: '/pages/phoneReg/phoneReg',
+    })
+  },
+  agreement(){
+    wx.navigateTo({
+      url: '/pages/agreement/agreement',
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

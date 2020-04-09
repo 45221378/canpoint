@@ -1,16 +1,16 @@
 <!--pages/phoneReg/phoneReg.wxml-->
 <view class="phoneReg">
   <text class="title">手机号登陆</text>
-   <form bindsubmit="regSubmit">
+   <form>
     <view class="form">
       <view class="border">
-        <input placeholder="请输入手机号" value="{{userPhone}}" name="userPhone" max-length="11" placeholder-class="black" type="number" maxlength="11" auto-focus />
+        <input placeholder="请输入手机号" bindinput='getPhoneValue' value="{{userPhone}}" name="userPhone" placeholder-class="black" type="number" maxlength="11" auto-focus />
       </view>
       <view class="border clearfix">
-        <input placeholder="请输入验证码" value="{{userCode}}" name="userCode" max-length="6" placeholder-class="black" auto-focus/>
-        <button form-type="submit" class="button getCode">发送验证码</button>
+        <input class="left" placeholder="请输入验证码" bindinput='getuserCode' value="{{userCode}}" name="userCode" max-length="6" placeholder-class="black" auto-focus/>
+        <button class="button getCode" bindtap="getCode">{{codename}}</button>
       </view>
-      <button form-type="submit" class="button reg">登录</button>
+      <button class="button reg" bindtap="regSubmit">登录</button>
     </view>
   </form>
 </view>

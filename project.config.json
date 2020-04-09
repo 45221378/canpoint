@@ -25,8 +25,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
-	"appid": "wx2344ed21c2d6ffb0",
-	"projectname": "canpoint",
+	"appid": "wxb7b1182d2e5c8415",
+	"projectname": "canpoint-wx",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

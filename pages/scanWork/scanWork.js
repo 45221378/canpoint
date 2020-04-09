@@ -1,15 +1,34 @@
-// pages/markWrongList/markWrongList.js
+// pages/scanWork/scanWork.js
 var ajax = require("./../../utils/ajax.js")
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    title:'',
+    
   },
-
+  scancode: function(){
+    // 允许从相机和相册扫码
+    wx.scanCode({
+      success(res) {
+        let section_id = res.result.split(',')[0];
+        wx.setStorageSync('section_id', section_id);
+        wx.navigateTo({
+          url: `/pages/myWork/myWork?section_id=${section_id}`,
+        })
+        
+      },
+      fail: (res) =>{
+        wx.showToast({
+          title: '扫描失败',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

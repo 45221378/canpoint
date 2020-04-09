@@ -1,4 +1,14 @@
-<!--pages/myWork/myWork.wxml-->
+<!--pages/scanWork/scanWork.wxml-->
+<!-- <view class="scanWork">
+  <image src="../../images/banner.png"></image>
+  <text class="click">点击【扫一扫】开启作业之旅~</text>
+  <view class="scan" bindtap='scancode'>
+    <image src="/images/scan.png"></image>
+    <text>扫一扫</text>
+  </view>
+</view> -->
+
+
 <view class="myWork ">
   <view class="clearfix">
     <view class="section left">
@@ -65,4 +75,3 @@
     <text>扫一扫</text>
   </view>
 </view>
-

@@ -1,6 +1,4 @@
-// pages/markWrongList/markWrongList.js
-var ajax = require("./../../utils/ajax.js")
-
+// pages/pointTrain/pointTrain.js
 Page({
 
   /**
@@ -14,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**

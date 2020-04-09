@@ -1,0 +1,15 @@
+<!--pages/pointTrain/pointTrain.wxml-->
+<view class="pointTrain">
+  <view class="title">作业：沂水经过湘江</view>
+  <view class="content">
+    <text class="tips">将为您下载本作业错题和针对训练题。</text>
+    <view class="net">
+      <text class="net-work">网址：https://note.youdao.com/signIn/index.html?&callback=https%3A%2F%2Fnote.you.com</text>
+      <text class="copy">复制</text>
+    </view>
+    <text class="error">
+      如果不能下载，你也可以复制网址到浏览器打开或点击右上角“... — 在浏览器内打开“（有效期为10分钟）
+    </text>
+    <button class="button download">下载针对训练</button>
+  </view>
+</view>

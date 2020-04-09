@@ -1,0 +1,38 @@
+/* pages/scanWork/scanWork.wxss */
+@import '../myWork/myWork.wxss';
+
+.scanWork image{
+  height: 40vh;
+  width: 100%;
+  position: relative;
+}
+.scanWork .click{
+  font-size: 30rpx;
+  color: #333;
+  text-align: center;
+  margin-top: 120rpx;
+  display: block;
+}
+.scanWork .scan{
+  position: fixed;
+  bottom: 300rpx;
+  right: 50%;
+  height: 240rpx;
+  width: 240rpx;
+  background-color: #2896fe;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(50%);
+}
+.scanWork .scan image{
+  height: 70rpx;
+  width: 70rpx;
+}
+.scanWork .scan text {
+  font-size: 34rpx;
+  color: #fff;
+  margin-top: 24rpx;
+}

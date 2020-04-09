@@ -1,0 +1,66 @@
+/* pages/mine/mine.wxss */
+.mine {
+  background-color: #f9f9f9;
+  height: 100vh;
+  padding-top: 24rpx;
+
+}
+.mine .mine-img{
+  height: 30vh;
+  background-color: #fff;
+  margin-bottom: 24rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.mine .mine-img .image{
+  height: 200rpx;
+  width: 200rpx;
+  margin-bottom: 30rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.mine .mine-img .mine-name{
+  font-size: 30rpx;
+  color: #333;
+}
+
+.mine .ul{
+  background-color: #fff;
+  padding-bottom: 60rpx;
+}
+.mine .ul .li{
+  height: 120rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2rpx solid #eee;
+  padding: 0 40rpx;
+}
+.mine .ul .li .img-right{
+  height: 30rpx;
+  width: 20rpx;
+}
+.mine .ul .li text{
+  font-size: 30rpx;
+  color: #333;
+}
+.mine .ul .li .contact {
+  font-size: 30rpx;
+  color: #333;
+  text-align: left;
+  display: block;
+  flex: 1;
+}
+.mine .loginout{
+  font-size: 30rpx;
+  color: #999;
+  background-color: #eeeeee;
+  margin-top: 120rpx;
+  width: 600rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  font-weight: normal;
+}

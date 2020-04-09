@@ -1,6 +1,4 @@
-// pages/markWrongList/markWrongList.js
-var ajax = require("./../../utils/ajax.js")
-
+// pages/mine/mine.js
 Page({
 
   /**
@@ -9,12 +7,16 @@ Page({
   data: {
 
   },
-
+  loginout(){
+    wx.navigateTo({
+      url: '/pages/login/login',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**

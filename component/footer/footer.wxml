@@ -1,0 +1,12 @@
+<template name="footer">
+  <view class="footer">
+    <view>
+      <image class="footer-workpng"  src='/images/homework-1.png'></image>
+      <text class="text work active-text">作业</text>
+    </view>
+    <view>
+      <image class="footer-mypng" src='/images/mine-1.png'></image>
+      <text class="text my">我的</text>
+    </view>
+  </view>
+</template>

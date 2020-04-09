@@ -1,0 +1,28 @@
+<!--pages/mine/mine.wxml-->
+<view class="mine">
+  <view class="mine-img">
+    <!-- <image src="../../images/logo.png"></image>
+    <text class="mine-name">齐老师</text> -->
+    <view class="image">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+    <view class="mine-name">
+      <open-data type="userNickName"></open-data>
+    </view>
+  </view>
+  <view class="ul">
+    <view class="li">
+      <button class="button contact" open-type='contact'>客服中心</button>
+      <image class="img-right" src="../../images/right.png"></image>
+    </view>
+    <view class="li">
+      <text>服务协议</text>
+      <image class="img-right" src="../../images/right.png"></image>
+    </view>
+    <button class="button loginout" bindtap="loginout">退出登录</button>
+
+  </view>
+
+  <!-- <import src="/component/footer/footer" />
+  <template is="footer"></template> -->
+</view>
