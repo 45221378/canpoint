@@ -26,21 +26,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // const {section_id} = options;
-    const section_id = 'tXXi99sA';
-    let url = wx.getStorageSync('requstURL') +'homework/info';
-    let token = wx.getStorageSync('token');
-    let data  = {
-      token: token,
-      section_id: section_id
-    };
-    ajax.requestLoad(url,data,'GET').then(res=>{
-      if(res.code===20000){
-        res.question_list.map(item=>{
-
-        })
-      }
-    })
+    
   },
 
   /**

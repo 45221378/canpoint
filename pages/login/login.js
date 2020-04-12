@@ -34,9 +34,6 @@ Page({
   //   }
   // },
   getPhoneNumber (e) {
-    console.log(e.detail.errMsg)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
     let url = wx.getStorageSync('requstURL') +'user/auth';
     let resCode = wx.getStorageSync('resCode');
     let data = {
@@ -47,6 +44,7 @@ Page({
     }
     ajax.requestLoad(url,data,'POST').then(res=>{
       if(res.code===20000){
+        wx.setStorageSync('token', res.token)
         wx.switchTab({
           url: '/pages/scanWork/scanWork',
         })

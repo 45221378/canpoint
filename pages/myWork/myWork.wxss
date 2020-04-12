@@ -5,8 +5,16 @@
   height: 100vh;
   position: relative;
 }
+.myWork .title{
+  font-size: 32rpx;
+  color: #000;
+  display: block;
+  text-align: center;
+  margin-top: 80rpx;
+  margin-bottom: 20rpx;
+}
 .myWork .section{
-  margin-right: 30rpx;
+  padding-right: 40rpx;
 }
 .myWork .section-title{
   font-size: 28rpx;
@@ -75,14 +83,19 @@
 .myWork .myWork-ul .myWork-bot .book-time{
   width: 146rpx;
   display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-right: 30rpx;
+  vertical-align: middle;
 }
 .myWork .myWork-ul .myWork-bot .book-name{
-  width: 450rpx;
+  width: 400rpx;
   display: inline-block;
   vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 1;
 }
 .myWork .myWork-ul .myWork-bot .img-book{
   width: 16rpx;

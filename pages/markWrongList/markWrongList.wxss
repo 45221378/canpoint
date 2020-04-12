@@ -1,4 +1,5 @@
 /* pages/markWrongList/markWrongList.wxss */
+@import '../../wxParse/wxParse.wxss';
 .markWrongList{
   padding: 0 48rpx 50rpx 48rpx;
 }

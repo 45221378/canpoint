@@ -1,15 +1,16 @@
 <!--pages/scanWork/scanWork.wxml-->
-<!-- <view class="scanWork">
+<view class="scanWork" wx:if="{{showScan}}">
   <image src="../../images/banner.png"></image>
   <text class="click">点击【扫一扫】开启作业之旅~</text>
   <view class="scan" bindtap='scancode'>
     <image src="/images/scan.png"></image>
     <text>扫一扫</text>
   </view>
-</view> -->
+</view>
 
 
-<view class="myWork ">
+<view class="myWork " wx:if="{{!showScan}}">
+  <text class="title">我的作业</text>
   <view class="clearfix">
     <view class="section left">
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
@@ -19,58 +20,39 @@
       </picker>  
     </view>
     <view class="section left">
-      <picker bindchange="changeObject" value="{{objectIndex}}" range="{{objectArray}}">
+      <picker bindchange="changeObject" value="{{objectIndex}}" range="{{objectArrayInt}}">
         <view class="picker">
-          <text class="section-title">{{objectIndex===''?'筛选学科':objectArray[objectIndex]}}</text><image class="section-check" src='/images/check-bottom.png'></image>
+          <text class="section-title">{{objectIndex===''?'筛选学科':objectArrayInt[objectIndex]}}</text><image class="section-check" src='/images/check-bottom.png'></image>
         </view>
       </picker>
     </view>
   </view>
   <view class="myWork-ul">
-    <view class="myWork-li">
-      <view class="bg-img">
-        <image class="subject-img" src='/images/subject/biology.png'></image>
+    <block wx:for-items="{{record_list}}" wx:key="index">
+      <view class="myWork-li" bindtap="goList" data-sectionId='tXXi99sA'>
+        <view class="bg-img">
+          <image class="subject-img" src="{{imgList[item.subject_id]}}"></image>
+        </view>
+        <view class="center">
+          <text class="center-top">{{item.subject_name}}</text>
+          <text class="center-page">{{item.section_name}}</text>
+        </view>
+        <image class="img-right" src='/images/right.png'></image>
       </view>
-      <view class="center">
-        <text class="center-top">小学语文</text>
-        <text class="center-page">第1课  勇气的来源</text>
+      <view class="myWork-bot">
+        <view>
+          <image class="img-time" src='/images/time.png'></image>
+          <text class="book-time">{{item.modified}}</text>
+        </view>
+        <view>
+          <image class="img-book" src='/images/book.png'></image>
+          <text class="book-name">{{item.book_name}}</text>
+        </view>
       </view>
-      <image class="img-right" src='/images/right.png'></image>
-    </view>
-    <view class="myWork-bot">
-      <view>
-        <image class="img-time" src='/images/time.png'></image>
-        <text>2019-10-25</text>
-      </view>
-      <view>
-        <image class="img-book" src='/images/book.png'></image>
-        <text class="book-name">全品学练考小学语文人教版八年级上册</text>
-      </view>
-    </view>
-
-    <view class="myWork-li">
-      <view class="bg-img">
-        <image class="subject-img" src='/images/subject/biology.png'></image>
-      </view>
-      <view class="center">
-        <text class="center-top">小学语文</text>
-        <text class="center-page">第1课  勇气的来源</text>
-      </view>
-      <image class="img-right" src='/images/right.png'></image>
-    </view>
-    <view class="myWork-bot">
-      <view>
-        <image class="img-time" src='/images/time.png'></image>
-        <text class="book-time">2019-0-25</text>
-      </view>
-      <view>
-        <image class="img-book" src='/images/book.png'></image>
-        <text class="book-name">全品学练考小学语文人教版八年级上册</text>
-      </view>
-    </view>
+    </block>
   </view>
 
-  <view class="scan">
+  <view class="scan" bindtap='scancode'>
     <image src="/images/scan.png"></image>
     <text>扫一扫</text>
   </view>

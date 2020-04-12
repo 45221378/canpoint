@@ -1,0 +1,9 @@
+var bar = function (a,b) {
+  if(a.indexOf(b)>=0){
+    return true
+  }else{
+    return false
+  }
+}
+  
+module.exports = { bar: bar};
