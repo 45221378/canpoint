@@ -14,11 +14,19 @@ let requestLoad = function(url,data,method){
       header: header,
       success: function(res){
         wx.hideLoading();
-        if(res.data.code===20000){
-          resolve(res.data)
+        if(res.statusCode===200){
+          if(res.data.code===20000){
+            resolve(res.data)
+          }else{
+            wx.showToast({
+              title: res.data.message,
+              icon:'none',
+              duration: 2000
+            })
+          }
         }else{
           wx.showToast({
-            title: res.data.message,
+            title: `网络连接错误${res.statusCode}`,
             icon:'none',
             duration: 2000
           })

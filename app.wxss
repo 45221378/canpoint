@@ -1,6 +1,7 @@
 /**app.wxss**/
 @import '/lib/base.wxss';
-@import '/component/footer/footer.wxss'
+@import '/component/footer/footer.wxss';
+
 .container {
   height: 100%;
   display: flex;

@@ -6,4 +6,11 @@ var bar = function (a,b) {
   }
 }
   
-module.exports = { bar: bar};
+
+var change = function (a) {
+  // var newStr = a.replace("img", "image");
+  // console.log(newStr)
+  // return newStr;
+}
+
+module.exports = { bar: bar,change:change};

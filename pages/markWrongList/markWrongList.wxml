@@ -1,16 +1,13 @@
 <!--pages/markWrongList/markWrongList.wxml-->
-<import src="../../wxParse/wxParse.wxml" />
 <wxs src="./../../utils/check.wxs" module="tools" />
 
 <view class="markWrongList">
-  
-
   <text class="top">当前作业：{{section_name}}</text>
   <view class="question">
     <block>
       <view class="easy" wx:for="{{pageData}}" wx:for-item="item" wx:key="index">
-        <!-- 客观题 -->
-        <view wx:if="{{item.quesType===0}}">
+        <!-- 客观题 单选题-->
+        <view wx:if="{{item.quesType===1}}">
           <view class="right-answer">
             <text>{{item.index}}</text>，正确答案：<text > {{item.answers}}</text>
           </view>
@@ -22,7 +19,29 @@
                   wx:for-item="it"
                   wx:key="index">
                     <view 
-                      bindtap="inputchecked" data-datarow='{{item}}' data-flag="{{item.flag}}"  data-it="{{it}}" data-idx="{{item.index}}"
+                      bindtap="onechecked" data-datarow='{{item}}' data-flag="{{item.flag}}"  data-it="{{it}}" data-idx="{{item.index}}"
+                      class="ques {{tools.bar(item.checked,it)?'checked':''}}" 
+                      >
+                        {{it}}
+                    </view>
+                </block>
+              </view>
+          </view>
+        </view>
+        <!-- 客观题 多选题-->
+        <view wx:if="{{item.quesType===2}}">
+          <view class="right-answer">
+            <text>{{item.index}}</text>，正确答案：<text > {{item.answers}}</text>
+          </view>
+          <view class="taps">
+              <text class="left">标记我的答案：</text>
+              <view class="answer clearfix" >
+                <block
+                  wx:for="{{item.options}}" 
+                  wx:for-item="it"
+                  wx:key="index">
+                    <view 
+                      bindtap="doublechecked" data-datarow='{{item}}' data-flag="{{item.flag}}"  data-it="{{it}}" data-idx="{{item.index}}"
                       class="ques {{tools.bar(item.checked,it)?'checked':''}}" 
                       >
                         {{it}}
@@ -32,35 +51,24 @@
           </view>
         </view>
         <!-- 主观题 无小题的情况-->
-        <view wx:if="{{item.quesType===1&&item.child===0}}">
+        <view wx:if="{{item.quesType===12&&item.child===0}}">
           <view class="right-answer">
-            <text>{{item.index}}</text>，正确答案：<text > <text> 答案不唯一，如图。</text></text>
-          </view>
-          <!-- <view class='answer-img' wx:for="{{item.answers}}" wx:for-item="it" wx:key="index">
-            <image src="{{it}}" ></image>
-            <view>
-              <template is="wxParse" data="{{wxParseData:item}}"/>
-            </view>
-          </view> -->
-          <!-- <block wx:for="{{replyTemArray}}" wx:key="">
-            <template is="wxParse" data="{{wxParseData:item}}"/>        
-          </block> -->
-          <view>
-            <template is="wxParse" data="{{wxParseData:item}}"/>
+            <text>{{item.index}}</text>，正确答案：<text > </text>
+
           </view>
           <view class="taps">
               <text class="left">标记我的答案：</text>
               <view class="answer clearfix">
                 <view 
                   class="ques unormal {{item.checked===1?'checked':''}}" 
-                  bindtap="bindchecked"
+                  bindtap="bindAllchecked"
                   data-datarow='{{item}}' data-it="{{1}}" data-idx="{{item.index}}"
                 >
                   我答对了
                 </view>
                 <view 
                   class="ques unormal {{item.checked===0?'checked':''}}" 
-                  bindtap="bindchecked"
+                  bindtap="bindAllchecked"
                   data-datarow='{{item}}' data-it="{{0}}" data-idx="{{item.index}}"
                 >
                   标为错题
@@ -69,95 +77,43 @@
           </view>
         </view>
         <!-- 主观题 有小题的情况-->
-        <view wx:if="{{item.quesType===1&&item.child===1}}">
+        <view wx:if="{{item.quesType===12&&item.child===1}}">
           <view class="right-answer">
-            <text>{{item.index}}</text>，
-            <text>
-              <block wx:for="{{replyTemArray}}" wx:key="in">
-                <block>
-                  <template is="wxParse" data="{{wxParseData:item}}"/>
-                </block>
-              </block>
-            </text>
+            <!-- <text>{{item.index}}</text>， -->
+            <parser html="{{item.stem}}" />
           </view>
-          <view class="taps">
+          <block wx:for="{{item.children}}" wx:for-item="i" wx:key="index">
+            <text>{{i.index}}</text>
+            <text>{{tools.change(i.stem)}}</text>
+            <view class="taps">
               <text class="left">标记我的答案：</text>
               <view class="answer clearfix">
                 <view 
-                  class="ques unormal {{item.checked===1?'checked':''}}" 
+                  class="ques unormal {{i.checked===1?'checked':''}}" 
                   bindtap="bindchecked"
                   data-datarow='{{item}}' data-it="{{1}}" data-idx="{{item.index}}"
+                  data-i="{{i.index}}"
                 >
                   我答对了
                 </view>
                 <view 
-                  class="ques unormal {{item.checked===0?'checked':''}}" 
+                  class="ques unormal {{i.checked===0?'checked':''}}" 
                   bindtap="bindchecked"
                   data-datarow='{{item}}' data-it="{{0}}" data-idx="{{item.index}}"
+                  data-i="{{i.index}}"
                 >
                   标为错题
                 </view>
               </view>
-          </view>
+            </view>
+          </block>
         </view>
       </view>
     </block>
-    
-    <!-- 提交的   主观题 正确 1 错误 0 -->
+    <!-- 提交的 my_answer  主观题 正确 1 错误 0 -->
     <!-- stem 有小题 显示 此字段，找childs -->
     <!-- questionType  里面的id 为 1 2 4表示是客观题 -->
-
-
-    <!-- <view class="easy">
-      <text class="right-answer">2，正确答案：<text> C</text></text>
-      <view class="taps">
-          <text class="left">标记我的答案：</text>
-          <view class="answer clearfix">
-            <view class="ques ">A</view>
-            <view class="ques  ">B</view>
-            <view class="ques checked">C</view>
-            <view class="ques ">D</view>
-          </view>
-      </view>
-    </view>
-    <view class="easy">
-      <text class="right-answer">3，正确答案：<text> A</text></text>
-      <view class="taps">
-          <text class="left">标记我的答案：</text>
-          <view class="answer clearfix">
-            <view class="ques checked">A</view>
-            <view class="ques  ">B</view>
-            <view class="ques ">C</view>
-            <view class="ques ">D</view>
-          </view>
-      </view>
-    </view>
-    <view class="easy">
-      <text class="right-answer">4，正确答案：<text> B</text></text>
-      <view class="taps">
-          <text class="left">标记我的答案：</text>
-          <view class="answer clearfix">
-            <view class="ques ">A</view>
-            <view class="ques checked ">B</view>
-            <view class="ques ">C</view>
-            <view class="ques ">D</view>
-          </view>
-      </view>
-    </view>
-    <view class="easy ">
-      <text class="right-answer">5，正确答案：<text> 答案不唯一，如图。</text></text>
-      <view class='answer-img'>
-        <image  src='/images/logo.png' ></image>
-      </view>
-      <view class="taps">
-          <text class="left">标记我的答案：</text>
-          <view class="answer clearfix">
-            <view class="ques unormal checked ">我答对了</view>
-            <view class="ques unormal">标为错题</view>
-          </view>
-      </view>
-    </view> -->
   </view>  
-  <button class="submit button">提交</button>
+  <button class="submit button" bindtap="subTip">提交</button>
 </view>
 

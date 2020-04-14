@@ -16,9 +16,7 @@
 .button-hover {
   background-color:rgba(0, 0, 0, 0);
 }
-image{
-  display: block;
-}
+
 view,text,input,button{
   box-sizing: border-box;
 }

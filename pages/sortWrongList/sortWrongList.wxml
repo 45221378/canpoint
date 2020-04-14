@@ -1,0 +1,58 @@
+<!--pages/sortWrongList/sortWrongList.wxml-->
+<view class="sortWrongList">
+  <view class="noData" wx:if="{{noData}}">
+    没数据
+  </view>
+  <view wx:if="{{!noData}}">
+    <view class="title" >
+      <text>{{section_name}}</text><text class="num">{{pageData.length}}/{{question_count}}</text>
+      <button class="remark button" bindtap="remark">重新标记错题</button>
+    </view>
+    <view class="content">
+      <view class="index">
+        <block 
+          wx:for="{{pageData}}" 
+          wx:for-item="item"
+          wx:key="index">
+            <text bindtap="changeChecked" data-checked="{{item.question_num}}" class="i {{pageChecked===item.question_num?'checked':''}}">{{item.question_num}}</text>
+        </block>
+      </view>
+      <!-- <parser html="{{html}}" /> -->
+      <block
+        wx:for="{{pageData}}" 
+        wx:for-item="item"
+        wx:key="index">
+        <!-- 无小题的情况下 -->
+        <view wx:if="{{pageChecked===item.question_num}}">
+          <view wx:if="{{!item.childrenFlag}}">
+            <parser html="{{item.indexstem}}" />
+            <view wx:for="{{item.question_data.options}}" wx:for-item="it" wx:key="index">
+              <parser html="{{it}}" />
+            </view>
+            <view class="clearfix" wx:if="{{item.question_data.video!==''}}">
+              <view class="video">视频讲解：</view>
+              <video class="seeVideo" src="https://v.qq.com/x/page/y0647bdq0hl.html" ></video>
+            </view>
+            <view class="clearfix">
+              <view class="myanswer">我的作答：</view><view class="error">X</view>
+            </view>
+            <view class="clearfix changeAns">
+              <view class="myanswer">我的反思：</view>
+              <textarea class="textarea" placeholder="最多可录入30个字"></textarea>
+              <button class="sub button" bindtap="changeAnswer">提交</button>
+            </view>
+            <view class="clearfix">
+              <view class="myanswer">答案解析：</view><view class="see">查看</view>
+            </view>
+          </view>
+          <!-- 有小题的情况下 -->
+          <view wx:if="{{item.childrenFlag}}">
+            <view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <button class="submit button" bindtap="downTip">下载针对训练</button>
+    </view>
+  </view>
+</view>

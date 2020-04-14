@@ -1,11 +1,14 @@
 {
   "pages": [
+    "pages/sortWrongList/sortWrongList",
 
     "pages/markWrongList/markWrongList",
 
-    "pages/scanWork/scanWork",
+
+
     "pages/login/login",
 
+    "pages/scanWork/scanWork",
 
     "pages/agreement/agreement",
 
@@ -22,6 +25,9 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "parser": "component/parser/parser"
   },
   "tabBar": {
     "color": "#A4A3A3",
