@@ -1,11 +1,11 @@
 /* pages/agreement/agreement.wxss */
 .agreement {
   background: #f9f9f9;
-  padding: 30rpx 0;
+  padding: 30rpx 0 0 0;
 }
 .agreement .bgfff {
   background: #fff;
-  padding: 10rpx 40rpx 30rpx 40rpx;
+  padding: 10rpx 40rpx 50rpx 40rpx;
 
 }
 .agreement text {

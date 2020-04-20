@@ -1,14 +1,16 @@
 {
   "pages": [
-    "pages/sortWrongList/sortWrongList",
+    "pages/login/login",
+
+    "pages/scanWork/scanWork",
 
     "pages/markWrongList/markWrongList",
 
 
 
-    "pages/login/login",
 
-    "pages/scanWork/scanWork",
+    "pages/sortWrongList/sortWrongList",
+
 
     "pages/agreement/agreement",
 
@@ -27,7 +29,8 @@
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
-    "parser": "component/parser/parser"
+    "parser": "component/parser/parser",
+    "parser-group": "component/parser-group/parser-group"
   },
   "tabBar": {
     "color": "#A4A3A3",

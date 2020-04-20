@@ -15,8 +15,8 @@
   color: #551a8b;
 }
 ._img {
-  height: 50px;
-  max-width: 100%;
+  width: 0;
+  height:0
 }
 /* 内部样式 */
 :host {

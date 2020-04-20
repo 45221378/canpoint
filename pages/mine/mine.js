@@ -11,6 +11,12 @@ Page({
     wx.navigateTo({
       url: '/pages/login/login',
     })
+    wx.clearStorageSync()
+  },
+  agreement(){
+    wx.navigateTo({
+      url: '/pages/agreement/agreement',
+    })
   },
   /**
    * 生命周期函数--监听页面加载

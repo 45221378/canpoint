@@ -4,11 +4,16 @@
   <view class="title">全品智能作业</view>
   <view class="title-little">对答案、标错题、进行针对训练</view>
   <!-- <button class="login-wx button" open-type='getUserInfo' bindgetuserinfo='getUserInfos'>微信授权登录</button> -->
-  <button class="login-wx button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信授权登录</button>
+  <button class="login-wx button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{checked}}">微信授权登录</button>
+  <button class="login-wx button" bindtap="wxLogin" wx:if="{{!checked}}">微信授权登录</button>
+
   <button class="login-phone button" bindtap="phoneReg">手机验证码登录</button>
   <view class="bottom">
-    <label>
-      <checkbox class="checkbox" value="{{checked}}" checked="{{checked}}"/><text class="agree">我已阅读并同意</text>
+    <label >
+      <checkbox-group bindchange="checkboxChange" class="checkbox" data-checked="{{checked}}">
+        <checkbox value="{{checked}}" checked="{{checked}}"/>
+      </checkbox-group>
+      <text class="agree">我已阅读并同意</text>
     </label>
     <text class="reg" bindtap="agreement">《全品智能作业服务协议》</text>
   </view>

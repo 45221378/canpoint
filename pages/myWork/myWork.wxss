@@ -47,6 +47,7 @@
 .myWork .myWork-ul .myWork-li .bg-img .subject-img{
   width: 100rpx;
   height: 100rpx;
+  display: block;
 }
 .myWork .myWork-ul .myWork-li .center{
   flex: 1;

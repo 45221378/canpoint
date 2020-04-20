@@ -1,15 +1,21 @@
 <!--pages/sortWrongList/sortWrongList.wxml-->
+<wxs src="./../../utils/check.wxs" module="tools" />
+
 <view class="sortWrongList">
   <view class="noData" wx:if="{{noData}}">
-    没数据
+    <image src="/images/nodata.png"></image>
+    <view class="say">
+      <text>错题本空空如也~</text>
+      <text>将题目加入错题本可以方便复习哦</text>
+    </view>
   </view>
   <view wx:if="{{!noData}}">
     <view class="title" >
-      <text>{{section_name}}</text><text class="num">{{pageData.length}}/{{question_count}}</text>
+      <text class="section-name">{{section_name}}</text><text class="num">{{wrong_question_count}}/{{question_count}}</text>
       <button class="remark button" bindtap="remark">重新标记错题</button>
     </view>
     <view class="content">
-      <view class="index">
+      <view class="index clearfix">
         <block 
           wx:for="{{pageData}}" 
           wx:for-item="item"
@@ -17,40 +23,85 @@
             <text bindtap="changeChecked" data-checked="{{item.question_num}}" class="i {{pageChecked===item.question_num?'checked':''}}">{{item.question_num}}</text>
         </block>
       </view>
-      <!-- <parser html="{{html}}" /> -->
       <block
         wx:for="{{pageData}}" 
         wx:for-item="item"
         wx:key="index">
-        <!-- 无小题的情况下 -->
-        <view wx:if="{{pageChecked===item.question_num}}">
-          <view wx:if="{{!item.childrenFlag}}">
-            <parser html="{{item.indexstem}}" />
-            <view wx:for="{{item.question_data.options}}" wx:for-item="it" wx:key="index">
-              <parser html="{{it}}" />
+        <parser-group>
+          <view hidden="{{pageChecked!=item.question_num}}">
+             <!-- 无小题的情况下 -->
+            <view wx:if="{{!item.childrenFlag}}">
+              <parser html="{{item.indexstem}}" />
+              <view wx:for="{{item.question_data.options}}" wx:for-item="it" wx:key="index">
+                <parser html="{{it}}"  />
+              </view>
+              <view class="clearfix" wx:if="{{item.question_data.video!==''}}">
+                <view class="video">视频讲解：</view>
+                <video class="seeVideo" src="https://v.qq.com/x/page/y0647bdq0hl.html" ></video>
+              </view>
+              <view class="clearfix">
+                <view class="myanswer">我的作答：<text class="error">X</text></view>
+              </view>
+              <view class="clearfix" >
+                <view class="myanswer">答案解析：<text class="see" bindtap="seeAnswer" data-childrenFlag="{{item.childrenFlag}}" data-id="{{item.id}}" >查看</text></view>
+                <view class="myanswer-check" style="display:{{item.myanswerFlag?'block':'none'}}">
+                  <block wx:for="{{item.question_data.answers[0]}}" wx:for-item="ans" wx:key="index">
+                    <parser html="{{ans}}" />
+                  </block>
+                  <block wx:for="{{item.question_data.analysis}}" wx:for-item="ana" wx:key="index">
+                    <parser html="{{ana}}" />
+                  </block>
+                </view>
+              </view>
+              <view class="clearfix changeAns">
+                <view class="myanswer">我的反思：</view>
+                <textarea class="textarea" bindinput='getTextareaValue' value="{{item.remarks}}" placeholder="最多可录入30个字" placeholder-class="black"></textarea>
+                <button class="sub button" bindtap="changeAnswer" data-id="{{item.id}}">提交</button>
+              </view>
             </view>
-            <view class="clearfix" wx:if="{{item.question_data.video!==''}}">
-              <view class="video">视频讲解：</view>
-              <video class="seeVideo" src="https://v.qq.com/x/page/y0647bdq0hl.html" ></video>
-            </view>
-            <view class="clearfix">
-              <view class="myanswer">我的作答：</view><view class="error">X</view>
-            </view>
-            <view class="clearfix changeAns">
-              <view class="myanswer">我的反思：</view>
-              <textarea class="textarea" placeholder="最多可录入30个字"></textarea>
-              <button class="sub button" bindtap="changeAnswer">提交</button>
-            </view>
-            <view class="clearfix">
-              <view class="myanswer">答案解析：</view><view class="see">查看</view>
+            <!-- 有小题的情况下 -->
+            <view wx:if="{{item.childrenFlag}}">
+              <parser lazy-load="true" html="{{item.indexstem}}" />
+               <block wx:for="{{item.question_data.children}}" wx:for-item="itch" wx:key="index">
+                <view>
+                  <view class="clearfix">
+                    <view class="myanswer">{{itch.index}}.我的作答：<text class="error" wx:if="{{!itch.myanswerTrue}}">×</text><view wx:if="{{itch.myanswerTrue}}" class="noerror"><image src="../../images/gougou.png"></image></view></view>
+                  </view>
+                  <view class="clearfix" >
+                    <view class="myanswer">答案解析：<text class="see" bindtap="seeAnswer" data-childrenflag="{{item.childrenFlag}}" data-id="{{item.id}}" data-iid="{{itch.index}}">查看</text></view>
+                    <view class="myanswer-check" style="display:{{itch.myanswerFlag?'block':'none'}}">
+                      <view class="clearfix">
+                        <view class="myanswer">
+                          <view class="errorright">
+                            <block wx:for="{{itch.answers[0]}}" wx:for-item="ans" wx:key="index">
+                              <parser html="{{ans}}" />
+                            </block>
+                          </view>
+                        </view>
+                      </view>
+                      <block wx:for="{{itch.analysis}}" wx:for-item="ana" wx:key="index">
+                        <parser html="{{ana}}" />
+                      </block>
+                      <!-- <image class='login-logo' src='/images/logo.png' ></image> -->
+                    </view>
+                  </view>
+                </view>
+              </block>
+              
+              <view class="clearfix" wx:if="{{item.question_data.video!==''}}">
+                <view class="video">视频讲解：</view>
+                <video class="seeVideo" src="https://v.qq.com/x/page/y0647bdq0hl.html" ></video>
+              </view>
+              
+              <view class="clearfix changeAns">
+                <view class="myanswer">我的反思：</view>
+                <textarea class="textarea" bindinput='getTextareaValue' value="{{item.remarks}}" placeholder="最多可录入30个字" placeholder-class="black"></textarea>
+                <button class="sub button" bindtap="changeAnswer" data-id="{{item.id}}">提交</button>
+              </view>
             </view>
           </view>
-          <!-- 有小题的情况下 -->
-          <view wx:if="{{item.childrenFlag}}">
-            <view>
-            </view>
-          </view>
-        </view>
+        </parser-group>
+        
       </block>
       <button class="submit button" bindtap="downTip">下载针对训练</button>
     </view>

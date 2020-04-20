@@ -11,6 +11,16 @@
 .markWrongList .question .easy{
 
 }
+.markWrongList .spe{
+  margin-top: 20rpx;
+}
+.markWrongList .right-answer .nochildren {
+  margin: 0 0 20rpx 0;
+}
+.markWrongList  .haveanswer{
+  margin: 20rpx 0 20rpx 0;
+  font-size: 26rpx;
+}
 .markWrongList .question .easy .right-answer{
   font-size: 28rpx;
   

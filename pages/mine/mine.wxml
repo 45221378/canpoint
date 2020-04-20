@@ -15,7 +15,7 @@
       <button class="button contact" open-type='contact'>客服中心</button>
       <image class="img-right" src="../../images/right.png"></image>
     </view>
-    <view class="li">
+    <view class="li" bindtap="agreement">
       <text>服务协议</text>
       <image class="img-right" src="../../images/right.png"></image>
     </view>

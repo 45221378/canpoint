@@ -4,6 +4,21 @@
   background: #f9f9f9;
   padding: 20rpx 0;  
 }
+.sortWrongList .noData image{
+  width: 370rpx;
+  height: 280rpx;
+  margin: 100rpx auto 20rpx;
+  display: block;
+}
+.sortWrongList .noData .say{
+  font-size: 30rpx;
+  color: #999;
+}
+.sortWrongList .noData .say text{
+  display: block;
+  line-height: 50rpx;
+  text-align: center;
+}
 .sortWrongList .title {
   text-align: left;
   font-size: 28rpx;
@@ -12,11 +27,21 @@
   background: #fff;
   padding-left: 40rpx;
 }
+.sortWrongList .title .section-name{
+  width: 350rpx;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .sortWrongList .title .num{
   margin-left: 20rpx;
+  font-size: 28rpx;
+  vertical-align: middle;
 }
 .sortWrongList text{
-  font-size: 30rpx;
+  font-size: 28rpx;
   text-align: justify;
 }
 .sortWrongList .title .remark{
@@ -38,12 +63,11 @@
   padding: 30rpx;
 }
 .sortWrongList .content .index{
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 20rpx;
+  /* display: flex;
+  justify-content: flex-start; */
 }
 .sortWrongList .content .index .i{
-  width: 68rpx;
+  padding: 0 20rpx;
   height: 44rpx;
   background: #fff;
   color: #2896fe;
@@ -53,6 +77,10 @@
   border-radius: 26rpx;
   margin-right: 20rpx;
   border: 2rpx solid #2896fe;
+  display: block;
+  float: left;
+  margin-bottom: 20rpx;
+
 }
 .sortWrongList .content .index .checked{
   background: #2896fe;
@@ -70,9 +98,13 @@
   margin: 20rpx 20rpx 0 0;
 }
 .sortWrongList .myanswer{
-  font-size: 30rpx;
-  float: left;
+  font-size: 28rpx;
+  /* float: left; */
   margin: 20rpx 20rpx 20rpx 0;
+  vertical-align: middle;
+}
+.sortWrongList .myanswer-check{
+
 }
 .sortWrongList .mythink{
   font-size: 30rpx;
@@ -85,11 +117,37 @@
   border: 2rpx solid #fe2841;
   width: 72rpx;
   height: 44rpx;
+  font-size: 24rpx;
   border-radius: 26rpx;
   text-align: center;
   line-height: 40rpx;
-  float: left;
+  /* float: left; */
   margin: 20rpx 0;
+  display: inline-block;
+}
+.sortWrongList  .noerror{
+  color: #2896fe;
+  border: 2rpx solid #2896fe;
+  width: 72rpx;
+  height: 44rpx;
+  font-size: 24rpx;
+  border-radius: 26rpx;
+  text-align: center;
+  line-height: 40rpx;
+  /* float: left; */
+  margin: 20rpx 0;
+  display: inline-block;
+}
+.sortWrongList  .noerror image{
+  width: 30rpx;
+  height: 32rpx;
+  vertical-align: middle;
+}
+.sortWrongList .errorright{
+  font-size: 24rpx;
+  line-height: 40rpx;
+  margin: 20rpx 0;
+  display: inline-block;
 }
 .sortWrongList .answerdetail{
   font-size: 30rpx;
@@ -101,7 +159,7 @@
 }
 .sortWrongList .textarea{
   background: #f9f9f9;
-  color: #a0a0a0;
+  color: #000;
   font-size: 26rpx;
   border: 2rpx solid #eee;
   height: 200rpx;
@@ -109,6 +167,9 @@
   flex: 1;
   border-radius: 12rpx;
   margin: 20rpx 0 0 0;
+}
+.black{
+  color: #a0a0a0;
 }
 .sortWrongList  .sub{
   font-size: 30rpx;
@@ -120,7 +181,7 @@
 .sortWrongList .see{
   font-size: 30rpx;
   color: #2896fe;
-  float: left;
+  /* float: left; */
   margin: 20rpx 20rpx 0 0;
 
 }

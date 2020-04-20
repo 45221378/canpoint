@@ -13,9 +13,9 @@
   <text class="title">我的作业</text>
   <view class="clearfix">
     <view class="section left">
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <picker bindchange="bindPickerChange" value="{{stageindex}}" range="{{arraystage}}">
         <view class="picker">
-          <text class="section-title">{{index===''?'筛选学段':array[index]}}</text><image class="section-check" src='/images/check-bottom.png'></image>
+          <text class="section-title">{{stageindex===''?'筛选学段':arraystage[stageindex]}}</text><image class="section-check" src='/images/check-bottom.png'></image>
         </view> 
       </picker>  
     </view>
@@ -29,7 +29,7 @@
   </view>
   <view class="myWork-ul">
     <block wx:for-items="{{record_list}}" wx:key="index">
-      <view class="myWork-li" bindtap="goList" data-sectionId='tXXi99sA'>
+      <view class="myWork-li" bindtap="goList" data-section_id='{{item.section_id}}' data-question_count='5' data-section_name="{{item.section_name}}">
         <view class="bg-img">
           <image class="subject-img" src="{{imgList[item.subject_id]}}"></image>
         </view>

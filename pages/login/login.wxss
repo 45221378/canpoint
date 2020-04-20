@@ -10,6 +10,7 @@
   height: 300rpx;
   width: 300rpx;
   margin: 0 auto ;
+  display: block;
 }
 .login .title{
   font-size: 34rpx;
@@ -64,4 +65,7 @@
 .login .bottom .reg{
   font-size: 24rpx;
   color: #333;
+}
+.login checkbox-group{
+  display: inline-block;
 }

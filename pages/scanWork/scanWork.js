@@ -8,8 +8,8 @@ Page({
   data: {
     showScan: false,
     title:'',
-    array: ['一年级', '二年级', '三年级', '四年级','五年级','六年级','七年级','八年级','九年级 ','高一','高二','高三'],
-    index:'',
+    arraystage:['小学','初中','高中'],
+    stageindex:'',
     objectArrayInt:[],
     objectArray:[],
     objectIndex:'',
@@ -46,33 +46,30 @@ Page({
           objectArray : arrayObj,
           objectArrayInt:arrayInt
         })
+        // console.log(this.data.objectArray)
+        // console.log(this.data.objectArrayInt)
+
       }
     })
   },
   bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    const {objectIndex} = this.data;
     this.setData({
-      index: e.detail.value
+      stageindex: parseInt(e.detail.value)
     })
+    const stageindex = parseInt(e.detail.value) ;
+    this.getScanList(stageindex,objectIndex);
   },
   changeObject: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    // if(this.data.index===""){
-    //   wx.showToast({
-    //     title: '请先筛选学段',
-    //     icon: 'none',
-    //     duration: 2000
-    //   })
-    // }else{
-      this.setData({
-        objectIndex: e.detail.value
-      })
-      //选择成功后给后台发送请求
-      console.log(this.data.objectArray[e.detail.value])
-    // }
+    const {objectArray,stageindex} = this.data;
+    this.setData({
+      objectIndex: e.detail.value
+    })
+    const sendobject = objectArray[e.detail.value]
+    this.getScanList(stageindex,sendobject);
   },
   //获取数据
-  getScanList(subjectId){
+  getScanList(stageindex,objectIndex){
     // console.log(subjectId)
     let url = wx.getStorageSync('requstURL') +'homework/list';
     let token = wx.getStorageSync('token');
@@ -81,7 +78,9 @@ Page({
       pagesize: 100,
       page:1
     };
-    subjectId!==""?data.subjectId = subjectId:'';
+    stageindex!==""?data.stage_id=parseInt(stageindex)+1:'';
+    objectIndex!==""?data.subjectId = objectIndex:'';
+    // console.log(data)
     ajax.requestLoad(url,data,'GET').then(res=>{
       if(res.code===20000){
         if(res.total_count<1){
@@ -115,9 +114,9 @@ Page({
     })
   },
   goList(e){
-    const section_id = e.currentTarget.dataset.sectionId;
+    const {section_id,section_name} = e.currentTarget.dataset;
     wx.navigateTo({
-      url: `/pages/markWrongList/markWrongList?section_id=${section_id}`,
+      url: `/pages/sortWrongList/sortWrongList?section_id=${section_id}&section_name=${section_name}`,
     })
   },
   /**
@@ -125,7 +124,6 @@ Page({
    */
   onLoad: function (options) {
     this.getObject();
-
   },
 
   /**
@@ -139,7 +137,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getScanList('');
+    this.getScanList('','');
 
   },
 

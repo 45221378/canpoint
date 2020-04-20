@@ -6,104 +6,159 @@
   <view class="question">
     <block>
       <view class="easy" wx:for="{{pageData}}" wx:for-item="item" wx:key="index">
-        <!-- 客观题 单选题-->
-        <view wx:if="{{item.quesType===1}}">
-          <view class="right-answer">
-            <text>{{item.index}}</text>，正确答案：<text > {{item.answers}}</text>
-          </view>
-          <view class="taps">
-              <text class="left">标记我的答案：</text>
-              <view class="answer clearfix" >
-                <block
-                  wx:for="{{item.options}}" 
-                  wx:for-item="it"
-                  wx:key="index">
-                    <view 
-                      bindtap="onechecked" data-datarow='{{item}}' data-flag="{{item.flag}}"  data-it="{{it}}" data-idx="{{item.index}}"
-                      class="ques {{tools.bar(item.checked,it)?'checked':''}}" 
-                      >
-                        {{it}}
-                    </view>
-                </block>
-              </view>
-          </view>
-        </view>
-        <!-- 客观题 多选题-->
-        <view wx:if="{{item.quesType===2}}">
-          <view class="right-answer">
-            <text>{{item.index}}</text>，正确答案：<text > {{item.answers}}</text>
-          </view>
-          <view class="taps">
-              <text class="left">标记我的答案：</text>
-              <view class="answer clearfix" >
-                <block
-                  wx:for="{{item.options}}" 
-                  wx:for-item="it"
-                  wx:key="index">
-                    <view 
-                      bindtap="doublechecked" data-datarow='{{item}}' data-flag="{{item.flag}}"  data-it="{{it}}" data-idx="{{item.index}}"
-                      class="ques {{tools.bar(item.checked,it)?'checked':''}}" 
-                      >
-                        {{it}}
-                    </view>
-                </block>
-              </view>
-          </view>
-        </view>
-        <!-- 主观题 无小题的情况-->
-        <view wx:if="{{item.quesType===12&&item.child===0}}">
-          <view class="right-answer">
-            <text>{{item.index}}</text>，正确答案：<text > </text>
-
-          </view>
-          <view class="taps">
-              <text class="left">标记我的答案：</text>
-              <view class="answer clearfix">
-                <view 
-                  class="ques unormal {{item.checked===1?'checked':''}}" 
-                  bindtap="bindAllchecked"
-                  data-datarow='{{item}}' data-it="{{1}}" data-idx="{{item.index}}"
-                >
-                  我答对了
+        <!-- 大题的情况 无小题   -->
+        <view wx:if="{{item.child===0}}">
+          <!-- 客观题 单选题-->
+          <view wx:if="{{item.quesType===1}}">
+            <view class="right-answer">
+              <text>{{item.index}}</text>，正确答案：<text > {{item.answers}}</text>
+            </view>
+            <view class="taps"> 
+                <text class="left">标记我的答案：</text>
+                <view class="answer clearfix" >
+                  <block
+                    wx:for="{{item.options}}" 
+                    wx:for-item="it"
+                    wx:key="index">
+                      <view 
+                        bindtap="onechecked" data-datarow='{{item}}' data-flag="{{item.flag}}"  data-it="{{it}}" data-idx="{{item.index}}"
+                        class="ques {{tools.bar(item.checked,it)?'checked':''}}" 
+                        >
+                          {{it}}
+                      </view>
+                  </block>
                 </view>
-                <view 
-                  class="ques unormal {{item.checked===0?'checked':''}}" 
-                  bindtap="bindAllchecked"
-                  data-datarow='{{item}}' data-it="{{0}}" data-idx="{{item.index}}"
-                >
-                  标为错题
+            </view>
+          </view>
+          <!-- 客观题 多选题-->
+          <view wx:if="{{item.quesType===2}}">
+            <view class="right-answer">
+              <text>{{item.index}}</text>，正确答案：<text > {{item.answers}}</text>
+            </view>
+            <view class="taps">
+                <text class="left">标记我的答案：</text>
+                <view class="answer clearfix" >
+                  <block
+                    wx:for="{{item.options}}" 
+                    wx:for-item="it"
+                    wx:key="index">
+                      <view 
+                        bindtap="doublechecked" data-datarow='{{item}}' data-flag="{{item.flag}}"  data-it="{{it}}" data-idx="{{item.index}}"
+                        class="ques {{tools.bar(item.checked,it)?'checked':''}}" 
+                        >
+                          {{it}}
+                      </view>
+                  </block>
                 </view>
+            </view>
+          </view>
+          <!-- 主观题-->
+          <view wx:if="{{item.quesType===300}}">
+            <view class="right-answer">
+              <view class="nochildren">
+                <text>{{item.index}}</text>，正确答案： 答案不唯一，如图。<text > </text>
               </view>
+              <block wx:for="{{item.answers[0]}}" wx:for-item="i" wx:key="index">
+                <parser html="{{i}}" />
+              </block>
+            </view>
+            <view class="taps">
+                <text class="left">标记我的答案：</text>
+                <view class="answer clearfix">
+                  <view 
+                    class="ques unormal {{item.checked===1?'checked':''}}" 
+                    bindtap="bindAllchecked"
+                    data-datarow='{{item}}' data-it="{{1}}" data-idx="{{item.index}}"
+                  >
+                    我答对了
+                  </view>
+                  <view 
+                    class="ques unormal {{item.checked===0?'checked':''}}" 
+                    bindtap="bindAllchecked"
+                    data-datarow='{{item}}' data-it="{{0}}" data-idx="{{item.index}}"
+                  >
+                    标为错题
+                  </view>
+                </view>
+            </view>
           </view>
         </view>
-        <!-- 主观题 有小题的情况-->
-        <view wx:if="{{item.quesType===12&&item.child===1}}">
+        <!-- 大题的情况 有小题   -->
+        <view wx:if="{{item.child===1}}">
           <view class="right-answer">
-            <!-- <text>{{item.index}}</text>， -->
             <parser html="{{item.stem}}" />
           </view>
-          <block wx:for="{{item.children}}" wx:for-item="i" wx:key="index">
-            <text>{{i.index}}</text>
-            <text>{{tools.change(i.stem)}}</text>
-            <view class="taps">
-              <text class="left">标记我的答案：</text>
-              <view class="answer clearfix">
-                <view 
-                  class="ques unormal {{i.checked===1?'checked':''}}" 
-                  bindtap="bindchecked"
-                  data-datarow='{{item}}' data-it="{{1}}" data-idx="{{item.index}}"
-                  data-i="{{i.index}}"
-                >
-                  我答对了
+          <block wx:for="{{item.children}}" wx:for-item="itch" wx:key="index">
+            <!-- 特殊题型 7选5-->
+            <view wx:if="{{item.template===14}}">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                <view class="haveanswer">
+                  <text>{{itch.index}}. </text>
+                  <text>正确答案</text>
+                  <text>{{itch.answers[0]}}</text>
                 </view>
-                <view 
-                  class="ques unormal {{i.checked===0?'checked':''}}" 
-                  bindtap="bindchecked"
-                  data-datarow='{{item}}' data-it="{{0}}" data-idx="{{item.index}}"
-                  data-i="{{i.index}}"
-                >
-                  标为错题
+                <parser html="{{itch.answers}}" />
+                <view class="taps">
+                  <text class="left">标记我的答案：</text>
+                  <view class="answer clearfix" >
+                    <block
+                      wx:for="{{itch.options}}" 
+                      wx:for-item="it"
+                      wx:key="iidx">
+                        <view 
+                          bindtap="speonechecked" data-datarow='{{item}}'  data-it="{{it}}" data-idx="{{item.index}}" data-iidx="{{i.index}}"
+                          class="ques {{tools.bar(itch.my_answer,it)?'checked':''}}" 
+                          >
+                            {{it}}
+                        </view>
+                    </block>
+                  </view>
                 </view>
+            </view>
+            <!-- 大题的情况 有小题  单选题 -->
+            <view wx:if="{{itch.template===1}}">
+              <view class="right-answer">
+                <text>{{itch.index}}</text>，正确答案：<text > {{itch.answers}}</text>
+              </view>
+              <view class="taps"> 
+                  <text class="left">标记我的答案：</text>
+                  <view class="answer clearfix" >
+                    <block
+                      wx:for="{{itch.options}}" 
+                      wx:for-item="itopt"
+                      wx:key="index">
+                        <view 
+                          bindtap="onechildchecked" data-datarow='{{item}}' data-it="{{itopt}}" data-idx="{{item.index}}" data-iidx="{{itch.index}}"
+                          class="ques {{tools.bar(itch.checked,itopt)?'checked':''}}" 
+                          >
+                            {{itopt}}
+                        </view>
+                    </block>
+                  </view>
+              </view>
+            </view>
+            <!-- 大题的情况 有小题  客观题 -->
+            <view wx:if="{{itch.template!==1&&item.template!==2&&itch.template!==14}}">
+              <view class="right-answer">
+                <text>{{itch.index}}</text>，正确答案：
+                <block wx:for="{{itch.answers[0]}}" wx:for-item="i" wx:key="index">
+                  <parser id="article" html="{{i}}" />
+                </block>
+              </view>
+              <view class="taps"> 
+                  <text class="left">标记我的答案：</text>
+                  <view class="answer clearfix" >
+                    <block
+                      wx:for="{{itch.options}}" 
+                      wx:for-item="itopt"
+                      wx:key="index">
+                        <view 
+                          bindtap="onechildchecked" data-datarow='{{item}}' data-it="{{itopt}}" data-idx="{{item.index}}" data-iidx="{{itch.index}}"
+                          class="ques unormal  {{itch.checked==itopt?'checked':''}}" 
+                          >
+                            {{itopt=='1'?'我答对了':'标为错题'}}
+                        </view>
+                    </block>
+                  </view>
               </view>
             </view>
           </block>
