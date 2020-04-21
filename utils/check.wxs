@@ -9,5 +9,11 @@ var bar = function (a,b) {
     }
   }
 }
+var splitTime = function(a){
+  if(a){
+    var b = a.slice(0,10)
+  }
+  return b
+}
   
-module.exports = { bar: bar};
+module.exports = { bar: bar,splitTime:splitTime};

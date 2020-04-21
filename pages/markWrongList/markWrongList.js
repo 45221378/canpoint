@@ -148,10 +148,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // const {section_id} = options;
+    const {section_id} = options;
     // const section_id = "LYLcvMie"  // 有特殊标签
     // const section_id = "Ng3DSoGX"  // 有特殊题型
-    const section_id = "FQ0Xk28F"  //含多选
+    // const section_id = "FQ0Xk28F"  //含多选
     let url = wx.getStorageSync('requstURL') +'homework/info';
     let token = wx.getStorageSync('token');
     let data  = {
@@ -172,12 +172,12 @@ Page({
               options = 'ABCDEFGHIJKLMN'.substr(0,item.options.length);
               quesType = 1;
               answers = item.answers;
-              checked = item.answers.toString();
+              checked = item.my_answer?item.my_answer:item.answers.toString();
             }else if(item.template===4){
               options = 'ABCDEFGHIJKLMN'.substr(0,item.options.length);
               quesType = 2;
               answers = item.answers;
-              checked = item.answers.join("");
+              checked = item.my_answer?item.my_answer:item.answers.join('');
               console.log(checked)
             }else{
               quesType = 300;

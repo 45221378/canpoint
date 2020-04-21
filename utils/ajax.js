@@ -35,8 +35,6 @@ let requestLoad = function(url,data,method){
       },
       fail: function(error){
         wx.hideLoading();
-        console.log(111)
-        console.log(error)
         reject(error)
       }
     })

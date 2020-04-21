@@ -8,7 +8,7 @@
       <text class="copy" bindtap="copyText" data-content="{{downNet}}">复制</text>
     </view>
     <text class="error">
-      如果不能下载，你也可以复制网址到浏览器打开或点击右上角“... — 在浏览器内打开“（有效期为10分钟）
+      如果不能下载，你也可以复制网址到浏览器打开
     </text>
     <button class="button download" bindtap="downNet"  data-type="pdf">下载针对训练</button>
   </view>

@@ -27,7 +27,7 @@ Page({
     }
   },
   getPhoneNumber (e) {
-    console.log(e.detail)
+    // console.log(e.detail)
     if (e.detail.errMsg === 'getPhoneNumber:fail user deny') {
       console.log('点击拒绝');
     }else{
@@ -50,9 +50,19 @@ Page({
     }
   },
   phoneReg(){
-    wx.navigateTo({
-      url: '/pages/phoneReg/phoneReg',
-    })
+    const {checked} = this.data;
+    if(checked){ 
+      wx.navigateTo({
+        url: '/pages/phoneReg/phoneReg',
+      })
+    }else{
+      wx.showToast({
+        title: '请同意服务协议',
+        icon:'none',
+        duration: 1000
+      })
+    }
+    
   },
   agreement(){
     wx.navigateTo({

@@ -1,4 +1,6 @@
 <!--pages/scanWork/scanWork.wxml-->
+<wxs src="./../../utils/check.wxs" module="tools" />
+
 <view class="scanWork" wx:if="{{showScan}}">
   <image src="../../images/banner.png"></image>
   <text class="click">点击【扫一扫】开启作业之旅~</text>
@@ -42,7 +44,7 @@
       <view class="myWork-bot">
         <view>
           <image class="img-time" src='/images/time.png'></image>
-          <text class="book-time">{{item.modified}}</text>
+          <text class="book-time">{{tools.splitTime(item.modified)}}</text>
         </view>
         <view>
           <image class="img-book" src='/images/book.png'></image>

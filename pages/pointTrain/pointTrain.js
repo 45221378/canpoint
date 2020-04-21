@@ -6,7 +6,8 @@ Page({
    */
   data: {
     section_name:"",
-    downNet:''
+    downNet:'',
+    showNet:''
   },
   copyText(e){
     const {content} = e.currentTarget.dataset;
@@ -48,23 +49,44 @@ Page({
       header: {},
       success: function(res) {
         wx.hideLoading();
-        console.log(res);
-        var filePath = res.tempFilePath;
-        wx.openDocument({
-            filePath: filePath,
-            success: function(res) {
-                console.log('打开文档成功')
-            },
-            fail: function(res) {
-                console.log(res);
-            },
-            complete: function(res) {
-                console.log(res);
-            }
-        })
+        if(res.errMsg=="downloadFile:ok"){
+          wx.showToast({
+            title: '文件下载成功',
+            icon:'none',
+            duration: 2000
+          })
+        }else{
+          wx.showToast({
+            title: '下载文件失败',
+            icon:'none',
+            duration: 2000
+          })
+        }
+        // var filePath = res.tempFilePath;
+        // wx.openDocument({
+        //     filePath: filePath,
+        //     success: function(res) {
+        //         console.log('打开文档成功')
+        //     },
+        //     fail: function(res) {
+        //       wx.showToast({
+        //         title: '下载文件失败',
+        //         icon:'none',
+        //         duration: 2000
+        //       })
+        //     },
+        //     complete: function(res) {
+        //         console.log(res);
+        //     }
+        // })
       },
       fail: function(res) {
-          console.log('文件下载失败');
+        wx.hideLoading();
+        wx.showToast({
+          title: '下载文件失败',
+          icon:'none',
+          duration: 2000
+        })
       },
       complete: function(res) {},
     })
@@ -74,11 +96,14 @@ Page({
    */
   onLoad: function (options) {
     const {section_name,section_id} = options;
+    let token = wx.getStorageSync('token');
     // const downNet = `http://zywx.canpoint.net:9200/homework/wrong/question/download?section_id=${section_id}`;
-    const downNet = wx.getStorageSync('requstURL')+`homework/wrong/question/download?section_id=${section_id}`;
+    const downNet = wx.getStorageSync('requstURL')+`homework/wrong/question/download?section_id=${section_id}&token=${token}`;
+    const showNet = wx.getStorageSync('requstURL')+`homework/wrong/question/download?section_id=${section_id}&token=${token}&html`;
     this.setData({
       section_name:section_name,
-      downNet:downNet
+      downNet:downNet,
+      showNet:showNet
     })
   },
 

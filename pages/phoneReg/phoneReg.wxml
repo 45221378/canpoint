@@ -7,7 +7,7 @@
         <input placeholder="请输入手机号" bindinput='getPhoneValue' value="{{userPhone}}" name="userPhone" placeholder-class="black" type="number" maxlength="11" auto-focus />
       </view>
       <view class="border clearfix">
-        <input class="left" placeholder="请输入验证码" bindinput='getuserCode' value="{{userCode}}" name="userCode" max-length="6" placeholder-class="black" auto-focus/>
+        <input class="left userCode" placeholder="请输入验证码" bindinput='getuserCode' value="{{userCode}}" name="userCode" max-length="6" placeholder-class="black" auto-focus/>
         <button class="button getCode" bindtap="getCode">{{codename}}</button>
       </view>
       <button class="button reg" bindtap="regSubmit">登录</button>

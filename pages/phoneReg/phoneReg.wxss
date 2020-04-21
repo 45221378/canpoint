@@ -18,6 +18,9 @@
   padding:  40rpx 0 10rpx 0;
   height: 110rpx;
 }
+.phoneReg .border .userCode{
+  width: 240rpx;
+}
 .black{
   color: #e6e6e6;
 }

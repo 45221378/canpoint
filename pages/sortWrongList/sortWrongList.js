@@ -90,7 +90,6 @@ Page({
                 console.log(item.question_data.answers.join(','))
                 let newAnwser = [];
                 newAnwser.push(item.question_data.answers.join(''));
-                console.log(newAnwser)
                 item.question_data.answers = newAnwser
               }
             }
