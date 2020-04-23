@@ -115,7 +115,8 @@
 .sortWrongList .error{
   color: #fe2841;
   border: 2rpx solid #fe2841;
-  width: 72rpx;
+  min-width: 72rpx;
+  padding: 0 14rpx;
   height: 44rpx;
   font-size: 24rpx;
   border-radius: 26rpx;

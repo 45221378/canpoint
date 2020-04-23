@@ -163,8 +163,9 @@ Page({
         let pageData = [];
         let countArray = JSON.parse(JSON.stringify(res.question_list));
         countArray.map(item=>{
-          let options,quesType ,answers,child,checked;
+          let options,quesType,answers,child,checked;
           let specicalOption = [];
+          let newAnwsers = []
           child = item.children.length>0?1:0;
           // 自己定义的 quesType  1为单选题  2为多选题 300为客观题  400为特殊题型，7选5
           if(child==0){
@@ -179,6 +180,7 @@ Page({
               answers = item.answers;
               checked = item.my_answer?item.my_answer:item.answers.join('');
               console.log(checked)
+              console.log(answers)
             }else{
               quesType = 300;
               answers = item.answers;
@@ -190,6 +192,11 @@ Page({
                 checked = 1;
               }
             }
+            //多答案的情况下
+            item.answers.forEach(item=>{
+              newAnwsers.push(item.toString())
+            })
+           
           }else{
             //大题里面含有小题的情况
             //特殊题型 7选5
@@ -208,7 +215,7 @@ Page({
             item.children.map(itch=>{
               if(itch.template===1 ||itch.template===2){
                 itch.options = 'ABCDEFGHIJKLMN'.substr(0,itch.options.length);
-                console.log(!!itch.my_answer)
+                
                 if(!itch.my_answer){
                   itch.my_answer = itch.answers[0][0];
                 }
@@ -243,8 +250,9 @@ Page({
             quesType:quesType,
             checked:checked,
             child:child,
-            stem:item.index+'，'+item.stem,
-            children:item.children
+            stem:item.index,
+            children:item.children,
+            newAnwsers:newAnwsers
           })
         })
 

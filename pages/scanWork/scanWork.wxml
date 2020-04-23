@@ -31,25 +31,27 @@
   </view>
   <view class="myWork-ul">
     <block wx:for-items="{{record_list}}" wx:key="index">
-      <view class="myWork-li" bindtap="goList" data-section_id='{{item.section_id}}' data-question_count='5' data-section_name="{{item.section_name}}">
-        <view class="bg-img">
-          <image class="subject-img" src="{{imgList[item.subject_id]}}"></image>
-        </view>
-        <view class="center">
-          <text class="center-top">{{item.subject_name}}</text>
-          <text class="center-page">{{item.section_name}}</text>
-        </view>
-        <image class="img-right" src='/images/right.png'></image>
-      </view>
-      <view class="myWork-bot">
-        <view>
-          <image class="img-time" src='/images/time.png'></image>
-          <text class="book-time">{{tools.splitTime(item.modified)}}</text>
-        </view>
-        <view>
-          <image class="img-book" src='/images/book.png'></image>
-          <text class="book-name">{{item.book_name}}</text>
-        </view>
+      <view>
+        <view class="myWork-li" bindtap="goList" data-section_id='{{item.section_id}}' data-question_count='5' data-section_name="{{item.section_name}}">
+            <view class="bg-img">
+              <image class="subject-img" src="{{imgList[item.subject_id]}}"></image>
+            </view>
+            <view class="center">
+              <text class="center-top">{{item.subject_name}}</text>
+              <text class="center-page">{{item.section_name}}</text>
+            </view>
+            <image class="img-right" src='/images/right.png'></image>
+          </view>
+          <view class="myWork-bot">
+            <view>
+              <image class="img-time" src='/images/time.png'></image>
+              <text class="book-time">{{tools.splitTime(item.modified)}}</text>
+            </view>
+            <view>
+              <image class="img-book" src='/images/book.png'></image>
+              <text class="book-name">{{item.book_name}}</text>
+            </view>
+          </view>
       </view>
     </block>
   </view>

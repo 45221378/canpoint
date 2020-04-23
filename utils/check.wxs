@@ -2,13 +2,14 @@ var bar = function (a,b) {
   if(a&&b){
     // console.log(a);
     // console.log(b);
-    if(a.indexOf(b)>=0){
+    if(a.toString().indexOf(b)>=0){
       return true
     }else{
       return false
     }
   }
-}
+} 
+
 var splitTime = function(a){
   if(a){
     var b = a.slice(0,10)

@@ -46,8 +46,8 @@ Page({
           objectArray : arrayObj,
           objectArrayInt:arrayInt
         })
-        // console.log(this.data.objectArray)
-        // console.log(this.data.objectArrayInt)
+        console.log(this.data.objectArray)
+        console.log(this.data.objectArrayInt)
 
       }
     })
@@ -89,6 +89,7 @@ Page({
           })
         }else{
           this.setData({
+            showScan:false,
             record_list : res.record_list
           })
         }
@@ -100,8 +101,25 @@ Page({
     wx.scanCode({
       success(res) {
         let section_id = res.result.split(',')[0];
-        wx.navigateTo({
-          url: `/pages/markWrongList/markWrongList?section_id=${section_id}`,
+        let url = wx.getStorageSync('requstURL') +'homework/info';
+        let token = wx.getStorageSync('token');
+        let data  = {
+          token: token,
+          section_id: section_id
+        };
+        ajax.requestLoad(url,data,'GET').then(res=>{
+          if(res.code===20000){
+            let section_name = res.section_name;
+            if(res.source==2){
+              wx.navigateTo({
+                url: `/pages/markWrongList/markWrongList?section_id=${section_id}`,
+              })
+            }else{
+              wx.navigateTo({
+                url: `/pages/sortWrongList/sortWrongList?section_id=${section_id}&section_name=${section_name}`,
+              })
+            }
+          }
         })
       },
       fail: (res) =>{

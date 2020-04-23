@@ -4,17 +4,14 @@
 
     "pages/scanWork/scanWork",
 
+
     "pages/markWrongList/markWrongList",
-
-
 
     "pages/sortWrongList/sortWrongList",
 
     "pages/agreement/agreement",
 
     "pages/phoneReg/phoneReg",
-
-    "pages/myWork/myWork",
 
     "pages/pointTrain/pointTrain",
 

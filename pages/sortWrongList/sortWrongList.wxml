@@ -3,6 +3,10 @@
 
 <view class="sortWrongList">
   <view class="noData" wx:if="{{noData}}">
+    <view class="title" >
+      <text class="section-name">{{section_name}}</text><text class="num">{{wrong_question_count}}/{{question_count}}</text>
+      <button class="remark button" bindtap="remark">重新标记错题</button>
+    </view>
     <image src="/images/nodata.png"></image>
     <view class="say">
       <text>错题本空空如也~</text>
@@ -33,19 +37,23 @@
             <view wx:if="{{!item.childrenFlag}}">
               <parser html="{{item.indexstem}}" />
               <view wx:for="{{item.question_data.options}}" wx:for-item="it" wx:key="index">
-                <parser html="{{it}}"  />
+                <parser html="{{it}}" />
               </view>
               <view class="clearfix" wx:if="{{item.question_data.video!==''}}">
                 <view class="video">视频讲解：</view>
-                <video class="seeVideo" src="https://v.qq.com/x/page/y0647bdq0hl.html" ></video>
+                <video class="seeVideo" src="{{item.question_data.video}}" ></video>
               </view>
               <view class="clearfix">
-                <view class="myanswer">我的作答：<text class="error">X</text></view>
+                <view class="myanswer">
+                  我的作答：
+                  <text class="error" wx:if="{{item.showErrorAnswer}}">{{item.question_data.my_answer}}</text>
+                  <text class="error" wx:if="{{!item.showErrorAnswer}}">X</text>
+                </view>
               </view>
               <view class="clearfix" >
                 <view class="myanswer">答案解析：<text class="see" bindtap="seeAnswer" data-childrenFlag="{{item.childrenFlag}}" data-id="{{item.id}}" >查看</text></view>
                 <view class="myanswer-check" style="display:{{item.myanswerFlag?'block':'none'}}">
-                  <block wx:for="{{item.question_data.answers[0]}}" wx:for-item="ans" wx:key="index">
+                  <block wx:for="{{item.question_data.newAnwsers}}" wx:for-item="ans" wx:key="index">
                     <parser html="{{ans}}" />
                   </block>
                   <block wx:for="{{item.question_data.analysis}}" wx:for-item="ana" wx:key="index">
@@ -55,8 +63,8 @@
               </view>
               <view class="clearfix changeAns">
                 <view class="myanswer">我的反思：</view>
-                <textarea class="textarea" bindinput='getTextareaValue' value="{{item.remarks}}" placeholder="最多可录入30个字" placeholder-class="black"></textarea>
-                <button class="sub button" bindtap="changeAnswer" data-id="{{item.id}}">提交</button>
+                <textarea class="textarea" disabled="{{!item.haveThink}}" data-id="{{item.id}}" bindinput='getTextareaValue' value="{{item.remarks}}" placeholder="最多可录入30个字" placeholder-class="black"></textarea>
+                <button class="sub button" bindtap="changeAnswer" data-id="{{item.id}}" data-value="{{item.remarks}}" data-havethink="{{item.haveThink}}">{{item.haveThink?'提交':'修改'}}</button>
               </view>
             </view>
             <!-- 有小题的情况下 -->
@@ -65,10 +73,20 @@
                <block wx:for="{{item.question_data.children}}" wx:for-item="itch" wx:key="index">
                 <view>
                   <view class="clearfix">
-                    <view class="myanswer">{{itch.index}}.我的作答：<text class="error" wx:if="{{!itch.myanswerTrue}}">×</text><view wx:if="{{itch.myanswerTrue}}" class="noerror"><image src="../../images/gougou.png"></image></view></view>
+                    <view class="myanswer">
+                      <parser html="{{itch.indexChildstem}}" />
+                      <view>
+                        我的作答：
+                        <text class="error" wx:if="{{!itch.myanswerTrue&&itch.showErrorAnswer}}">{{itch.my_answer}}</text>
+                        <text text class="error" wx:if="{{!itch.myanswerTrue&&!itch.showErrorAnswer}}">X</text>
+                        <view wx:if="{{itch.myanswerTrue}}" class="noerror"><image src="../../images/gougou.png"></image></view>
+                      </view>
+                    </view>
                   </view>
                   <view class="clearfix" >
-                    <view class="myanswer">答案解析：<text class="see" bindtap="seeAnswer" data-childrenflag="{{item.childrenFlag}}" data-id="{{item.id}}" data-iid="{{itch.index}}">查看</text></view>
+                    <view class="myanswer">
+                      答案解析：
+                      <text class="see" bindtap="seeAnswer" data-childrenflag="{{item.childrenFlag}}" data-id="{{item.id}}" data-iid="{{itch.index}}">查看</text></view>
                     <view class="myanswer-check" style="display:{{itch.myanswerFlag?'block':'none'}}">
                       <view class="clearfix">
                         <view class="myanswer">
@@ -90,18 +108,17 @@
               
               <view class="clearfix" wx:if="{{item.question_data.video!==''}}">
                 <view class="video">视频讲解：</view>
-                <video class="seeVideo" src="https://v.qq.com/x/page/y0647bdq0hl.html" ></video>
+                <video class="seeVideo" src="{{item.question_data.video}}" ></video>
               </view>
               
               <view class="clearfix changeAns">
                 <view class="myanswer">我的反思：</view>
                 <textarea class="textarea" bindinput='getTextareaValue' value="{{item.remarks}}" placeholder="最多可录入30个字" placeholder-class="black"></textarea>
-                <button class="sub button" bindtap="changeAnswer" data-id="{{item.id}}">提交</button>
+                <button class="sub button" bindtap="changeAnswer" data-id="{{item.id}}">{{item.haveThink?'提交':'修改'}}</button>
               </view>
             </view>
           </view>
         </parser-group>
-        
       </block>
       <button class="submit button" bindtap="downTip">下载针对训练</button>
     </view>

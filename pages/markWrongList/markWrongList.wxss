@@ -7,9 +7,17 @@
   font-size: 28rpx;
   display: block;
   padding: 20rpx 0 30rpx 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+}
+.markWrongList .question{
+  margin: 98rpx 0 20rpx 0;
 }
 .markWrongList .question .easy{
-
+  overflow: hidden;
 }
 .markWrongList .spe{
   margin-top: 20rpx;
@@ -32,12 +40,9 @@
 .markWrongList .question .easy .taps .left{
   height: 50rpx;
   line-height: 50rpx;
-  
+  margin-bottom: 20rpx;
 }
-.markWrongList .question .easy .answer-img image{
-  /* height: 200rpx;
-  width:100%; */
-}
+
 .markWrongList .question .easy .taps .ques{
   width: 71rpx;
   height: 46rpx;
@@ -48,7 +53,7 @@
   border: 2rpx solid #2896fe;
   float: left;
   text-align: center;
-  margin-left: 20rpx;
+  margin: 0 0 20rpx 20rpx;
 }
 .markWrongList .question .easy .taps .unormal{
   width: 171rpx;
@@ -58,11 +63,14 @@
 .markWrongList .question .easy .taps .answer .checked{
   color: #fff;
   background-color: #2896fe;
+  border: 2rpx solid #2896fe;
 }
-.markWrongList .question .difficult{
-  
-}
+.markWrongList .question .easy .taps .answer .checkedRed{
+  color: #fff;
+  background-color: #fe3f43;
+  border: 2rpx solid #fe3f43;
 
+}
 .markWrongList .submit{
   width: 631rpx;
   height: 60rpx;
@@ -72,4 +80,13 @@
   color: #fff;
   border-radius: 36rpx;
   background-color: #2896fe;
+}
+.bottom-btn{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 20rpx 0;
 }

@@ -5,7 +5,7 @@
   <view class="title-little">对答案、标错题、进行针对训练</view>
   <!-- <button class="login-wx button" open-type='getUserInfo' bindgetuserinfo='getUserInfos'>微信授权登录</button> -->
   <button class="login-wx button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{checked}}">微信授权登录</button>
-  <button class="login-wx button" bindtap="wxLogin" wx:if="{{!checked}}">微信授权登录</button>
+  <button class="login-wx button bg99d" bindtap="wxLogin" wx:if="{{!checked}}">微信授权登录</button>
 
   <button class="login-phone button" bindtap="phoneReg">手机验证码登录</button>
   <view class="bottom">

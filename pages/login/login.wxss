@@ -62,6 +62,9 @@
   font-size: 24rpx;
   color: #999;
 }
+.bg99d{
+  background-color: #99d58d !important;
+}
 .login .bottom .reg{
   font-size: 24rpx;
   color: #333;

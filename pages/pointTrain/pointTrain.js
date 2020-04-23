@@ -62,23 +62,16 @@ Page({
             duration: 2000
           })
         }
-        // var filePath = res.tempFilePath;
-        // wx.openDocument({
-        //     filePath: filePath,
-        //     success: function(res) {
-        //         console.log('打开文档成功')
-        //     },
-        //     fail: function(res) {
-        //       wx.showToast({
-        //         title: '下载文件失败',
-        //         icon:'none',
-        //         duration: 2000
-        //       })
-        //     },
-        //     complete: function(res) {
-        //         console.log(res);
-        //     }
-        // })
+        var filePath = res.tempFilePath;
+        wx.openDocument({
+            filePath: filePath,
+            success: function(res) {
+            },
+            fail: function(res) {
+            },
+            complete: function(res) {
+            }
+        })
       },
       fail: function(res) {
         wx.hideLoading();
