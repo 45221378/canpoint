@@ -16,7 +16,8 @@
 }
 ._img {
   width: 0;
-  height:0
+  height:0;
+  display:inline-black;
 }
 /* 内部样式 */
 :host {

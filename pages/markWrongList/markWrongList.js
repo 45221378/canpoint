@@ -24,7 +24,7 @@ Page({
               [`pageData[${i}]children[${j}].my_answer`] :it
             })
           }
-        })
+        }) 
       }
     })
     pageIntData.forEach(items=>{
@@ -167,20 +167,23 @@ Page({
           let specicalOption = [];
           let newAnwsers = []
           child = item.children.length>0?1:0;
-          // 自己定义的 quesType  1为单选题  2为多选题 300为客观题  400为特殊题型，7选5
+          // 自己定义的 quesType  1为单选题  2为多选题 300为客观题  400为特殊题型，7选5  1  2  3 6 25 
           if(child==0){
-            if(item.template===1){
+            if(item.template===1||item.template===25){
               options = 'ABCDEFGHIJKLMN'.substr(0,item.options.length);
               quesType = 1;
               answers = item.answers;
               checked = item.my_answer?item.my_answer:item.answers.toString();
-            }else if(item.template===4){
+            }else if(item.template===2||item.template===3||item.template===4){
               options = 'ABCDEFGHIJKLMN'.substr(0,item.options.length);
               quesType = 2;
               answers = item.answers;
               checked = item.my_answer?item.my_answer:item.answers.join('');
-              console.log(checked)
-              console.log(answers)
+            }else if(item.template===6){
+              options = 'TF';
+              quesType = 6;
+              answers = item.answers;
+              checked = item.my_answer?item.my_answer:item.answers.toString();
             }else{
               quesType = 300;
               answers = item.answers;

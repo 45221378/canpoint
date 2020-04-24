@@ -1,5 +1,7 @@
 // pages/scanWork/scanWork.js
 var ajax = require("./../../utils/ajax.js")
+var that
+var list = []
 Page({
 
   /**
@@ -8,11 +10,63 @@ Page({
   data: {
     showScan: false,
     title:'',
-    arraystage:['小学','初中','高中'],
-    stageindex:'',
-    objectArrayInt:[],
-    objectArray:[],
-    objectIndex:'',
+    isShow_09: false,
+    isShow_09Flage:true,
+    listData_09:[
+      {
+        name:'小学',
+        id:1,
+        children:[
+          {
+            name:'语文',
+            id:14
+          },
+          {
+            name:'数学',
+            id:15
+          },
+          {
+            name:'英语',
+            id:17
+          }
+        ]
+      },
+      {
+        name:'初中',
+        id:2,
+        children:[
+          {
+            id: 14,
+            name: '语文'
+          },
+          {
+            id: 15,
+            name: '数学'
+          },
+          {
+            id: 17,
+            name: '英语'
+          },
+          {
+            id: 16,
+            name: '物理'
+          },
+          {
+            id: 18,
+            name: '化学'
+          },
+          {
+            id: 20,
+            name: '道德与法制'
+          },
+          {
+            id: 21,
+            name: '历史'
+          }
+        ]
+      }
+    ],
+    picker_09_data:[],
     record_list:[],
     imgList :{
       14:'/images/subject/Chinese.png',
@@ -21,53 +75,33 @@ Page({
       17:'/images/subject/English.png',
       18:'/images/subject/chemistry.png',
       19:'/images/subject/biology.png',
-      20:'/images/subject/morality andlaw.png',
+      20:'/images/subject/moralityandlaw.png',
       21:'/images/subject/history.png',
       22:'/images/subject/geography.png'
     }
   },
-  //获取学科列表
-  getObject(){
-    let url = wx.getStorageSync('requstURL') +'common/enum';
-    let token = wx.getStorageSync('token');
-    let data  = {
-      token: token,
-      enum_name: 'subject'
-    };
-    ajax.requestLoad(url,data,'GET').then(res=>{
-      if(res.code===20000){
-        let arrayObj = [] //数组对象
-        let arrayInt = [] //单独的数组
-        Object.keys(res.enum).map((item,index)=>{
-          arrayInt.push(res.enum[item])
-          arrayObj.push(item)
-        })
-        this.setData({
-          objectArray : arrayObj,
-          objectArrayInt:arrayInt
-        })
-        console.log(this.data.objectArray)
-        console.log(this.data.objectArrayInt)
+  showPicker_09: function () {
+    this.setData({
+      isShow_09: true
+    })
+  },
+  sureCallBack_09 (e) {
+    let data = e.detail
+    this.setData({
+      isShow_09: false,
+      picker_09_data: e.detail.choosedData,
+      picker_09_index:JSON.stringify(e.detail.choosedIndexArr)
+    })
+    let stageindex = data.choosedData[0].id;
+    let objectIndex = data.choosedData[1].id;
+    this.getScanList(stageindex,objectIndex)
+  },
+  cancleCallBack_09 () {
+    this.setData({
+      isShow_09: false,
+    })
+  },
 
-      }
-    })
-  },
-  bindPickerChange: function (e) {
-    const {objectIndex} = this.data;
-    this.setData({
-      stageindex: parseInt(e.detail.value)
-    })
-    const stageindex = parseInt(e.detail.value) ;
-    this.getScanList(stageindex,objectIndex);
-  },
-  changeObject: function (e) {
-    const {objectArray,stageindex} = this.data;
-    this.setData({
-      objectIndex: e.detail.value
-    })
-    const sendobject = objectArray[e.detail.value]
-    this.getScanList(stageindex,sendobject);
-  },
   //获取数据
   getScanList(stageindex,objectIndex){
     // console.log(subjectId)
@@ -132,16 +166,15 @@ Page({
     })
   },
   goList(e){
-    const {section_id,section_name} = e.currentTarget.dataset;
+    const {sectionid,sectionname} = e.currentTarget.dataset;
     wx.navigateTo({
-      url: `/pages/sortWrongList/sortWrongList?section_id=${section_id}&section_name=${section_name}`,
+      url: `/pages/sortWrongList/sortWrongList?section_id=${sectionid}&section_name=${sectionname}`,
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getObject();
   },
 
   /**

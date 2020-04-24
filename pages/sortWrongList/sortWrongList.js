@@ -15,17 +15,6 @@ Page({
     pageHandleData:[],
     pageChecked: '',
   },
-  renderStem(str) {
-    if (str) {
-        var str1 = str;
-        if(str1.indexOf('<blank/>')>0){
-          str1.replace('<blank/>','');
-          console.log(str1)
-        }
-        return str1
-    }
-    console.log(111)
-  },
   getData(){
     const {section_id} = this.data;
     let url = wx.getStorageSync('requstURL') +'homework/section/wrong/question/list';
@@ -46,38 +35,40 @@ Page({
           let dotArr = ['A.','B.','C.','D.','E.','F.','G.','H.','I.'];
 
           res.wrong_question_list.map((item,index)=>{
-
-            let indexstemInt = changeStr.changeReplace(item.question_data.stem);
-            // let indexstemInt = item.question_data.stem;
-
-            let indexP = indexstemInt.indexOf('<p>');
-            let indexstem
-            if(indexP==0){
-              indexstem = indexstemInt.slice(0,3)+item.question_data.index+'，'+indexstemInt.slice(3)
-            }else{
-              indexstem = item.question_data.index+'，'+changeStr.changeReplace(item.question_data.stem);
+            if(item.question_data.stem){
+              let indexstemInt = changeStr.changeReplace(item.question_data.stem);
+              // let indexstemInt = item.question_data.stem;
+              let indexDisP = indexstemInt.indexOf('>')+1;
+              let indexP = indexstemInt.indexOf('<p');
+              let indexstem
+              if(indexP==0){
+                indexstem = indexstemInt.slice(0,indexDisP)+item.question_data.index+'. '+indexstemInt.slice(indexDisP);
+              }else{
+                indexstem = item.question_data.index+'. '+changeStr.changeReplace(item.question_data.stem);
+              }
+              item.indexstem = indexstem
             }
-            item.indexstem = indexstem
             // 是否有反思，有就需要disabled输入框，并且 字的内容为修改
             item.haveThink = item.remarks===''?true:false;
             for(var i in item.question_data.options){
               item.question_data.options[i] = dotArr[i]+item.question_data.options[i]
             }
             if(item.question_data.children.length>0){
-              
-
               item.childrenFlag = true;
               item.question_data.children.map(itch=>{
                 //处理小题的题干
-                let indexChildstemInt = changeStr.changeReplace(itch.stem);
-                let indexChildP = indexChildstemInt.indexOf('<p>');
-                let indexChildstem
-                if(indexChildP==0){
-                  indexChildstem = indexChildstemInt.slice(0,3)+itch.index+'，'+indexChildstemInt.slice(3)
-                }else{
-                  indexChildstem = itch.index+'，'+changeStr.changeReplace(itch.stem);
+                if(itch.stem){
+                  let indexChildstemInt = changeStr.changeReplace(itch.stem);
+                  let indexChildP = indexChildstemInt.indexOf('<p>');
+                  let indexChildstem
+                  if(indexChildP==0){
+                    indexChildstem = indexChildstemInt.slice(0,3)+itch.index+'. '+indexChildstemInt.slice(3)
+                  }else{
+                    indexChildstem = itch.index+'. '+changeStr.changeReplace(itch.stem);
+                  }
+                  itch.indexChildstem = indexChildstem
                 }
-                itch.indexChildstem = indexChildstem
+                
 
                 itch.myanswerFlag = false   //是否有答案解析
                 // myanswerTrue  是否答题正确

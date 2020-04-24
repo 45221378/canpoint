@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/scanWork/scanWork",
+
     "pages/login/login",
 
-    "pages/scanWork/scanWork",
 
 
     "pages/markWrongList/markWrongList",
@@ -25,7 +26,8 @@
   },
   "usingComponents": {
     "parser": "component/parser/parser",
-    "parser-group": "component/parser-group/parser-group"
+    "parser-group": "component/parser-group/parser-group",
+    "picker": "component/picker/picker"
   },
   "tabBar": {
     "color": "#A4A3A3",

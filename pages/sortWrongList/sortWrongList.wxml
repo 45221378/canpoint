@@ -53,12 +53,27 @@
               <view class="clearfix" >
                 <view class="myanswer">答案解析：<text class="see" bindtap="seeAnswer" data-childrenFlag="{{item.childrenFlag}}" data-id="{{item.id}}" >查看</text></view>
                 <view class="myanswer-check" style="display:{{item.myanswerFlag?'block':'none'}}">
-                  <block wx:for="{{item.question_data.newAnwsers}}" wx:for-item="ans" wx:key="index">
-                    <parser html="{{ans}}" />
-                  </block>
-                  <block wx:for="{{item.question_data.analysis}}" wx:for-item="ana" wx:key="index">
-                    <parser html="{{ana}}" />
-                  </block>
+                  <view class="clearflex mgt10">
+                    <view class="ansewrtext">答案: </view>
+                    <view class="errorright">
+                      <block wx:for="{{item.question_data.newAnwsers}}" wx:for-item="ans" wx:key="index">
+                        <parser html="{{ans}}" />
+                      </block>
+                    </view>
+                  </view>
+                  <view class="clearflex">
+                    <text class="ansewrtext">解析: </text>
+                    <view class="errorright">
+                      <view wx:if="{{item.question_data.analysis[0]==''||item.question_data.analysis==null}}">
+                        <text>略</text>
+                      </view>
+                      <view wx:if="{{item.question_data.analysis[0]!=''}}">
+                        <block wx:for="{{item.question_data.analysis}}" wx:for-item="ana" wx:key="index">
+                          <parser html="{{ana}}" />
+                        </block>
+                      </view>
+                    </view>
+                  </view>
                 </view>
               </view>
               <view class="clearfix changeAns">
@@ -88,11 +103,23 @@
                       答案解析：
                       <text class="see" bindtap="seeAnswer" data-childrenflag="{{item.childrenFlag}}" data-id="{{item.id}}" data-iid="{{itch.index}}">查看</text></view>
                     <view class="myanswer-check" style="display:{{itch.myanswerFlag?'block':'none'}}">
-                      <view class="clearfix">
-                        <view class="myanswer">
-                          <view class="errorright">
-                            <block wx:for="{{itch.answers[0]}}" wx:for-item="ans" wx:key="index">
-                              <parser html="{{ans}}" />
+                      <view class="myanswer clearflex">
+                        <view class="ansewrtext">答案:</view>
+                        <view class="errorright">
+                          <block wx:for="{{itch.answers[0]}}" wx:for-item="ans" wx:key="index">
+                            <parser html="{{ans}}" />
+                          </block>
+                        </view>
+                      </view>
+                      <view class="clearflex myanswer">
+                        <text class="ansewrtext">解析:</text>
+                        <view class="errorright">
+                          <view wx:if="{{item.question_data.analysis[0]==''||item.question_data.analysis==null}}">
+                            <text>略</text>
+                          </view>
+                          <view wx:if="{{item.question_data.analysis[0]!=''}}">
+                            <block wx:for="{{item.question_data.analysis}}" wx:for-item="ana" wx:key="index">
+                              <parser html="{{ana}}" />
                             </block>
                           </view>
                         </view>
@@ -100,7 +127,6 @@
                       <block wx:for="{{itch.analysis}}" wx:for-item="ana" wx:key="index">
                         <parser html="{{ana}}" />
                       </block>
-                      <!-- <image class='login-logo' src='/images/logo.png' ></image> -->
                     </view>
                   </view>
                 </view>

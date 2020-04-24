@@ -30,6 +30,28 @@
                 </view>
             </view>
           </view>
+           <!-- 客观题 判断题-->
+          <view wx:if="{{item.quesType===6}}">
+            <view class="right-answer">
+              <text>{{item.index}}</text>. 正确答案：<text > {{item.answers}}</text>
+            </view>
+            <view class="taps"> 
+                <text class="left">标记我的答案：</text>
+                <view class="answer clearfix" >
+                  <block
+                    wx:for="{{item.options}}" 
+                    wx:for-item="it"
+                    wx:key="index">
+                      <view 
+                        bindtap="onechecked" data-datarow='{{item}}' data-flag="{{item.flag}}"  data-it="{{it}}" data-idx="{{item.index}}"
+                        class="ques {{item.checked==it&&item.checked==item.answers?'checked':item.checked==it?'checkedRed':''}}" 
+                        >
+                          {{it}}
+                      </view>
+                  </block>
+                </view>
+            </view>
+          </view>
           <!-- 客观题 多选题-->
           <view wx:if="{{item.quesType===2}}">
             <view class="right-answer">
@@ -56,7 +78,7 @@
           <view wx:if="{{item.quesType===300}}">
             <view class="right-answer">
               <view class="nochildren">
-                <text>{{item.index}}</text>. 正确答案： 答案不唯一，如图。<text > </text>
+                <text>{{item.index}}</text>. 正确答案： 如图。<text > </text>
               </view>
               <block wx:for="{{item.newAnwsers}}" wx:for-item="i" wx:key="index">
                 <parser html="{{i}}" />
