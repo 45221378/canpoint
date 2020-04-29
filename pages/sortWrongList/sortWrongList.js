@@ -1,6 +1,10 @@
 // pages/sortWrongList/sortWrongList.js
 var ajax = require("./../../utils/ajax.js")
 var changeStr = require("./../../utils/replace.js")
+
+
+const innerAudioContext = wx.createInnerAudioContext();
+
 Page({
   /**
    * 页面的初始数据
@@ -14,6 +18,11 @@ Page({
     pageData: [],
     pageHandleData:[],
     pageChecked: '',
+    answer:{
+      audio:0,
+      duration:'',
+      currentTime:''
+    }
   },
   getData(){
     const {section_id} = this.data;
@@ -32,12 +41,12 @@ Page({
         }else{
           let pageChecked = res.wrong_question_list[0].question_num;
           let pageHandleData = [];
-          let dotArr = ['A.','B.','C.','D.','E.','F.','G.','H.','I.'];
+          let dotArr = ['A.','B.','C.','D.','E.','F.','G.','H.','I.','J.','K.','L.','M.','N.','O.','P.','Q.','R.','S.','T.',];
 
           res.wrong_question_list.map((item,index)=>{
+            item.videoFlag = true;
             if(item.question_data.stem){
               let indexstemInt = changeStr.changeReplace(item.question_data.stem);
-              // let indexstemInt = item.question_data.stem;
               let indexDisP = indexstemInt.indexOf('>')+1;
               let indexP = indexstemInt.indexOf('<p');
               let indexstem
@@ -50,26 +59,56 @@ Page({
             }
             // 是否有反思，有就需要disabled输入框，并且 字的内容为修改
             item.haveThink = item.remarks===''?true:false;
+            //给每一个答案，拼接 A B C D
             for(var i in item.question_data.options){
-              item.question_data.options[i] = dotArr[i]+item.question_data.options[i]
+              item.question_data.options[i] = String.fromCodePoint(parseInt(i)+65)+'&nbsp;' +item.question_data.options[i]
             }
+            //处理大题的音频地址
+            if(item.question_data.audio){
+              let audiohttps = item.question_data.audio.replace('http://','https://')
+              item.question_data.audio = audiohttps;
+              item.question_data.durationTotal = '00:00';
+              item.question_data.currentTime = '00:00';
+              item.question_data.showaudioImg = 0;
+            }
+            
             if(item.question_data.children.length>0){
               item.childrenFlag = true;
-              item.question_data.children.map(itch=>{
+              item.question_data.children.map((itch,idch)=>{
                 //处理小题的题干
                 if(itch.stem){
                   let indexChildstemInt = changeStr.changeReplace(itch.stem);
                   let indexChildP = indexChildstemInt.indexOf('<p>');
                   let indexChildstem
+                  //有的题号带了括号，有的题号没有带括号
                   if(indexChildP==0){
                     indexChildstem = indexChildstemInt.slice(0,3)+itch.index+'. '+indexChildstemInt.slice(3)
                   }else{
                     indexChildstem = itch.index+'. '+changeStr.changeReplace(itch.stem);
                   }
                   itch.indexChildstem = indexChildstem
+                }else{
+                  itch.indexChildstem = itch.index+'. '
                 }
+                //给每一个答案，拼接 A B C D
+                for(var j in itch.options){
+                  itch.options[j] = String.fromCodePoint(parseInt(j)+65)+'&nbsp;' + itch.options[j]
+                }
+                //处理小题的音频地址
+                if(itch.audio){
+                  let audiohttps = itch.audio.replace('http://','https://')
+                  itch.audio = audiohttps;
+                  itch.durationTotal = '00:00';
+                  itch.currentTime = '00:00';
+                  itch.showaudioImg = 0;
+                }
+                //小题多答案的情况下, 把答案拼接，用逗号分开
+                let newAnwsers = ''
+                itch.answers.forEach(item=>{
+                  newAnwsers =  newAnwsers + item.toString()  + ' &nbsp;&nbsp;' ;
+                })
+                itch.newAnwsers = newAnwsers
                 
-
                 itch.myanswerFlag = false   //是否有答案解析
                 // myanswerTrue  是否答题正确
                 if(itch.my_answer){
@@ -89,10 +128,11 @@ Page({
                 }else{
                   itch.myanswerTrue = true
                 }
+              
                 if(!itch.myanswerTrue){
                   //如果在有小题的情况下，答错了。
                   //再判断，是否是选择题，是选择题，显示选择的答案。否则，显示 x
-                  if(itch.template==1 ||itch.template==2||itch.template==14||itch.template==22||itch.template==29){
+                  if(itch.template==1 ||itch.template==2||itch.template==6||itch.template==14||itch.template==22||itch.template==29){
                     itch.showErrorAnswer = true;
                   }else{
                     itch.showErrorAnswer = false;
@@ -108,7 +148,9 @@ Page({
             }else{
               // 无小题的情况下
               item.childrenFlag = false;
-              item.myanswerFlag = false
+              item.myanswerFlag = false;
+
+              
               //多选题的情况
               if(item.question_data.questionType.id===4){
                 let newAnwser = [];
@@ -116,23 +158,34 @@ Page({
                 item.question_data.answers = newAnwser
               }
               //多答案的情况下
-              let newAnwsers = []
-              item.question_data.answers.forEach(item=>{
-                newAnwsers.push(item.toString())
+              let newAnwsers = ''
+              item.question_data.answers.forEach(itAn=>{
+                // 判断题，把后端返回的0和1 变为 F和T
+                if(item.question_data.template==6||item.question_data.template==24){
+                  newAnwsers = itAn.toString()==0?'F':'T'
+                }else{
+                  newAnwsers =  newAnwsers + itAn.toString()  + ' &nbsp;&nbsp;' ;
+                }
               })
               item.question_data.newAnwsers = newAnwsers
               //判断到底是显示错误的答案，还是在显示 X
-              if(item.question_data.my_answer==1||item.question_data.my_answer==0){
-                item.showErrorAnswer = false;
-              }else{
+              if(
+                item.question_data.template==1||
+                item.question_data.template==2||
+                item.question_data.template==3||
+                item.question_data.template==4||
+                item.question_data.template==25||
+                item.question_data.template==6||
+                item.question_data.template==19||
+                item.question_data.template==14||
+                item.question_data.template==22||
+                item.question_data.template==29
+                ){
                 item.showErrorAnswer = true;
+              }else{
+                item.showErrorAnswer = false;
               }
-
             }
-            // var that = this;
-            // item.question_data.answers[0] = changeStr.changeReplace(item.question_data.answers[0]);
-            // item.question_data.analysis = changeStr.changeReplace(item.question_data.analysis[0]);
-
           })
           this.setData({
             pageData:res.wrong_question_list,
@@ -146,6 +199,29 @@ Page({
       }
     })
   },
+  // 点击获取视频地址并进行观看
+  playbtn(e){
+    const {videoid,id} = e.currentTarget.dataset;
+    let {pageData } = this.data;
+    let urlC = wx.getStorageSync('requstURL') +'video/link';
+    let tokenC = wx.getStorageSync('token');
+    let data  = {
+      token: tokenC,
+      video_id: videoid,
+    };
+    ajax.requestLoad(urlC,data,'GET').then(res=>{
+      if(res.code===20000&&res.video_link!=null){
+        pageData.forEach((item,i)=>{
+          if(item.id==id){
+            this.setData({
+              [`pageData[${i}]videoFlag`]: false,
+              [`pageData[${i}]videoSrc`]: res.video_link
+            })
+          }
+        })
+      }
+    })
+  },
   remark(){
     const {section_id} = this.data;
     wx.navigateTo({
@@ -156,6 +232,28 @@ Page({
     const {checked} = e.currentTarget.dataset;
     this.setData({
       pageChecked:checked,
+    })
+    //点击头部切换,所有的音频重置
+    var that = this
+    innerAudioContext.pause();
+    that.data.pageData.map((item,it)=>{
+      if(item.question_data.children.length>0){
+        item.question_data.children.map((itch,ic)=>{
+          if(itch.audio!=null&&itch.audio!=""){
+            that.setData({
+              [`pageData[${it}]question_data.children[${ic}].currentTime`]:'00:00',
+              [`pageData[${it}]question_data.children[${ic}].showaudioImg`]:0,
+            })
+          }
+        })
+      }else{
+        if(item.question_data.audio!=null&&item.question_data.audio!=""){
+          that.setData({
+            [`pageData[${it}]question_data.currentTime`]:'00:00',
+            [`pageData[${it}]question_data.showaudioImg`]:0,
+          })
+        }
+      }
     })
   },
   downTip(){
@@ -256,6 +354,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(changeStr.formatSeconds(85))
     const {section_id,section_name} = options;
     // const section_id = 'LYLcvMie'; 
     // const section_id = 'RQA3TmwB'; 
@@ -269,12 +368,109 @@ Page({
       section_name:section_name,
     })
     this.getData();
+    let that = this;
+    innerAudioContext.onPlay(()=>{
+     
+    })
+    innerAudioContext.onPause(()=>{
+      
+    })
   },
+  playaudio(e){
+    // console.log('开始')
+    const {audiosrc,id,qid} = e.currentTarget.dataset;
+    // const {pageData}  =this.data;
+    innerAudioContext.src = audiosrc;
+    innerAudioContext.play();
+    var that = this
+    that.data.pageData.map((item,it)=>{
+      if(item.id==id&&item.question_data.children.length>0){
+        item.question_data.children.map((itch,ic)=>{
+          if(itch.audio!=null&&itch.audio!=""&&itch.qid==qid){
+            that.setData({
+              [`pageData[${it}]question_data.children[${ic}].showaudioImg`]:3,
+            })
+            setTimeout(()=>{
+              innerAudioContext.currentTime  
+              innerAudioContext.onTimeUpdate(() => {
+                // console.log(innerAudioContext.duration)
+                // console.log('进度更新了总进度为：' + innerAudioContext.duration + '当前进度为：' +           this.innerAudioContext.currentTime);
+                let durationTotal =  changeStr.formatSeconds(innerAudioContext.duration)
+                let currentTime = changeStr.formatSeconds(innerAudioContext.currentTime)
+                  that.setData({
+                    [`pageData[${it}]question_data.children[${ic}].durationTotal`]:durationTotal,
+                    [`pageData[${it}]question_data.children[${ic}].currentTime`]:currentTime,
+                    [`pageData[${it}]question_data.children[${ic}].showaudioImg`]:1,
+                  })
+              })
+            },500)  
+          }
+        })
+      }
+    })
+    
+  },
+  stopaudio(e){
+    const {audiosrc,id,qid} = e.currentTarget.dataset;
+    innerAudioContext.src = audiosrc;
+    var that = this
+    that.data.pageData.map((item,it)=>{
+      if(item.id==id&&item.question_data.children.length>0){
+        item.question_data.children.map((itch,ic)=>{
+          if(itch.audio!=null&&itch.audio!=""&&itch.qid==qid){
+            that.setData({
+              [`pageData[${it}]question_data.children[${ic}].showaudioImg`]:0,
+            })
+          }
+        })
+      }
+    })
+    innerAudioContext.pause();
+  },
+  playbigaudio(e){
+    const {audiosrc,id} = e.currentTarget.dataset;
+    console.log(e.currentTarget.dataset)
+
+    innerAudioContext.src = audiosrc;
+    innerAudioContext.play();
+    var that = this
+    that.data.pageData.map((item,it)=>{
+      if(item.id==id&&item.question_data.audio!=null&&item.question_data.audio!=""){
+        that.setData({
+          [`pageData[${it}]question_data.showaudioImg`]:3,
+        })
+        setTimeout(()=>{
+          innerAudioContext.currentTime  
+          innerAudioContext.onTimeUpdate(() => {
+            let durationTotal =  changeStr.formatSeconds(innerAudioContext.duration)
+            let currentTime = changeStr.formatSeconds(innerAudioContext.currentTime)
+              that.setData({
+                [`pageData[${it}]question_data.durationTotal`]:durationTotal,
+                [`pageData[${it}]question_data.currentTime`]:currentTime,
+                [`pageData[${it}]question_data.showaudioImg`]:1,
+              })
+          })
+        },500)  
+      }
+    })
+  },
+  stopbigaudio(e){
+    const {id} = e.currentTarget.dataset;
+    var that = this
+    that.data.pageData.map((item,it)=>{
+      if(item.id==id&&item.question_data.audio!=null&&item.question_data.audio!=""){
+        that.setData({
+          [`pageData[${it}]question_data.showaudioImg`]:0,
+        })
+      }
+    })
+    innerAudioContext.pause();
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
@@ -295,7 +491,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+   
+    // innerAudioContext.destroy();
   },
 
   /**

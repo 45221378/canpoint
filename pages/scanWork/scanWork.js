@@ -14,6 +14,16 @@ Page({
     isShow_09Flage:true,
     listData_09:[
       {
+        name:'全部',
+        id:10,
+        children:[
+          {
+            name:'全部',
+            id:110
+          }
+        ]
+      },
+      {
         name:'小学',
         id:1,
         children:[
@@ -86,15 +96,18 @@ Page({
     })
   },
   sureCallBack_09 (e) {
-    let data = e.detail
+    let {choosedData} = e.detail
+    if(choosedData[0].id==10){
+      this.getScanList('','')
+    }else{
+      let stageindex = choosedData[0].id;
+      let objectIndex = choosedData[1].id;
+      this.getScanList(stageindex,objectIndex)
+    }
     this.setData({
       isShow_09: false,
-      picker_09_data: e.detail.choosedData,
-      picker_09_index:JSON.stringify(e.detail.choosedIndexArr)
+      picker_09_data: choosedData,
     })
-    let stageindex = data.choosedData[0].id;
-    let objectIndex = data.choosedData[1].id;
-    this.getScanList(stageindex,objectIndex)
   },
   cancleCallBack_09 () {
     this.setData({
@@ -112,12 +125,12 @@ Page({
       pagesize: 100,
       page:1
     };
-    stageindex!==""?data.stage_id=parseInt(stageindex)+1:'';
-    objectIndex!==""?data.subjectId = objectIndex:'';
+    stageindex!==""?data.stage_id=parseInt(stageindex):'';
+    objectIndex!==""?data.subject_id = objectIndex:'';
     // console.log(data)
     ajax.requestLoad(url,data,'GET').then(res=>{
       if(res.code===20000){
-        if(res.total_count<1){
+        if(res.total_count<1&&stageindex==''&objectIndex==''){
           this.setData({
             showScan:true
           })
@@ -175,6 +188,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
   },
 
   /**
@@ -188,15 +202,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getScanList('','');
-
+    let {picker_09_data:choosedData} = this.data
+    // console.log(choosedData)
+    if(choosedData.length==0){
+      this.getScanList('','')
+    }else{
+      if(choosedData[0].id==10){
+        this.getScanList('','')
+      }else{
+        let stageindex = choosedData[0].id;
+        let objectIndex = choosedData[1].id;
+        this.getScanList(stageindex,objectIndex)
+      }
+    }
+    
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    // this.setData({
+    //   picker_09_data:[]
+    // })
   },
 
   /**

@@ -88,7 +88,7 @@ Page({
   },
   doublechecked(e){
     const {it,idx} = e.currentTarget.dataset;
-    const {pageData,pageIntData} = this.data;
+    const {pageData} = this.data;
     pageData.forEach((items,i)=>{
       if(items.index===idx){
         let dataRowArray = items.checked;
@@ -99,10 +99,33 @@ Page({
         } else {
           dataRowArray = dataRowArray.split(it).join("");
         }
-        // items.checked =dataRowArray
         this.setData({
           [`pageData[${i}]checked`] :dataRowArray,
           [`pageIntData[${i}]my_answer`] :dataRowArray
+        })
+      }
+    })
+  },
+  doublechildchecked(e){
+    const {it,idx,iidx} = e.currentTarget.dataset;
+    const {pageData} = this.data;
+    pageData.map((items,i)=>{
+      if(items.index===idx){
+        items.children.map((item,j)=>{
+          if(item.index===iidx){
+            let dataRowArray = item.checked;
+            if (dataRowArray === "" || dataRowArray.indexOf(it) == -1) {
+              dataRowArray = item.checked += it;
+              dataRowArray = dataRowArray.split("").sort();
+              dataRowArray = Array.from(new Set(dataRowArray)).join("");
+            } else {
+              dataRowArray = dataRowArray.split(it).join("");
+            }
+            this.setData({
+              [`pageData[${i}]children[${j}].checked`] :dataRowArray,
+              [`pageIntData[${i}]children[${j}].my_answer`] :dataRowArray
+            })
+          }
         })
       }
     })
@@ -129,6 +152,14 @@ Page({
   subTip(){
     const {pageIntData,section_id,section_name} = this.data;
     console.log(pageIntData)
+    //把判断题用户选择的T F，转化成0 ，1发送给后端
+    pageIntData.forEach(item=>{
+      if(item.template==6){
+        if(item.my_answer){
+          item.my_answer = item.my_answer=='F'?'0':'1'
+        }
+      }
+    })
     let url = wx.getStorageSync('requstURL') +'homework/update';
     let token = wx.getStorageSync('token');
     let data  = {
@@ -165,7 +196,7 @@ Page({
         countArray.map(item=>{
           let options,quesType,answers,child,checked;
           let specicalOption = [];
-          let newAnwsers = []
+          let newAnwsers = "";
           child = item.children.length>0?1:0;
           // 自己定义的 quesType  1为单选题  2为多选题 300为客观题  400为特殊题型，7选5  1  2  3 6 25 
           if(child==0){
@@ -182,8 +213,10 @@ Page({
             }else if(item.template===6){
               options = 'TF';
               quesType = 6;
-              answers = item.answers;
-              checked = item.my_answer?item.my_answer:item.answers.toString();
+              answers = item.answers[0][0]=='0'?"F":"T";
+              let smy_answer
+              smy_answer = item.my_answer=='0'?'F':'T';
+              checked = item.my_answer?smy_answer:answers;
             }else{
               quesType = 300;
               answers = item.answers;
@@ -197,7 +230,7 @@ Page({
             }
             //多答案的情况下
             item.answers.forEach(item=>{
-              newAnwsers.push(item.toString())
+              newAnwsers =  newAnwsers + item.toString()  + ' &nbsp;&nbsp;' ;
             })
            
           }else{
@@ -216,15 +249,31 @@ Page({
               })
             }
             item.children.map(itch=>{
-              if(itch.template===1 ||itch.template===2){
+              if(itch.template===1 ||itch.template===25){
                 itch.options = 'ABCDEFGHIJKLMN'.substr(0,itch.options.length);
-                
+                itch.templateType = 1;
                 if(!itch.my_answer){
                   itch.my_answer = itch.answers[0][0];
                 }
                 itch.checked = itch.my_answer
+              }else if(itch.template===2||itch.template===3||itch.template===4){
+                itch.options = 'ABCDEFGHIJKLMN'.substr(0,itch.options.length);
+                itch.templateType = 2
+                if(!itch.my_answer){
+                  itch.my_answer = itch.answers[0][0];
+                }
+                itch.checked = itch.my_answer?itch.my_answer:itch.answers.join('');
+              }else if(itch.template===6){
+                //小题里面含有判断题
+                itch.options = 'TF';
+                itch.templateType = 6
+                answers = itch.answers[0][0]=='0'?"F":"T";
+                let smy_answer
+                smy_answer = itch.my_answer=='0'?'F':'T';
+                checked = itch.my_answer?smy_answer:answers;
               }else{
                 itch.options = '10';
+                itch.templateType = 300;
                 // console.log(itch.answers)
                 // itch.answers = itch.answers[0]
                 // 为此小题标记是否曾经存在标记的问题
@@ -243,6 +292,11 @@ Page({
                   }
                 }
               }
+              //小题多答案的情况下
+              itch.newAnwsers = "";
+              itch.answers.forEach(iit=>{
+                itch.newAnwsers =  itch.newAnwsers + iit.toString()  + ' &nbsp;&nbsp;' ;
+              })
             })
           }
           pageData.push({

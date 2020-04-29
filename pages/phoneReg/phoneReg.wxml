@@ -1,6 +1,6 @@
 <!--pages/phoneReg/phoneReg.wxml-->
 <view class="phoneReg">
-  <text class="title">手机号登陆</text>
+  <text class="title">手机号登录</text>
    <form>
     <view class="form">
       <view class="border">

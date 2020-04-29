@@ -20,7 +20,7 @@
 }
 .login .title-little{
   font-size: 24rpx;
-  color: #333;
+  color: #333; 
   text-align: center;
 
 }
@@ -53,6 +53,7 @@
 }
 .login .bottom label{
   display: inline-block;
+  padding: 30rpx 0 20rpx 30rpx;
 }
 .login .bottom label .checkbox .wx-checkbox-input{
   width: 30rpx;

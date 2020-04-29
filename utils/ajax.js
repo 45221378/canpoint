@@ -16,8 +16,14 @@ let requestLoad = function(url,data,method){
       success: function(res){
         wx.hideLoading();
         if(res.statusCode===200){
-          if(res.data.code===20000){
+          const {code} = res.data;
+          if(code===20000){
             resolve(res.data)
+          }else if(code === 300201 || code === 300202 || code === 300203 || code === 300301 || code === 300401|| code === 400201|| code === 400202|| code === 400203|| code === 400204){
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+            wx.clearStorageSync();
           }else{
             wx.showToast({
               title: res.data.message,

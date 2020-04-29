@@ -10,62 +10,68 @@
   </view>
 </view>
 
-
-<view class="myWork " wx:if="{{!showScan}}">
-  <text class="title">我的作业</text>
-  <view class="clearfix">
-    <view class="section left">
-      <!-- <picker mode="multiSelector" class='asdas' bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-        <view wx-if="{{multiIndex.length==0}}">
+<view class="myWork" wx:if="{{!showScan}}">
+  <view class="title">我的作业</view>
+  <view class="scroll">
+    <view class="clearfix">
+      <view class="section left">
+        <view wx:if="{{picker_09_data.length==0}}" bindtap="showPicker_09">
           <text class="section-title">请筛选学段和学科</text><image class="section-check" src='/images/check-bottom.png'></image>
         </view>
-        <input class="section-title" wx-if="{{multiIndex.length>0}}" value="{{multiArray[0][multiIndex[0]]}}-{{multiArray[1][multiIndex[1]]}}"></input>
-      </picker> -->
-      <view wx:if="{{picker_09_data.length==0}}" bindtap="showPicker_09">
-        <text class="section-title">请筛选学段和学科</text><image class="section-check" src='/images/check-bottom.png'></image>
+        <view wx:if="{{picker_09_data[0].id==10}}" bindtap="showPicker_09">
+          <text class="section-title">请筛选学段和学科</text><image class="section-check" src='/images/check-bottom.png'></image>
+        </view>
+        <view wx:if="{{picker_09_data.length>0&&picker_09_data[0].id!=10}}" bindtap="showPicker_09">
+          <text class="section-title">{{picker_09_data[0].name}} - {{picker_09_data[1].name}}</text><image class="section-check" src='/images/check-bottom.png'></image>
+        </view>
+        <picker
+          isShowPicker="{{isShow_09}}"
+          keyWordsOfShow="name"
+          bindsure="sureCallBack_09"
+          bindcancle="cancleCallBack_09"
+          scrollType="link"
+          listData="{{listData_09}}"
+        ></picker>
       </view>
-      <view wx:if="{{picker_09_data.length>0}}" bindtap="showPicker_09">
-        <text class="section-title">{{picker_09_data[0].name}} - {{picker_09_data[1].name}}</text><image class="section-check" src='/images/check-bottom.png'></image>
-      </view>
-      <picker
-        isShowPicker="{{isShow_09}}"
-        keyWordsOfShow="name"
-        bindsure="sureCallBack_09"
-        bindcancle="cancleCallBack_09"
-        scrollType="link"
-        listData="{{listData_09}}"
-      ></picker>
     </view>
-  </view>
-  <view class="myWork-ul">
-    <block wx:for-items="{{record_list}}" wx:key="index">
-      <view>
-        <view class="myWork-li" bindtap="goList" data-sectionid='{{item.section_id}}' data-sectionname="{{item.section_name}}">
-            <view class="bg-img">
-              <image class="subject-img" src="{{imgList[item.subject_id]}}"></image>
+    <view class="myWork-ul" wx:if="{{record_list.length>0}}">
+      <block wx:for-items="{{record_list}}" wx:key="index" >
+        <view class="pdlr30">
+          <view class="myWork-li" bindtap="goList" data-sectionid='{{item.section_id}}' data-sectionname="{{item.section_name}}">
+              <view class="bg-img">
+                <image class="subject-img" src="{{imgList[item.subject_id]}}"></image>
+              </view>
+              <view class="center">
+                <text class="center-top">{{item.stage_name}}{{item.subject_name}}</text>
+                <text class="center-page">{{item.section_name}}</text>
+              </view>
+              <image class="img-right" src='/images/right.png'></image>
             </view>
-            <view class="center">
-              <text class="center-top">{{item.stage_name}}{{item.subject_name}}</text>
-              <text class="center-page">{{item.section_name}}</text>
+            <view class="myWork-bot">
+              <view class="borderR">
+                <image class="img-time" src='/images/time.png'></image>
+                <text class="book-time">{{tools.splitTime(item.modified)}}</text>
+              </view>
+              <view>
+                <image class="img-book" src='/images/book.png'></image>
+                <text class="book-name">{{item.book_name}}</text>
+              </view>
             </view>
-            <image class="img-right" src='/images/right.png'></image>
-          </view>
-          <view class="myWork-bot">
-            <view>
-              <image class="img-time" src='/images/time.png'></image>
-              <text class="book-time">{{tools.splitTime(item.modified)}}</text>
-            </view>
-            <view>
-              <image class="img-book" src='/images/book.png'></image>
-              <text class="book-name">{{item.book_name}}</text>
-            </view>
-          </view>
+        </view>
+      </block>
+    </view>
+    <view class="myWork-ul noData" wx:if="{{record_list.length==0}}">
+      <view wx:if="{{record_list.length==0}}">
+        <image src="/images/nodata.png"></image>
+        <view class="say">
+          <text>我的作业空空如也~</text>
+          <text>将题目加入错题本可以方便复习哦</text>
+        </view>
       </view>
-    </block>
-  </view>
-
-  <view class="scan" bindtap='scancode'>
-    <image src="/images/scan.png"></image>
-    <text>扫一扫</text>
+    </view>
+    <view class="scan" bindtap='scancode'>
+      <image src="/images/scan.png"></image>
+      <text>扫一扫</text>
+    </view>
   </view>
 </view>

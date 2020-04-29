@@ -65,7 +65,7 @@
                     wx:for-item="it"
                     wx:key="index">
                       <view 
-                        bindtap="doublechecked" data-datarow='{{item}}' data-flag="{{item.flag}}"  data-it="{{it}}" data-idx="{{item.index}}"
+                        bindtap="doublechecked" data-datarow='{{item}}'  data-it="{{it}}" data-idx="{{item.index}}"
                         class="ques {{tools.bar(item.checked,it)&&tools.bar(item.answers,it)?'checked':tools.bar(item.checked,it)?'checkedRed':''}}" 
                         >
                           {{it}}
@@ -78,11 +78,12 @@
           <view wx:if="{{item.quesType===300}}">
             <view class="right-answer">
               <view class="nochildren">
-                <text>{{item.index}}</text>. 正确答案： 如图。<text > </text>
+                <text>{{item.index}}</text>. 正确答案： <text > </text>
               </view>
-              <block wx:for="{{item.newAnwsers}}" wx:for-item="i" wx:key="index">
+              <!-- <block wx:for="{{item.newAnwsers}}" wx:for-item="i" wx:key="index">
                 <parser html="{{i}}" />
-              </block>
+              </block> -->
+              <parser html="{{item.newAnwsers}}" />
             </view>
             <view class="taps">
                 <text class="left">标记我的答案：</text>
@@ -107,37 +108,10 @@
         </view>
         <!-- 大题的情况 有小题   -->
         <view wx:if="{{item.child===1}}">
-          <!-- <view class="right-answer">
-            <parser html="{{item.stem}}" />
-          </view> -->
           <block wx:for="{{item.children}}" wx:for-item="itch" wx:key="index">
             <!-- 特殊题型 7选5-->
-            <!-- <view wx:if="{{item.template===14}}">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-                <view class="haveanswer">
-                  <text>{{itch.index}}. </text>
-                  <text>正确答案123</text>
-                  <text>{{itch.answers[0]}}</text>
-                </view>
-                <parser html="{{itch.answers}}" />
-                <view class="taps">
-                  <text class="left">标记我的答案：</text>
-                  <view class="answer clearfix" >
-                    <block
-                      wx:for="{{itch.options}}" 
-                      wx:for-item="it"
-                      wx:key="iidx">
-                        <view 
-                          bindtap="speonechecked" data-datarow='{{item}}'  data-it="{{it}}" data-idx="{{item.index}}" data-iidx="{{i.index}}"
-                          class="ques {{tools.bar(itch.my_answer,it)?'checked':''}}" 
-                          >
-                            {{it}}
-                        </view>
-                    </block>
-                  </view>
-                </view>
-            </view> -->
             <!-- 大题的情况 有小题  单选题 -->
-            <view wx:if="{{itch.template===1}}">
+            <view wx:if="{{itch.templateType===1}}">
               <view class="right-answer">
                 <text>{{item.stem}}.{{itch.index}}</text> 正确答案：<text > {{itch.answers}}</text>
               </view>
@@ -155,16 +129,60 @@
                             {{itopt}}
                         </view>
                     </block>
+                  </view> 
+              </view>
+            </view>
+            <!-- 大题的情况 有小题  多选题 -->
+            <view wx:if="{{itch.templateType===2}}">
+              <view class="right-answer">
+                <text>{{item.stem}}.{{itch.index}}</text> 正确答案：<text > {{itch.answers}}</text>
+              </view>
+              <view class="taps"> 
+                  <text class="left">标记我的答案：</text>
+                  <view class="answer clearfix" >
+                    <block
+                      wx:for="{{itch.options}}" 
+                      wx:for-item="itopt"
+                      wx:key="index">
+                        <view 
+                          bindtap="doublechildchecked" data-datarow='{{item}}' data-it="{{itopt}}" data-idx="{{item.index}}" data-iidx="{{itch.index}}"
+                          class="ques {{tools.bar(itch.checked,itopt)&&tools.bar(itch.answers,itopt)?'checked':tools.bar(itch.checked,itopt)?'checkedRed':''}}" 
+                          >
+                            {{itopt}}
+                        </view>
+                    </block>
+                  </view> 
+              </view>
+            </view>
+            <!-- 大题的情况 有小题  判断题 -->
+            <view wx:if="{{itch.templateType===6}}">
+              <view class="right-answer">
+                <text>{{item.stem}}.{{itch.index}}</text> 正确答案：<text > {{itch.answers}}</text>
+              </view>
+              <view class="taps"> 
+                  <text class="left">标记我的答案：</text>
+                  <view class="answer clearfix" >
+                    <block
+                      wx:for="{{itch.options}}" 
+                      wx:for-item="itopt"
+                      wx:key="index">
+                        <view 
+                          bindtap="onechildchecked" data-datarow='{{item}}' data-it="{{itopt}}" data-idx="{{item.index}}" data-iidx="{{itch.index}}"
+                          class="ques {{itch.checked==itopt&&itch.checked==itch.answers?'checked':itch.checked==itopt?'checkedRed':''}}" 
+                          >
+                            {{itopt}}
+                        </view>
+                    </block>
                   </view>
               </view>
             </view>
             <!-- 大题的情况 有小题  客观题 -->
-            <view wx:if="{{itch.template!==1&&item.template!==2&&itch.template!==14}}">
+            <view wx:if="{{itch.templateType==300}}">
               <view class="right-answer">
-                <text>{{item.stem}}.{{itch.index}}</text>  正确答案：
-                <block wx:for="{{itch.answers[0]}}" wx:for-item="i" wx:key="index">
-                  <parser id="article" html="{{i}}" />
-                </block>
+                <view class="nochildren">
+                  <text>{{item.stem}}.{{itch.index}}</text>  正确答案： <text > </text>
+                </view>
+                <parser html="{{itch.newAnwsers}}" />
               </view>
               <view class="taps"> 
                   <text class="left">标记我的答案：</text>

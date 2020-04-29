@@ -2,15 +2,25 @@
 .myWork{
   position: relative;
   background-color: #f9f9f9;
+  min-height: 100vh;
 }
 .myWork .title{
   font-size: 32rpx;
   color: #000;
   display: block;
   text-align: center;
-  margin-top: 80rpx;
-  padding-bottom: 30rpx;
+  padding: 94rpx 0 0rpx 0;
+  height: 160rpx;
   background-color: #fff;
+  z-index: 9999;
+  font-weight: 600;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.myWork .scroll{
+  padding: 170rpx 0 0 0;
 }
 .myWork .section{
   padding: 20rpx 0 0 40rpx;
@@ -27,15 +37,14 @@
 }
 .myWork .myWork-ul{
   margin-top: 30rpx;
+  overflow: hidden;
 }
 .myWork .myWork-ul .myWork-li{
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  padding: 20rpx 30rpx 20rpx 30rpx;
-
-  
+  padding: 20rpx 0 20rpx 0;
 }
 
 .myWork .myWork-ul .myWork-li .bg-img{
@@ -59,24 +68,31 @@
 .myWork .myWork-ul .myWork-li .center .center-top{
   display: block;
   text-align: left;
-  font-size: 32rpx;
+  font-size: 30rpx;
   margin-bottom: 10rpx;
 }
 .myWork .myWork-ul .myWork-li .center .center-page{
   display: block;
   text-align: left;
-  font-size: 30rpx;
+  font-size: 28rpx;
 }
 .myWork .myWork-ul .myWork-li .img-right{
   height: 30rpx;
   width: 20rpx;
 }
+.pdlr30{
+  padding: 0 30rpx 0 30rpx;
+  background-color: #fff;
+}
 .myWork .myWork-ul .myWork-bot{
   display: flex;
   margin: 0 0 20rpx 0;
   background-color: #fff;
-  padding: 0 0 20rpx 30rpx;
-
+  padding: 20rpx 0 20rpx 0;
+  border-top: 1rpx solid #eeeeee;
+}
+.myWork .myWork-ul .myWork-bot .borderR{ 
+  border-right: 1rpx solid #eeeeee;
 }
 .myWork .myWork-ul .myWork-bot .img-time{
   width: 20rpx;
@@ -89,7 +105,7 @@
   font-size: 26rpx;
 }
 .myWork .myWork-ul .myWork-bot .book-time{
-  width: 176rpx;
+  width: 166rpx;
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
@@ -97,7 +113,7 @@
   vertical-align: middle;
 }
 .myWork .myWork-ul .myWork-bot .book-name{
-  width: 400rpx;
+  width: 420rpx;
   display: inline-block;
   vertical-align: middle;
   white-space: nowrap;
@@ -109,7 +125,7 @@
   width: 16rpx;
   height: 22rpx;
   display: inline-block;
-  margin: 0 6rpx 0 16rpx;
+  margin: 0 6rpx 0 26rpx;
   vertical-align: middle;
 }
 
@@ -138,7 +154,7 @@
 
 
 .scanWork image{
-  height: 598rpx;
+  height: 540rpx;
   width: 100%;
   position: relative;
 }
@@ -168,4 +184,20 @@
   font-size: 34rpx;
   color: #fff;
   margin-top: 24rpx;
+}
+
+.myWork .noData image{
+  width: 370rpx;
+  height: 280rpx;
+  margin: 100rpx auto 20rpx;
+  display: block;
+}
+.myWork .noData .say{
+  font-size: 30rpx;
+  color: #999;
+}
+.myWork .noData .say text{
+  display: block;
+  line-height: 50rpx;
+  text-align: center;
 }

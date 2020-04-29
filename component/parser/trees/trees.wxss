@@ -18,6 +18,15 @@
   width: 0;
   height:0;
   display:inline-black;
+  vertical-align: middle;
+}
+._cloze {
+  width: 46px;
+  border-bottom: 1px solid #333;
+  display: inline-block;
+  text-align: center;
+  line-height: 18px;
+  text-indent: 0;
 }
 /* 内部样式 */
 :host {
@@ -124,4 +133,26 @@
   margin: -15px 0 0 -15px;
   position: absolute;
   top: 50%;
+}
+
+.underline{
+  text-decoration: underline;
+}
+.point2{
+  padding-bottom:3rpx;
+  background: url("https://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/point.png") no-repeat center bottom;
+}
+.point2,point2 {
+  padding-bottom: 3rpx;
+  background: url("https://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/point.png") no-repeat center bottom;
+}
+.wave {
+  padding-bottom:8rpx;
+  background: url("https://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/wave.png") repeat-x center bottom;
+  
+}
+wave {
+  padding-bottom:8rpx;
+  background: url("https://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/wave.png") repeat-x center bottom;
+  
 }

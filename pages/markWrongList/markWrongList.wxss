@@ -11,6 +11,8 @@
   left: 0;
   background-color: #fff;
   width: 100%;
+  z-index: 999;
+  box-shadow: 0 0 10rpx #ddd;
 }
 .markWrongList .question{
   margin: 98rpx 0 20rpx 0;
@@ -79,6 +81,7 @@
   color: #fff;
   border-radius: 36rpx;
   background-color: #2896fe;
+  
 }
 .bottom-btn{
   width: 100%;
@@ -88,4 +91,6 @@
   overflow: hidden;
   background-color: #fff;
   padding: 20rpx 0;
+  box-shadow: 0 0 10rpx #ddd;
+
 }
