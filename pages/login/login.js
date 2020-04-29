@@ -31,32 +31,24 @@ Page({
     if (e.detail.errMsg === 'getPhoneNumber:fail user deny') {
       console.log('点击拒绝');
     }else{
-      wx.login({
-        success: res => {
-          // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          if (res.code) {
-            let url = wx.getStorageSync('requstURL') +'user/auth';
-            let resCode = res.code;
-            let startTime = new Date().getTime();
-            let data = {
-              method: 2,
-              code: resCode,
-              encryptedData:e.detail.encryptedData,
-              iv:e.detail.iv,
-            }
-            ajax.requestLoad(url,data,'POST').then(res=>{
-              if(res.code===20000){
-                wx.setStorageSync('token', res.token)
-                wx.setStorageSync('startTime', startTime)
-                wx.switchTab({
-                  url: '/pages/scanWork/scanWork',
-                })
-              }
-            })
-          }
+      let url = wx.getStorageSync('requstURL') +'user/auth';
+      let resCode = wx.getStorageSync('resCode');
+      let startTime = new Date().getTime();
+      let data = {
+        method: 2,
+        code: resCode,
+        encryptedData:e.detail.encryptedData,
+        iv:e.detail.iv,
+      }
+      ajax.requestLoad(url,data,'POST').then(res=>{
+        if(res.code===20000){
+          wx.setStorageSync('token', res.token)
+          wx.setStorageSync('startTime', startTime)
+          wx.switchTab({
+            url: '/pages/scanWork/scanWork',
+          })
         }
       })
-      
     }
   },
   phoneReg(){
@@ -115,7 +107,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if (res.code) {
+          wx.setStorageSync('resCode', res.code)
+        }
+      }
+    })
   },
 
   /**

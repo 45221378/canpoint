@@ -9,8 +9,8 @@
   color: #000;
   display: block;
   text-align: center;
-  padding: 94rpx 0 0rpx 0;
-  height: 160rpx;
+  padding: 6vh 0 0rpx 0;
+  height: 11vh;
   background-color: #fff;
   z-index: 9999;
   font-weight: 600;
@@ -20,7 +20,7 @@
   right: 0;
 }
 .myWork .scroll{
-  padding: 170rpx 0 0 0;
+  padding: 11vh 0 0 0;
 }
 .myWork .section{
   padding: 20rpx 0 0 40rpx;

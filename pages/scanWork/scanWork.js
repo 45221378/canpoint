@@ -98,11 +98,11 @@ Page({
   sureCallBack_09 (e) {
     let {choosedData} = e.detail
     if(choosedData[0].id==10){
-      this.getScanList('','')
+      this.getScanList(1,'','')
     }else{
       let stageindex = choosedData[0].id;
       let objectIndex = choosedData[1].id;
-      this.getScanList(stageindex,objectIndex)
+      this.getScanList(1,stageindex,objectIndex)
     }
     this.setData({
       isShow_09: false,
@@ -116,14 +116,14 @@ Page({
   },
 
   //获取数据
-  getScanList(stageindex,objectIndex){
+  getScanList(page,stageindex,objectIndex){
     // console.log(subjectId)
     let url = wx.getStorageSync('requstURL') +'homework/list';
     let token = wx.getStorageSync('token');
     let data  = {
       token: token,
       pagesize: 100,
-      page:1
+      page:page
     };
     stageindex!==""?data.stage_id=parseInt(stageindex):'';
     objectIndex!==""?data.subject_id = objectIndex:'';
@@ -205,14 +205,14 @@ Page({
     let {picker_09_data:choosedData} = this.data
     // console.log(choosedData)
     if(choosedData.length==0){
-      this.getScanList('','')
+      this.getScanList(1,'','')
     }else{
       if(choosedData[0].id==10){
-        this.getScanList('','')
+        this.getScanList(1,'','')
       }else{
         let stageindex = choosedData[0].id;
         let objectIndex = choosedData[1].id;
-        this.getScanList(stageindex,objectIndex)
+        this.getScanList(1,stageindex,objectIndex)
       }
     }
     
@@ -238,6 +238,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.showNavigationBarLoading();
 
   },
 

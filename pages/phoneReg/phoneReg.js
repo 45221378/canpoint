@@ -94,30 +94,26 @@ Page({
     }else if(userCode===''){
       wx.showToast({
         title: '请输入短信验证码',
-        icon:'none', 
+        icon:'none',
         duration: 2000
       })
       return;
     }else{
-      wx.login({
-        success: res => {
-          let url = wx.getStorageSync('requstURL') + 'user/auth';
-          let resCode = res.code;
-          let data ={
-            mobile : userPhone,
-            sms_code :userCode ,
-            code :resCode
-          }
-          ajax.requestLoad(url,data,'POST').then(res=>{
-            if(res.code===20000){
-              wx.setStorageSync('token', res.token)
-              wx.reLaunch({
-                url: '/pages/scanWork/scanWork',
-              })
-            }
+      let url = wx.getStorageSync('requstURL') + 'user/auth';
+      let resCode = wx.getStorageSync('resCode');
+      let data ={
+        mobile : userPhone,
+        sms_code :userCode ,
+        code :resCode
+      }
+      ajax.requestLoad(url,data,'POST').then(res=>{
+        if(res.code===20000){
+          wx.setStorageSync('token', res.token)
+          wx.reLaunch({
+            url: '/pages/scanWork/scanWork',
           })
         }
-      }) 
+      })
     }
   },
   /**
