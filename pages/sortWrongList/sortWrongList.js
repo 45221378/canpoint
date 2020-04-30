@@ -393,8 +393,6 @@ Page({
             setTimeout(()=>{
               innerAudioContext.currentTime  
               innerAudioContext.onTimeUpdate(() => {
-                // console.log(innerAudioContext.duration)
-                // console.log('进度更新了总进度为：' + innerAudioContext.duration + '当前进度为：' +           this.innerAudioContext.currentTime);
                 let durationTotal =  changeStr.formatSeconds(innerAudioContext.duration)
                 let currentTime = changeStr.formatSeconds(innerAudioContext.currentTime)
                   that.setData({
@@ -408,7 +406,6 @@ Page({
         })
       }
     })
-    
   },
   stopaudio(e){
     const {audiosrc,id,qid} = e.currentTarget.dataset;
@@ -430,7 +427,6 @@ Page({
   playbigaudio(e){
     const {audiosrc,id} = e.currentTarget.dataset;
     console.log(e.currentTarget.dataset)
-
     innerAudioContext.src = audiosrc;
     innerAudioContext.play();
     var that = this
@@ -471,6 +467,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    
   },
 
   /**
