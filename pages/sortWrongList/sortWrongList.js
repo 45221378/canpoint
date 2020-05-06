@@ -149,8 +149,6 @@ Page({
               // 无小题的情况下
               item.childrenFlag = false;
               item.myanswerFlag = false;
-
-              
               //多选题的情况
               if(item.question_data.questionType.id===4){
                 let newAnwser = [];
@@ -467,7 +465,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
