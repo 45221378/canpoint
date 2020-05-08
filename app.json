@@ -1,15 +1,10 @@
 {
   "pages": [
+
     "pages/login/login",
+    "pages/cutImg/cutImg",
 
     "pages/scanWork/scanWork",
-
-
-
-
-
-
-
 
     "pages/markWrongList/markWrongList",
 

@@ -110,7 +110,7 @@
         <view wx:if="{{item.child===1}}">
           <block wx:for="{{item.children}}" wx:for-item="itch" wx:key="index">
             <!-- 特殊题型 7选5-->
-            <!-- 大题的情况 有小题  单选题 -->
+            <!-- 大题的情况 有小题  单选题 --> 
             <view wx:if="{{itch.templateType===1}}">
               <view class="right-answer">
                 <text>{{item.stem}}.{{itch.index}}</text> 正确答案：<text > {{itch.answers}}</text>
@@ -140,7 +140,7 @@
               <view class="taps"> 
                   <text class="left">标记我的答案：</text>
                   <view class="answer clearfix" >
-                    <block
+                    <block 
                       wx:for="{{itch.options}}" 
                       wx:for-item="itopt"
                       wx:key="index">
@@ -157,7 +157,7 @@
             <!-- 大题的情况 有小题  判断题 -->
             <view wx:if="{{itch.templateType===6}}">
               <view class="right-answer">
-                <text>{{item.stem}}.{{itch.index}}</text> 正确答案：<text > {{itch.answers}}</text>
+                <text>{{item.stem}}.{{itch.index}}</text> 正确答案：<text > {{itch.answersPan}}</text>
               </view>
               <view class="taps"> 
                   <text class="left">标记我的答案：</text>
@@ -165,10 +165,10 @@
                     <block
                       wx:for="{{itch.options}}" 
                       wx:for-item="itopt"
-                      wx:key="index">
+                      wx:key="index"> 
                         <view 
                           bindtap="onechildchecked" data-datarow='{{item}}' data-it="{{itopt}}" data-idx="{{item.index}}" data-iidx="{{itch.index}}"
-                          class="ques {{itch.checked==itopt&&itch.checked==itch.answers?'checked':itch.checked==itopt?'checkedRed':''}}" 
+                          class="ques {{itch.checked==itopt&&itch.checked==itch.answersPan?'checked':itch.checked==itopt?'checkedRed':''}}" 
                           >
                             {{itopt}}
                         </view>

@@ -22,7 +22,8 @@ Page({
       audio:0,
       duration:'',
       currentTime:''
-    }
+    },
+    // it11:"用计算器计算。<br><span class='math-tex'><img src='http://qp-tiku.oss-cn-beijing.aliyuncs.com/latex2img/5ca4bca19199c5cc3501e769122cbecc.png'/></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='math-tex'><img src='http://qp-tiku.oss-cn-beijing.aliyuncs.com/latex2img/6cbd9c5cb364ad4cba95cc04cb05be9f.png'/></span>                 <span class='math-tex'><img src='http://qp-tiku.oss-cn-beijing.aliyuncs.com/latex2img/70e8c50781e288da474ec96a6a7c5d81.png'/></span><br><span class='math-tex'><img src='http://qp-tiku.oss-cn-beijing.aliyuncs.com/latex2img/bc7e84f87ca7ab9024d2e07cf16b1615.png'/></span>        <span class='math-tex'><img src='http://qp-tiku.oss-cn-beijing.aliyuncs.com/latex2img/7003301bd8503eb28150fb765a164ada.png'/></span>",
   },
   getData(){
     const {section_id} = this.data;
@@ -104,31 +105,45 @@ Page({
                 }
                 //小题多答案的情况下, 把答案拼接，用逗号分开
                 let newAnwsers = ''
-                itch.answers.forEach(item=>{
-                  newAnwsers =  newAnwsers + item.toString()  + ' &nbsp;&nbsp;' ;
+                itch.answers.forEach(itAn=>{
+                  // 判断题，把后端返回的正确的 
+                  if(itch.template==6||itch.template==24){
+                    newAnwsers = itAn.toString()==0?'错':'对'
+                  }else{
+                    newAnwsers =  newAnwsers + itAn.toString()  + ' &nbsp;&nbsp;' ;
+                  }
                 })
                 itch.newAnwsers = newAnwsers
                 
                 itch.myanswerFlag = false   //是否有答案解析
                 // myanswerTrue  是否答题正确
+                // 存在my_answer下
                 if(itch.my_answer){
-                  // 存在my_answer下
-                  if(itch.my_answer==0){
-                    itch.myanswerTrue = false
-                  }else if(itch.my_answer==1){
-                    itch.myanswerTrue = true
-                  }else{
+                  // 把判断题单独拿出来判断 因为my_answer在主观题的情况下为0 ，表示答错了。但是在判断题的情况下返回0.得去和answer进行比较，到底是否答对。
+                  if(itch.template==6||itch.template==24){
                     //单选，多选的情况 判断是否答对此道题目
                     if(itch.answers[0][0]==itch.my_answer){
                       itch.myanswerTrue = true
                     }else{
                       itch.myanswerTrue = false
                     }
+                  }else{
+                    if(itch.my_answer==0){
+                      itch.myanswerTrue = false
+                    }else if(itch.my_answer==1){
+                      itch.myanswerTrue = true
+                    }else{
+                      //单选，多选的情况 判断是否答对此道题目
+                      if(itch.answers[0][0]==itch.my_answer){
+                        itch.myanswerTrue = true
+                      }else{
+                        itch.myanswerTrue = false
+                      }
+                    }
                   }
                 }else{
                   itch.myanswerTrue = true
                 }
-              
                 if(!itch.myanswerTrue){
                   //如果在有小题的情况下，答错了。
                   //再判断，是否是选择题，是选择题，显示选择的答案。否则，显示 x
@@ -158,9 +173,9 @@ Page({
               //多答案的情况下
               let newAnwsers = ''
               item.question_data.answers.forEach(itAn=>{
-                // 判断题，把后端返回的0和1 变为 F和T
+                // 判断题，把后端返回的正确的 
                 if(item.question_data.template==6||item.question_data.template==24){
-                  newAnwsers = itAn.toString()==0?'F':'T'
+                  newAnwsers = itAn.toString()==0?'错':'对'
                 }else{
                   newAnwsers =  newAnwsers + itAn.toString()  + ' &nbsp;&nbsp;' ;
                 }
@@ -218,6 +233,11 @@ Page({
           }
         })
       }
+    })
+  },
+  return(){
+    wx.switchTab({
+      url: '/pages/scanWork/scanWork',
     })
   },
   remark(){

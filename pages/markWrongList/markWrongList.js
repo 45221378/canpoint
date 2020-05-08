@@ -58,6 +58,7 @@ Page({
     this.setData({
       pageIntData:pageIntData
     });
+    console.log(this.data.pageIntData)
   },
   onechildchecked(e){
     const {it,idx,iidx} = e.currentTarget.dataset;
@@ -151,25 +152,30 @@ Page({
   },
   subTip(){
     const {pageIntData,section_id,section_name} = this.data;
-    console.log(pageIntData)
     //把判断题用户选择的T F，转化成0 ，1发送给后端
     pageIntData.forEach(item=>{
       if(item.template==6){
         if(item.my_answer){
-          item.my_answer = item.my_answer=='F'?'0':'1'
+          item.my_answer = item.my_answer=='错'?'0':item.my_answer=='对'?'1': item.my_answer
         }
       }
+      item.children.map(it=>{
+        if(it.template==6){
+          it.my_answer = it.my_answer=='错'?'0':it.my_answer=='对'?'1': it.my_answer
+        }
+      })
     })
+
     let url = wx.getStorageSync('requstURL') +'homework/update';
     let token = wx.getStorageSync('token');
     let data  = {
-      token: token,
+      token: token, 
       section_id: section_id,
       question_list:JSON.stringify(pageIntData)
     };
     ajax.requestLoad(url,data,'POST').then(res=>{
       if(res.code===20000){
-        wx.navigateTo({
+        wx.reLaunch({
           url: `/pages/sortWrongList/sortWrongList?section_id=${section_id}&section_name=${section_name}`,
         })
       }
@@ -211,11 +217,11 @@ Page({
               answers = item.answers;
               checked = item.my_answer?item.my_answer:item.answers.join('');
             }else if(item.template===6){
-              options = 'TF';
+              options = '对错';
               quesType = 6;
-              answers = item.answers[0][0]=='0'?"F":"T";
+              answers = item.answers[0][0]=='0'?"错":"对";
               let smy_answer
-              smy_answer = item.my_answer=='0'?'F':'T';
+              smy_answer = item.my_answer=='0'?'错':'对';
               checked = item.my_answer?smy_answer:answers;
             }else{
               quesType = 300;
@@ -265,12 +271,13 @@ Page({
                 itch.checked = itch.my_answer?itch.my_answer:itch.answers.join('');
               }else if(itch.template===6){
                 //小题里面含有判断题
-                itch.options = 'TF';
+                itch.options = '对错';
                 itch.templateType = 6
-                answers = itch.answers[0][0]=='0'?"F":"T";
+                answers = itch.answers[0][0]=='0'?"错":"对";
+                itch.answersPan = answers; 
                 let smy_answer
-                smy_answer = itch.my_answer=='0'?'F':'T';
-                checked = itch.my_answer?smy_answer:answers;
+                smy_answer = itch.my_answer=='0'?'错':'对';
+                itch.checked = itch.my_answer?smy_answer:answers;
               }else{
                 itch.options = '10';
                 itch.templateType = 300;

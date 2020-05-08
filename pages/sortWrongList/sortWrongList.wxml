@@ -2,6 +2,10 @@
 <wxs src="./../../utils/check.wxs" module="tools" />
 
 <view class="sortWrongList">
+  <view class="title-top">
+    <image class="return" bindtap="return" src="../../images/return.png"></image>
+    错题整理
+  </view>
   <view class="noData" wx:if="{{noData}}">
     <view class="title" >
       <text class="section-name">{{section_name}}</text><text class="num">{{wrong_question_count}}/{{question_count}}</text>
@@ -13,7 +17,7 @@
       <text>将题目加入错题本可以方便复习哦</text>
     </view>
   </view>
-  <view wx:if="{{!noData}}">
+  <view wx:if="{{!noData}}" class="haveData">
     <view class="title" >
       <text class="section-name">{{section_name}}</text><text class="num">{{wrong_question_count}}/{{question_count}}</text>
       <button class="remark button " bindtap="remark">重新标记错题 </button>
@@ -27,6 +31,7 @@
             <text bindtap="changeChecked" data-checked="{{item.question_num}}" class="i {{pageChecked===item.question_num?'checked':''}}">{{item.question_num}}</text>
         </block>
       </view>
+      <!-- <parser html="{{it11}}" /> -->
       <parser-group>
         <recycle-view batch="{{batchSetRecycleData}}" id="recycleId">
           <recycle-item wx:for="{{pageData}}" 
@@ -57,7 +62,7 @@
                 <view class="clearfix">
                   <view class="myanswer">
                     我的作答：
-                    <text class="error" wx:if="{{item.showErrorAnswer}}">{{item.question_data.template==6?item.question_data.newAnwsers:item.question_data.my_answer}}</text>
+                    <text class="error" wx:if="{{item.showErrorAnswer}}">{{item.question_data.template==6?item.question_data.my_answer==0?'错':'对':item.question_data.my_answer}}</text>
                     <text class="error" wx:if="{{!item.showErrorAnswer}}">X</text>
                   </view>
                 </view>
@@ -67,9 +72,6 @@
                     <view class="clearflex mgt10">
                       <view class="ansewrtext">答案: </view>
                       <view class="errorright">
-                        <!-- <block wx:for="{{item.question_data.newAnwsers}}" wx:for-item="ans" wx:key="index">
-                          <parser html="{{ans}}" />
-                        </block> -->
                         <parser html="{{item.question_data.newAnwsers}}" />
                       </view>
                     </view>
@@ -134,7 +136,7 @@
                         
                         <view>
                           我的作答：
-                          <text class="error" wx:if="{{!itch.myanswerTrue&&itch.showErrorAnswer}}">{{itch.my_answer}}</text>
+                          <text class="error" wx:if="{{!itch.myanswerTrue&&itch.showErrorAnswer}}">{{itch.template==6?itch.my_answer==0?'错':'对':itch.my_answer}}</text> 
                           <text text class="error" wx:if="{{!itch.myanswerTrue&&!itch.showErrorAnswer}}">X</text>
                           <view wx:if="{{itch.myanswerTrue}}" class="noerror"><image src="../../images/gougou.png"></image></view>
                         </view>
@@ -148,28 +150,22 @@
                         <view class="myanswer clearflex">
                           <view class="ansewrtext">答案:</view>
                           <view class="errorright">
-                            <!-- <block wx:for="{{itch.answers[0]}}" wx:for-item="ans" wx:key="index">
-                              <parser html="{{ans}}" />
-                            </block> -->
                             <parser html="{{itch.newAnwsers}}" />
                           </view>
                         </view>
                         <view class="clearflex myanswer">
                           <text class="ansewrtext">解析:</text>
                           <view class="errorright">
-                            <view wx:if="{{item.question_data.analysis[0]==''||item.question_data.analysis==null}}">
+                            <view wx:if="{{itch.analysis[0]==''||itch.analysis[0]==null}}">
                               <text>略</text>
                             </view>
-                            <view wx:if="{{item.question_data.analysis[0]!=''}}">
-                              <block wx:for="{{item.question_data.analysis}}" wx:for-item="ana" wx:key="index">
+                            <view wx:if="{{itch.analysis[0]!=''}}">
+                              <block wx:for="{{itch.analysis}}" wx:for-item="ana" wx:key="index">
                                 <parser html="{{ana}}" />
                               </block>
                             </view>
                           </view>
                         </view>
-                        <block wx:for="{{itch.analysis}}" wx:for-item="ana" wx:key="index">
-                          <parser html="{{ana}}" />
-                        </block>
                       </view>
                     </view>
                   </view>
