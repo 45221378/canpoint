@@ -1,18 +1,13 @@
 <!-- pages/cutImg/cutImg.wxml -->
-<view wx:if="{{crop_pic==''}}" class='show' bindtouchstart='start' bindtouchmove='move' style='width:{{screenW}}px;height:{{screenW}}px'>
-  <scroll-view scroll-x='true' scroll-y='true' style='height:{{screenW}}px' bindscroll='scroll'>
-    <image src='{{img}}' style=' width:{{width}}px; height:{{height}}px'></image>
-  </scroll-view>
-  <view class='cut' style='width:{{cut_}}px; height:{{cut_}}px'></view>
-  <canvas canvas-id='canvas' style=' width:{{width}}px; height:{{height}}px'></canvas>
-</view>
-<block wx:else>
-  <image src='{{crop_pic}}' style='width:{{cut_}}px; height:{{cut_}}px'></image>
-</block>
-<view class='bottom'>
-  <button wx:if="{{img==''}}" bindtap='choose' type='primary'>上传图片</button>
-  <block wx:else>
-    <button bindtap='crop' type='primary' disabled='{{disable}}'>裁剪图片</button>
-    <button bindtap='clear' type='warn'>取消</button>
-  </block>
+<view class='cutImg' >
+  <view class="allImg">
+    <scroll-view scroll-x="true">
+      <image mode='aspectFill' wx:for="{{image_list}}" wx:for-item="item" wx:key="index" class="dotImg" src="{{item}}" data-imgsrc="{{item}}" bindtap="showImg"></image>
+    </scroll-view>
+  </view>
+  <!-- <movable-area scale-area> -->
+    <canvas style='width:{{canvas_width}}px;height:{{canvas_height}}px' canvas-id='my_canvas'></canvas>
+    <!-- <image class="sureImg" src="{{showImg}}" alt=""></image> -->
+    <!-- <movable-view direction="all" bindchange="onChange" bindscale="onScale" scale scale-min="0.5" scale-max="6" scale-value="{{scale}}">text</movable-view>
+  </movable-area> -->
 </view>

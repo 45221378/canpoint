@@ -1,8 +1,10 @@
 {
   "pages": [
-
     "pages/login/login",
+
     "pages/cutImg/cutImg",
+    "pages/cropper/cropper",
+
 
     "pages/scanWork/scanWork",
 

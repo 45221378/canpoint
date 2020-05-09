@@ -1,32 +1,35 @@
-/* pages/cutImg/cutImg.wxss */
-page{
+.cutImg{
+  background: rgba(0,0,0,.7);
+}
+.cutImg .allImg{
+  height: 130rpx;
+  padding-bottom: 10rpx;
+
+}
+.cutImg .allImg scroll-view{
+  height: 100%;
+}
+.cutImg .dotImg{
+  height:100%;
+  width: 100rpx;
+  margin-right: 20rpx;
+}
+.cutImg .sureImg{
+  height: calc(100vh - 140rpx);
+  width: 98vw;
+  margin: 0 auto;
+  display: block;
+}
+.cutImg movable-area {
+  height: calc(100vh - 130rpx);
+  width: 100vw;
+  overflow: hidden;
   box-sizing: border-box;
-  background: #050505c5
- }
- .show{
-   position: absolute;
-   overflow: hidden;
-   top: 40%;
-   transform: translateY(-50%);
- }
- .img{
-   overflow: scroll;
- }
- 
- .cut{
-   width: 100vw;
-   height: 100vw;
-   top:50%;
-   transform: translateY(-50%);
-   position: absolute;
-   border: 1px dashed rgba(255, 255, 255, 0.856);
- }
- .bottom{
-   position: absolute;
-   width: 100vw;
-   bottom: 0;
-   
- }
- button{
-   margin-top: 10rpx;
- }
+  text-align: center;
+}
+.cutImg movable-view{
+  height: 100rpx;
+  width: 100rpx;
+  background: #000;
+  opacity: 0.3;
+}

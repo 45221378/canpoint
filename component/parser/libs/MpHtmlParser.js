@@ -3,7 +3,7 @@
   github：https://github.com/jin-yufeng/Parser
   docs：https://jin-yufeng.github.io/Parser
   author：JinYufeng
-  update：2020/03/26
+  update：2020/05/08
 */
 var cfg = require('./config.js'),
   blankChar = cfg.blankChar,
@@ -25,7 +25,6 @@ class MpHtmlParser {
     this.state = this.Text;
     this.STACK = [];
     this.useAnchor = options.useAnchor;
-    this.xml = options.xml;
   }
   parse() {
     if (emoji) this.data = emoji.parseEmoji(this.data);
@@ -41,12 +40,14 @@ class MpHtmlParser {
   }
   // 设置属性
   setAttr() {
-    var name = this.getName(this.attrName);
+    var name = this.attrName.toLowerCase();
     if (cfg.trustAttrs[name]) {
-      if (!this.attrVal) {
-        if (cfg.boolAttrs[name]) this.attrs[name] = 'T';
-      } else if (name == 'src') this.attrs[name] = this.getUrl(this.attrVal.replace(/&amp;/g, '&'));
-      else this.attrs[name] = this.attrVal;
+      var val = this.attrVal;
+      if (val) {
+        if (name == 'src') this.attrs[name] = this.getUrl(this.decode(val, 'amp'));
+        else if (name == 'href' || name == 'style') this.attrs[name] = this.decode(val, 'amp');
+        else this.attrs[name] = val;
+      } else if (cfg.boolAttrs[name]) this.attrs[name] = 'T';
     }
     this.attrVal = '';
     while (blankChar[this.data[this.i]]) this.i++;
@@ -73,48 +74,19 @@ class MpHtmlParser {
       for (let i = text.length, c; c = text[--i];)
         if (!blankChar[c] || (!blankChar[tmp[0]] && (c = ' '))) tmp.unshift(c);
       text = tmp.join('');
-      if (text == ' ') return;
     }
-    // 处理实体
-    var i = -1,
-      j, en, siblings = this.siblings();
-    while (1) {
-      if ((i = text.indexOf('&', i + 1)) == -1) break;
-      if ((j = text.indexOf(';', i + 2)) == -1) break;
-      if (text[i + 1] == '#') {
-        en = parseInt((text[i + 2] == 'x' ? '0' : '') + text.substring(i + 2, j));
-        if (!isNaN(en)) text = text.substr(0, i) + String.fromCharCode(en) + text.substr(j + 1);
-      } else {
-        en = text.substring(i + 1, j);
-        if (en == 'nbsp')
-          text = text.substr(0, i) + '\xA0' + text.substr(j + 1); // 解决 &nbsp; 失效
-        else if (en != 'lt' && en != 'gt' && en != 'amp' && en != 'ensp' && en != 'emsp' && en != 'quot' && en != 'apos') {
-          i && siblings.push({
-            type: 'text',
-            text: text.substr(0, i)
-          })
-          siblings.push({
-            type: 'text',
-            text: `&${en};`,
-            en: 1
-          })
-          text = text.substr(j + 1);
-          i = -1;
-        }
-      }
-    }
-    text && siblings.push({
+    this.siblings().push({
       type: 'text',
-      text
+      text: this.decode(text)
     });
   }
   // 设置元素节点
   setNode() {
     var node = {
-        name: this.getName(this.tagName),
+        name: this.tagName.toLowerCase(),
         attrs: this.attrs
       },
-      close = cfg.selfClosingTags[node.name] || (this.xml && this.data[this.i] == '/');
+      close = cfg.selfClosingTags[node.name];
     this.attrs = {};
     if (!cfg.ignoreTags[node.name]) {
       this.matchAttr(node);
@@ -131,18 +103,9 @@ class MpHtmlParser {
     } else {
       if (!close) this.remove(node);
       else if (node.name == 'source') {
-        var parent = this.parent(),
-          attrs = node.attrs;
-        if (parent && attrs.src)
-          if (parent.name == 'video' || parent.name == 'audio')
-            parent.attrs.source.push(attrs.src);
-          else {
-            var i, media = attrs.media;
-            if (parent.name == 'picture' && !parent.attrs.src && (!media || (media.includes('px') &&
-                (((i = media.indexOf('min-width')) != -1 && (i = media.indexOf(':', i + 8)) != -1 && screenWidth > parseInt(media.substr(i + 1))) ||
-                  ((i = media.indexOf('max-width')) != -1 && (i = media.indexOf(':', i + 8)) != -1 && screenWidth < parseInt(media.substr(i + 1)))))))
-              parent.attrs.src = attrs.src;
-          }
+        var parent = this.parent();
+        if (parent && (parent.name == 'video' || parent.name == 'audio') && node.attrs.src)
+          parent.attrs.source.push(node.attrs.src);
       } else if (node.name == 'base' && !this.domain) this.domain = node.attrs.href;
     }
     if (this.data[this.i] == '/') this.i++;
@@ -153,6 +116,25 @@ class MpHtmlParser {
   remove(node) {
     var name = node.name,
       j = this.i;
+    // 处理 svg
+    var handleSvg = () => {
+      var src = this.data.substring(j, this.i + 1);
+      if (!node.attrs.xmlns) src = ' xmlns="http://www.w3.org/2000/svg"' + src;
+      var i = j;
+      while (this.data[j] != '<') j--;
+      src = this.data.substring(j, i) + src;
+      var parent = this.parent();
+      if (node.attrs.width == '100%' && parent && (parent.attrs.style || '').includes('inline'))
+        parent.attrs.style = 'width:300px;max-width:100%;' + parent.attrs.style;
+      this.siblings().push({
+        name: 'img',
+        attrs: {
+          src: 'data:image/svg+xml;utf8,' + src.replace(/#/g, '%23'),
+          ignore: 'T'
+        }
+      })
+    }
+    if (node.name == 'svg' && this.data[j] == '/') return handleSvg(this.i++);
     while (1) {
       if ((this.i = this.data.indexOf('</', this.i + 1)) == -1) {
         if (name == 'pre' || name == 'svg') this.i = j;
@@ -161,7 +143,7 @@ class MpHtmlParser {
       }
       this.start = (this.i += 2);
       while (!blankChar[this.data[this.i]] && !this.isClose()) this.i++;
-      if (this.getName(this.section()) == name) {
+      if (this.section().toLowerCase() == name) {
         // 代码块高亮
         if (name == 'pre') {
           this.data = this.data.substr(0, j + 1) + cfg.highlight(this.data.substring(j + 1, this.i - 5), node.attrs) + this.data.substr(this.i - 5);
@@ -171,24 +153,7 @@ class MpHtmlParser {
         else if (name == 'title')
           this.title = this.data.substring(j + 1, this.i - 7);
         if ((this.i = this.data.indexOf('>', this.i)) == -1) this.i = this.data.length;
-        // 处理 svg
-        if (name == 'svg') {
-          var src = this.data.substring(j, this.i + 1);
-          if (!node.attrs.xmlns) src = ' xmlns="http://www.w3.org/2000/svg"' + src;
-          var i = j;
-          while (this.data[j] != '<') j--;
-          src = this.data.substring(j, i) + src;
-          var parent = this.parent();
-          if (node.attrs.width == '100%' && parent && (parent.attrs.style || '').includes('inline'))
-            parent.attrs.style = 'width:300px;max-width:100%;' + parent.attrs.style;
-          this.siblings().push({
-            name: 'img',
-            attrs: {
-              src: 'data:image/svg+xml;utf8,' + src.replace(/#/g, '%23')
-            },
-            svg: 1
-          })
-        }
+        if (name == 'svg') handleSvg();
         return;
       }
     }
@@ -230,7 +195,18 @@ class MpHtmlParser {
       case 'audio':
         if (!attrs.id) attrs.id = node.name + (++this[`${node.name}Num`]);
         else this[`${node.name}Num`]++;
-        if (node.name == 'video' && this.videoNum > 3) node.lazyLoad = 1;
+        if (node.name == 'video') {
+          if (this.videoNum > 3)
+            node.lazyLoad = 1;
+          if (attrs.width) {
+            styleObj.width = parseFloat(attrs.width) + (attrs.width.includes('%') ? '%' : 'px');
+            attrs.width = void 0;
+          }
+          if (attrs.height) {
+            styleObj.height = parseFloat(attrs.height) + (attrs.height.includes('%') ? '%' : 'px');
+            attrs.height = void 0;
+          }
+        }
         attrs.source = [];
         if (attrs.src) attrs.source.push(attrs.src);
         if (!attrs.controls && !attrs.autoplay)
@@ -250,16 +226,8 @@ class MpHtmlParser {
       styleObj['text-align'] = attrs.align;
       attrs.align = void 0;
     }
-    if (attrs.width) {
-      styleObj.width = parseFloat(attrs.width) + (attrs.width.includes('%') ? '%' : 'px');
-      attrs.width = void 0;
-    }
-    if (attrs.height) {
-      styleObj.height = parseFloat(attrs.height) + (attrs.height.includes('%') ? '%' : 'px');
-      attrs.height = void 0;
-    }
     // 压缩 style
-    var styles = style.replace(/&quot;/g, '"').replace(/&amp;/g, '&').split(';');
+    var styles = style.split(';');
     style = '';
     for (var i = 0, len = styles.length; i < len; i++) {
       var info = styles[i].split(':');
@@ -271,33 +239,37 @@ class MpHtmlParser {
       else if (!styleObj[key] || value.includes('import') || !styleObj[key].includes('import'))
         styleObj[key] = value;
     }
-    if (node.name == 'img' || node.name == 'picture') {
+    if (node.name == 'img') {
       if (attrs['data-src']) {
         attrs.src = attrs.src || attrs['data-src'];
         attrs['data-src'] = void 0;
       }
-      if ((attrs.src || node.name == 'picture') && !attrs.ignore) {
-        if (this.bubble()) {
-          if ((attrs.src || '').includes('.webp')) node.webp = 1;
+      if (attrs.src && !attrs.ignore) {
+        if (this.bubble())
           attrs.i = (this.imgNum++).toString();
-        } else attrs.ignore = 'T';
+        else attrs.ignore = 'T';
       }
       if (attrs.ignore) styleObj['max-width'] = '100%';
-      var check = item => styleObj[item] && !styleObj[item].includes('auto');
-      if (check('width')) {
-        var parent = this.parent();
-        if (styleObj.width.includes('%') && parent && (parent.attrs.style || '').includes('inline')) {
-          parent.attrs.style += ';max-width:100%'
-          node.auto = 1;
+      var width;
+      if (styleObj.width) width = styleObj.width;
+      else if (attrs.width) width = attrs.width.includes('%') ? attrs.width : attrs.width + 'px';
+      if (width) {
+        styleObj.width = width;
+        attrs.width = '100%';
+        if (parseInt(width) > screenWidth) {
+          styleObj.height = '';
+          if (attrs.height) attrs.height = void 0;
         }
-        if (parseInt(styleObj.width) > screenWidth)
-          styleObj.height = 'auto';
-        if (check('height')) node.mode = 'scaleToFill';
-      } else if (check('height')) node.mode = 'heightFix';
-      else node.auto = 1;
+      }
+      if (styleObj.height) {
+        attrs.height = styleObj.height;
+        styleObj.height = '';
+      } else if (attrs.height && !attrs.height.includes('%'))
+        attrs.height += 'px';
     }
     for (var key in styleObj) {
       var value = styleObj[key];
+      if (!value) continue;
       if (key.includes('flex') || key == 'order' || key == 'self-align') node.c = 1;
       // 填充链接
       if (value.includes('url')) {
@@ -309,7 +281,7 @@ class MpHtmlParser {
       }
       // 转换 rpx
       else if (value.includes('rpx'))
-        value = value.replace(/[0-9.\s]*rpx/g, $ => parseFloat($) * screenWidth / 750 + 'px');
+        value = value.replace(/[0-9.]+\s*rpx/g, $ => parseFloat($) * screenWidth / 750 + 'px');
       else if (key == 'white-space' && value.includes('pre'))
         this.pre = node.pre = true;
       style += `;${key}:${value}`;
@@ -326,28 +298,36 @@ class MpHtmlParser {
         if (this.STACK[i].pre)
           this.pre = true;
     }
+    var siblings = this.siblings(),
+      len = siblings.length,
+      childs = node.children.length;
     if (node.name == 'head' || (cfg.filter && cfg.filter(node, this) == false))
-      return this.siblings().pop();
+      return siblings.pop();
     var attrs = node.attrs;
     // 替换一些标签名
-    if (node.name == 'picture') {
-      node.name = 'img';
-      if (!attrs.src && (node.children[0] || '').name == 'img')
-        attrs.src = node.children[0].attrs.src;
-      return node.children = void 0;
-    }
     if (cfg.blockTags[node.name]) node.name = 'div';
     else if (!cfg.trustTags[node.name]) node.name = 'span';
+    // 去除块标签前后空串
+    if (node.name == 'div' || node.name == 'p' || node.name[0] == 't') {
+      if (len > 1 && siblings[len - 2].text == ' ')
+        siblings.splice(--len - 1, 1);
+      if (childs && node.children[childs - 1].text == ' ')
+        node.children.pop();
+    }
     // 处理列表
-    if (node.c) {
-      if (node.name == 'ul') {
+    if (node.c && (node.name == 'ul' || node.name == 'ol')) {
+      if ((node.attrs.style || '').includes('list-style:none')) {
+        for (let i = 0, child; child = node.children[i++];)
+          if (child.name == 'li')
+            child.name = 'div';
+      } else if (node.name == 'ul') {
         var floor = 1;
         for (let i = this.STACK.length; i--;)
           if (this.STACK[i].name == 'ul') floor++;
         if (floor != 1)
-          for (let i = node.children.length; i--;)
+          for (let i = childs; i--;)
             node.children[i].floor = floor;
-      } else if (node.name == 'ol') {
+      } else {
         for (let i = 0, num = 1, child; child = node.children[i++];)
           if (child.name == 'li') {
             child.type = 'ol';
@@ -383,6 +363,7 @@ class MpHtmlParser {
       if (border || padding || node.c)
         (function f(ns) {
           for (var i = 0, n; n = ns[i]; i++) {
+            if (n.type == 'text') continue;
             var style = n.attrs.style || '';
             if (node.c && n.name[0] == 't') {
               n.c = 1;
@@ -398,12 +379,8 @@ class MpHtmlParser {
     }
     this.CssHandler.pop && this.CssHandler.pop(node);
     // 自动压缩
-    if (node.name == 'div' && !Object.keys(attrs).length) {
-      var siblings = this.siblings();
-      if (!(node.children || []).length) siblings.pop();
-      else if (node.children.length == 1 && node.children[0].name == 'div')
-        siblings[siblings.length - 1] = node.children[0];
-    }
+    if (node.name == 'div' && !Object.keys(attrs).length && childs == 1 && node.children[0].name == 'div')
+      siblings[len - 1] = node.children[0];
   }
   // 工具函数
   bubble() {
@@ -416,6 +393,23 @@ class MpHtmlParser {
     }
     return true;
   }
+  decode(val, amp) {
+    var i = -1,
+      j, en;
+    while (1) {
+      if ((i = val.indexOf('&', i + 1)) == -1) break;
+      if ((j = val.indexOf(';', i + 2)) == -1) break;
+      if (val[i + 1] == '#') {
+        en = parseInt((val[i + 2] == 'x' ? '0' : '') + val.substring(i + 2, j));
+        if (!isNaN(en)) val = val.substr(0, i) + String.fromCharCode(en) + val.substr(j + 1);
+      } else {
+        en = val.substring(i + 1, j);
+        if (cfg.entities[en] || en == amp)
+          val = val.substr(0, i) + (cfg.entities[en] || '&') + val.substr(j + 1);
+      }
+    }
+    return val;
+  }
   getUrl(url) {
     if (url[0] == '/') {
       if (url[1] == '/') url = this.protocol + ':' + url;
@@ -424,7 +418,6 @@ class MpHtmlParser {
       url = this.domain + '/' + url;
     return url;
   }
-  getName = val => this.xml ? val : val.toLowerCase();
   isClose = () => this.data[this.i] == '>' || (this.data[this.i] == '/' && this.data[this.i + 1] == '>');
   section = () => this.data.substring(this.start, this.i);
   parent = () => this.STACK[this.STACK.length - 1];
@@ -505,7 +498,7 @@ class MpHtmlParser {
   }
   EndTag(c) {
     if (blankChar[c] || c == '>' || c == '/') {
-      var name = this.getName(this.section());
+      var name = this.section().toLowerCase();
       for (var i = this.STACK.length; i--;)
         if (this.STACK[i].name == name) break;
       if (i != -1) {

@@ -3,7 +3,7 @@
   github：https://github.com/jin-yufeng/Parser
   docs：https://jin-yufeng.github.io/Parser
   author：JinYufeng
-  update：2020/03/26
+  update：2020/05/08
 */
 var cache = {},
   Parser = require('./libs/MpHtmlParser.js'),
@@ -19,7 +19,7 @@ function hash(str) {
 }
 Component({
   options: {
-    pureDataPattern: /^[acdgtux]|W/
+    pureDataPattern: /^[acdgtu]|W/
   },
   properties: {
     'html': {
@@ -45,8 +45,7 @@ Component({
     'tagStyle': Object,
     'showWithAnimation': Boolean,
     'useAnchor': Boolean,
-    'useCache': Boolean,
-	'xml': Boolean
+    'useCache': Boolean
   },
   relations: {
     '../parser-group/parser-group': {
@@ -86,6 +85,7 @@ Component({
       for (var i = 0, len = this.length; i < len; i++)
         this.setItem(i, f(this[i], i, this));
     }
+    if (dom) this.document = new dom(this);
   },
   detached() {
     // 删除暂存
@@ -112,7 +112,7 @@ Component({
               obj.fail && obj.fail({
                 errMsg: 'Label not found'
               });
-          obj.scrollTop = res[1].scrollTop + res[0].top;
+          obj.scrollTop = res[1].scrollTop + res[0].top + (obj.offset || 0);
           wx.pageScrollTo(obj);
         })
     },
@@ -196,7 +196,6 @@ Component({
         })
       this.imgList.length = 0;
       this.videoContexts = [];
-      if (dom) this.document = new dom(this.data.html, 'html', this);
       var ns = this.selectAllComponents('.top,.top>>>._node');
       for (let i = 0, n; n = ns[i++];) {
         n.top = this;
