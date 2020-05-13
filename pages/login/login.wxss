@@ -32,7 +32,7 @@
   font-size: 28rpx;
   background-color: #53bd3e;
   color: #fff;
-  margin-top: 60rpx;
+  margin: 60rpx auto 0;
   box-sizing: border-box;
 }
 .login .login-phone{
@@ -43,7 +43,7 @@
   font-size: 28rpx;
   border: 2rpx solid #ddd;
   color: #333;
-  margin-top: 30rpx;
+  margin: 30rpx auto 0;
 }
 .login .bottom{
   position: absolute;
