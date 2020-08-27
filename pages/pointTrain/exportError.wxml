@@ -1,0 +1,15 @@
+<!--pages/pointTrain/pointTrain.wxml-->
+<view class="pointTrain" wx:if="{{showDownFlag==1}}">
+  <view class="title">{{section_name}}</view>
+  <view class="content">
+    <text class="tips">将为您下载错题集。</text>
+    <view class="net">
+      <text class="net-work">网址：{{downNet}}</text>
+      <text class="copy" bindtap="copyText" data-content="{{downNet}}">复制</text>
+    </view>
+    <text class="error">
+      如果不能下载，你也可以复制网址到浏览器打开
+    </text>
+    <button class="button download" bindtap="downNet"  data-type="pdf">下载错题集</button>
+  </view>
+</view>

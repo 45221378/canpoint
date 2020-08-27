@@ -1,0 +1,27 @@
+/* pages/cropper/remark.wxss */
+.textarea {
+  background: #f9f9f9;
+  color: #000;
+  font-size: 26rpx;
+  border: 2rpx solid #eee;
+  height: 200rpx;
+  padding: 10rpx;
+  border-radius: 12rpx;
+  margin: 40rpx auto 0;
+  z-index: 0;
+
+}
+.black {
+  color: #a0a0a0;
+}
+.reg{
+  width: 560rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  background-color: #2896fe;
+  color: #fff;
+  margin-top: 60rpx;
+  box-sizing: border-box;
+}

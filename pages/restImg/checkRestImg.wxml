@@ -1,0 +1,27 @@
+<!-- pages/restImg/checkRestImg.wxml -->
+<view class="checkRestImg">
+  <scroll-view scroll-x="true">
+    <view class="allImg">
+      <block wx:for="{{imgList}}" wx:for-item="item" wx:key="index">
+        <view class="dotAllImg">
+          <image class="dotImg" src="{{item}}" data-imgsrc="{{item}}" data-imglist="{{imgList}}" bindtap="clickcut"></image>
+          <text class="cha">{{index+1}}</text>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+  <view class="view">
+     <!-- <movable-area class="big-img" >
+        <movable-view  direction="all" scale scale-min="0.5" scale-max="4" out-of-bounds="true"  x="{{x}}" y="{{y}}">
+           <cover-image src="{{src}}"></cover-image>
+        </movable-view>
+      </movable-area> -->
+      <swiper duration="100" class="question" current="{{nowid}}" bindchange="bindchange">
+        <block wx:for="{{imgList}}" wx:for-item="item" wx:key="index">
+          <swiper-item>
+            <image src="{{item}}" mode="widthFix"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+  </view>
+</view>

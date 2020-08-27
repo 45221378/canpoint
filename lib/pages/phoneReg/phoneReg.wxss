@@ -1,0 +1,48 @@
+/* pages/phoneReg/phoneReg.wxss */
+.phoneReg{
+  padding: 100rpx 140rpx 140rpx 140rpx;
+}
+.phoneReg .title{
+  font-weight: 600;
+  font-size: 38rpx ;
+  color:#333;
+}
+.phoneReg .form{
+  margin-top: 20rpx;
+}
+.phoneReg .border{
+  border-bottom: 1px solid #ddd;
+}
+.phoneReg .border input{
+  font-size: 24rpx;
+  padding:  40rpx 0 10rpx 0;
+  height: 110rpx;
+}
+.phoneReg .border .userCode{
+  width: 240rpx;
+}
+.black{
+  color: #e6e6e6;
+}
+.phoneReg .border .getCode {
+  font-size: 24rpx;
+  color: #999;
+  float: right;
+  width: 160rpx;
+  background-color: #f7f7f7;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  margin: 46rpx 10rpx 0 0;
+}
+.phoneReg .form .reg{
+  width: 506rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  background-color: #2896fe;
+  color: #fff;
+  margin-top: 60rpx;
+  box-sizing: border-box;
+}
+

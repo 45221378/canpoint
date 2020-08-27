@@ -1,0 +1,67 @@
+.checkRestImg {
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+}
+.checkRestImg .tips{
+  color: #fff;
+  font-size: 28rpx;
+  padding: 0rpx 0 20rpx 32rpx;
+  display: block;
+}
+
+.checkRestImg .allImg {
+  height: 170rpx;
+  z-index: 99;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.checkRestImg .dotAllImg {
+  position: relative;
+  height: 130rpx;
+  width: 100rpx;
+  margin-left: 32rpx;
+}
+.checkRestImg .allImg .dotAllImg .cha {
+  position: absolute;
+  top: -10rpx;
+  right: -15rpx;
+  height: 36rpx;
+  width: 36rpx;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  line-height: 30rpx;
+  font-size: 22rpx;
+}
+.checkRestImg .dotImg {
+  height: 130rpx;
+  width: 100rpx;
+}
+.checkRestImg .view{
+  width: 100vw;
+  height: calc(100vh - 173rpx);
+  position: relative;
+  overflow: hidden;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}     
+.checkRestImg .big-img{
+  width: 2050rpx;
+  height: 2900rpx;
+  z-index: 999;
+  position: absolute;
+  top: -900rpx;
+  left: -700rpx;
+}
+.checkRestImg .big-img movable-view {
+  height: 1000rpx;
+  width: 750rpx;
+}
+.checkRestImg .big-img image{
+
+}

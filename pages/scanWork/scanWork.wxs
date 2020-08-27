@@ -1,0 +1,17 @@
+function touchmove(event, ins) {
+  ins.selectComponent('.scan').setStyle({
+    'background-color': 'rgba(126, 192, 254, 1)'
+  })
+}
+
+function touchend(event, ins) {
+  ins.selectComponent('.scan').setStyle({
+    // 'background-color': 'rgba(126, 192, 254, 0.6)'
+  })
+}
+
+
+module.exports = {
+  touchmove:touchmove,
+  touchend:touchend
+}

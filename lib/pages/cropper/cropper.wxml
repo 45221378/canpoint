@@ -1,0 +1,17 @@
+<view class="cutImg" >
+  <view class="allImg">
+    <scroll-view scroll-x="true">
+      <image mode='aspectFill' wx:for="{{image_list}}" wx:for-item="item" wx:key="index" class="dotImg" src="{{item}}" data-imgsrc="{{item}}" bindtap="showImg"></image>
+    </scroll-view>
+  </view>
+</view>
+
+<image-cropper id="image-cropper" img_width="{{imgwidth}}" img_height="{{imgheight}}" min_width="50" min_height="50"  max_scale="4" min_scale="0.5" limit_move="{{true}}" disable_rotate="{{true}}" width="{{width}}" height="{{height}}" imgSrc="{{src}}" bindload="cropperload" bindimageload="loadimage" bindtapcut="clickcut">
+</image-cropper>
+<view class='bottom'>
+  <view class="tips">
+    框选对应的题目~
+  </view>
+  <image src="../../images/sure.png" class="button cro-btn" bindtap='submit'></image>
+  <!-- <button class="button cro-btn" catchtap='upload'>上传</button> -->
+</view>

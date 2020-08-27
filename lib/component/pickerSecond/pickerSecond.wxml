@@ -1,0 +1,13 @@
+
+<view class="section" hover-class="none" hover-stop-propagation="false">
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker" wx:if="{{showPickerFlag}}">
+      {{multiArray[0][multiIndex[0]]}} - {{multiArray[1][multiIndex[1]]}}
+      <image class="section-check" src='/images/check-bottom.png'></image>
+    </view>
+    <view class="picker" wx:if="{{!showPickerFlag}}">
+      请筛选学段和学科
+      <image class="section-check" src='/images/check-bottom.png'></image>
+    </view>
+  </picker>
+</view>

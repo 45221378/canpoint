@@ -1,0 +1,86 @@
+.bgfff {
+    background-color: #fff !important;
+}
+
+/* 未登录状态下的公共样式 */
+.gologin {
+    background-color: #ff6c6c;
+    width: 690rpx;
+    height: 62rpx;
+    border-radius: 30rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20rpx;
+    position: absolute;
+    bottom: 20rpx;
+    left: 30rpx;
+    z-index: 9999;
+
+}
+
+.gologin .tips {
+    font-size: 29rpx;
+    color: #fff;
+}
+
+.gologin .gobtn {
+    font-size: 29rpx;
+    color: #fff;
+}
+
+.arotate {
+    animation: a 0.5s linear;
+}
+
+@keyframes a {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    25% {
+        -webkit-transform: rotate(2deg);
+    }
+
+    50% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    75% {
+        -webkit-transform: rotate(2deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+/* 对爱心加入动画 */
+.heart {
+    position: relative;
+  }
+  
+  .heart .heartImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transition: all 1s cubic-bezier(.25, .5, .5, .9);
+    -webkit-transition: all 1s cubic-bezier(.25, .5, .5, .9);
+  }
+  
+  .heart .ani {
+    opacity: 0;
+    transform: translateY(-80rpx);
+    -webkit-transform: translateY(-80rpx);
+  }
+  
+  .heart .noani {
+    z-index: -999;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }

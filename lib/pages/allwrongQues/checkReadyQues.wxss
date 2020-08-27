@@ -1,0 +1,208 @@
+.allwrongQues .master image {
+  height: 36rpx;
+  width: 36rpx;
+  margin-right: 10rpx;
+}
+
+.allwrongQues .child-parser {
+  padding: 20rpx 20rpx;
+}
+
+.allwrongQues .parser-bottom {
+  margin: 0 0 30rpx 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.allwrongQues .parser-bottom .parser-download {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 30rpx;
+}
+
+.allwrongQues .parser-bottom image {
+  width: 16rpx;
+  height: 22rpx;
+  display: inline-block;
+  margin: 0 6rpx 0 26rpx;
+  vertical-align: middle;
+  padding: 16rpx 0 16rpx 0;
+
+}
+
+.allwrongQues .parser-bottom .have {
+  font-size: 22rpx;
+  color: #333;
+  margin-left: 16rpx;
+}
+
+.allwrongQues .parser-bottom .width400 {
+  width: 360rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 !important;
+}
+
+.allwrongQues .parser-bottom .padr0 {
+  padding-right: 0 !important;
+}
+
+.allwrongQues .parser-bottom .imgright {
+  margin-left: 0 !important;
+  width: 20rpx;
+  left: 20rpx;
+}
+
+.allwrongQues .parser-bottom image {
+  width: 16rpx;
+  height: 22rpx;
+  display: inline-block;
+  margin: 0 6rpx 0 26rpx;
+  vertical-align: middle;
+  padding: 16rpx 0 16rpx 0;
+
+}
+
+.allwrongQues-ul {
+  padding-bottom: 128rpx;
+  margin-top: 0rpx !important;
+
+}
+
+.allwrongQues .allwrongQues-ul {
+  background-color: #f9f9f9;
+}
+
+.allwrongQues .allwrongQues-ul .allwrongQues-li {
+  margin-top: 10rpx;
+  background-color: #f9f9f9;
+
+}
+
+.allwrongQues .allwrongQues-ul .allwrongQues-li .allwrongQues-li-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #fff;
+  padding: 0 40rpx 0 0;
+  height: 70rpx;
+}
+
+.allwrongQues .allwrongQues-ul .allwrongQues-li .allwrongQues-li-top .master {
+  display: flex;
+  align-items: center;
+  margin-left: 40rpx;
+}
+
+.allwrongQues .allwrongQues-ul .allwrongQues-li .allwrongQues-li-top .master .have {
+  font-size: 20rpx;
+  color: #333;
+  margin-left: 14rpx;
+}
+
+.allwrongQues .allwrongQues-ul .allwrongQues-li .allwrongQues-li-top .master .add-btn {
+  height: 36rpx;
+  width: 36rpx;
+  background-color: #fe2841;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 34rpx;
+  color: #fff;
+}
+
+.allwrongQues .allwrongQues-ul .allwrongQues-li .allwrongQues-li-content {
+  background-color: #f9f9f9;
+  padding-top: 20rpx;
+}
+
+.allwrongQues .parser-view {
+  padding: 30rpx 40rpx;
+  border-bottom: 1rpx solid #ddd;
+  background-color: #fff;
+  /* font-size: 30rpx; */
+}
+
+.al-buttom {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 128rpx;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0rpx;
+  border-top: 1rpx solid #ddd;
+  background-color: #fff;
+  padding-bottom: 20rpx;
+}
+
+.al-buttom .al-buttom-left {
+  position: relative;
+}
+
+.al-buttom .al-buttom-left .text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.al-buttom .al-buttom-left .text text {
+  color: #fe2841;
+}
+
+.al-buttom .al-buttom-left .mark {
+  height: 34rpx;
+  width: 34rpx;
+  border-radius: 50%;
+  background-color: #eee;
+  color: #999;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 34rpx;
+  position: absolute;
+  right: -40rpx;
+  top: -10rpx;
+}
+
+.al-buttom .al-buttom-right {
+  width: 384rpx;
+  height: 70rpx;
+  background-color: #fff;
+  border: 1rpx solid #ddd;
+  border-radius: 35rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.al-buttom .al-buttom-right {
+  width: 384rpx;
+  height: 70rpx;
+  background-color: #fff;
+  border: 1rpx solid #ddd;
+  border-radius: 35rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.al-buttom .al-buttom-right .al-clear {
+  font-size: 28rpx;
+  color: #999;
+  text-align: center;
+  flex: 1;
+}
+
+.al-buttom .al-buttom-right .al-export {
+  font-size: 28rpx;
+  color: #fff;
+  background-color: #2896fe;
+  text-align: center;
+  flex: 1;
+  border-radius: 0 35rpx 35rpx 0;
+  height: 70rpx;
+  line-height: 70rpx;
+}

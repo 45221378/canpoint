@@ -1,0 +1,246 @@
+/* 按章节按题目查看的情况 */
+.wrongQuesTable {
+    background-color: #f9f9f9;
+    padding: 124rpx 0 0 0;
+
+}
+
+.bgf9 {
+    background-color: #f9f9f9 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    padding: 10rpx 0;
+    z-index: 999;
+    width: 100%;
+
+}
+
+.wrongQuesTable .table {
+    background: #fff;
+    padding: 16rpx 0;
+
+}
+
+.wrongQuesTable .table .table-check {
+    height: 72rpx;
+    width: 540rpx;
+    border: 1rpx solid #2896fe;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 40rpx;
+    margin: 0 auto;
+}
+
+.wrongQuesTable .table .chapter {
+    color: #2896fe;
+    font-size: 28rpx;
+    text-align: center;
+    flex: 1;
+    height: 100%;
+    border-right: 1rpx solid #2896fe;
+    line-height: 70rpx;
+    border-radius: 40rpx 0 0 40rpx;
+}
+
+.wrongQuesTable .table .ques {
+    color: #2896fe;
+    font-size: 28rpx;
+    text-align: center;
+    flex: 1;
+    line-height: 70rpx;
+    height: 72rpx;
+    border-radius: 0 40rpx 40rpx 0;
+}
+
+.wrongQuesTable .table .checked {
+    color: #fff !important;
+    background-color: #2896fe !important;
+}
+
+/* 头部的picker样式 */
+.wrongQuesTable .pickerone {
+    width: 100%;
+    height: 66rpx;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20rpx 40rpx;
+}
+
+.wrongQuesTable .pickerone .gradepicker {
+    font-size: 28rpx;
+    color: #333;
+}
+
+.wrongQuesTable .pickerone .gradepicker .section-check {
+    width: 16rpx;
+    height: 14rpx;
+    display: inline-block;
+    margin-left: 12rpx;
+}
+
+/* 主体内容区域 */
+.wrongQuesTable .ul {
+    background-color: #f9f9f9;
+    overflow: hidden;
+}
+
+.wrongQuesTable .ul .li {
+    background-color: #fff;
+    padding: 20rpx 30rpx 0rpx 40rpx;
+    margin: 0 0 10rpx 0;
+    position: relative;
+}
+
+.wrongQuesTable .ul .li .title {
+    font-size: 30rpx;
+    color: #333;
+}
+
+.wrongQuesTable .ul .li .main {
+    font-size: 26rpx;
+    color: #333;
+    line-height: 100rpx;
+    height: 100rpx;
+}
+
+.wrongQuesTable .ul .li .main .flex-left {
+    width: 300rpx;
+    height: 100%;
+    float: left;
+}
+.wrongQuesTable .ul .li .main .flex-add{
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    float: left;
+
+}
+.wrongQuesTable .ul .li .main .img-book {
+    width: 21rpx;
+    height: 27rpx;
+    display: inline-block;
+    margin: 0 10rpx 0 0rpx;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.wrongQuesTable .ul .li .main .book-name {
+    font-size: 24rpx;
+    color: #333;
+}
+
+.wrongQuesTable .ul .li .main .em {
+    width: 42rpx;
+    height: 42rpx;
+    border-radius: 50%;
+
+    line-height: 40rpx;
+    text-align: center;
+    font-size: 32rpx;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10rpx 0 0rpx;
+
+}
+
+.emadd {
+    background-color: #fe2841;
+    color: #fff;
+}
+
+.emdesc {
+    background-color: #999;
+    color: #333;
+}
+
+
+.wrongQuesTable .ul .li .main .handle {
+    font-size: 24rpx;
+    color: #333;
+    margin: 0 0 0 10rpx;
+    vertical-align: middle;
+
+}
+
+.wrongQuesTable .ul .li .img-right {
+    height: 30rpx;
+    width: 20rpx;
+    position: absolute;
+    right: 30rpx;
+    top: 80rpx;
+}
+
+
+
+/* 搬入错题整理页面 */
+@import './bookWrongQues.wxss';
+
+.top124 {
+    top: 124rpx !important;
+}
+
+.padt20 {
+    padding: 0 0 20rpx 0 !important;
+}
+
+.ques-all {
+    position: fixed;
+    right: 40rpx;
+    bottom: 130rpx;
+    width: 96rpx;
+    height: 126rpx;
+    text-align: center;
+}
+
+.ques-all .add-img {
+    width: 100%;
+    height: 100%;
+}
+
+.ques-all .add-text {
+    font-size: 20rpx;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    bottom: 4rpx;
+    transform: translateX(-4rpx);
+    width: 100%;
+    text-align: center;
+}
+
+/* 对爱心加入动画 */
+.heart {
+    position: relative;
+}
+
+.heart .heartImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transition: all 1s cubic-bezier(.25, .5, .5, .9);
+    -webkit-transition: all 1s cubic-bezier(.25, .5, .5, .9);
+}
+
+.heart .ani {
+    opacity: 0;
+    transform: translateY(-80rpx);
+    -webkit-transform: translateY(-80rpx);
+}
+
+.heart .noani {
+    z-index: -999;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

@@ -1,0 +1,27 @@
+<!--pages/mine/explain.wxml-->
+<view class="explain">
+  <image class='explain-banner' src='http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/explain1.png' ></image>
+  <view class="main">
+    <view class="one">
+        <view class="num-left">1</view>
+        <view class="text">使用PC浏览器，打开全品同学辅导网站。</view>
+        <view class="net" data-content="{{downNet}}" bindtap="copyText">
+            <text class="net-work">{{downNet}}</text>
+            <text class="copy">复制</text>
+        </view>
+        <image class='line' src='http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/line2.png' ></image>
+        <image class='explain2' src='http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/explain2.png' ></image>
+    </view>
+    <view class="one">
+        <view class="num-left">2</view>
+        <view class="text">使用全品作业小助手的“扫一扫”，扫码登录。</view>
+        <image class='line' src='http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/line2.png' ></image>
+        <image class='explain3' src='http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/explain3.png' ></image>
+    </view>
+    <view class="one">
+        <view class="num-left">3</view>
+        <view class="text">选择图书，开通直播答疑服务。</view>
+        <image class='explain4' src='http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/explain4.png' ></image>
+    </view>
+  </view>  
+</view>

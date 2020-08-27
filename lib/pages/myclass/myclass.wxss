@@ -1,0 +1,88 @@
+/* pages/myclass/myclass.wxss */
+.myclass .myclass-no {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+
+}
+
+.myclass .myclass-no .no-bear {
+    width: 236rpx;
+    height: 271rpx;
+    display: block;
+    margin: 0 auto;
+}
+
+.myclass .myclass-no .no-tips {
+    font-size: 26rpx;
+    color: #999;
+    border-top: 1rpx solid #999;
+    padding: 60rpx 0 125rpx 0;
+    text-align: center;
+}
+
+.myclass .myclass-no .add-class {
+    width: 534rpx;
+    height: 85rpx;
+    line-height: 85rpx;
+    border-radius: 40rpx;
+    font-size: 30rpx;
+    background-color: #2896fe;
+    color: #fff;
+    margin-top: 100rpx;
+    box-sizing: border-box;
+}
+
+/* 有班级的情况下 */
+.myclass{
+    background-color: #f9f9f9;
+    padding: 10rpx 0 0 0;
+}
+.myclass .myclass-yes {
+    background-color: #fff;
+}
+.myclass .ul .li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    border-bottom: 1rpx solid #eee;
+    padding: 32rpx 46rpx 40rpx 46rpx;
+}
+.myclass .ul .li .know-bear{
+    width: 82rpx;
+    height: 90rpx;
+    margin: 0 40rpx 0 0;
+}
+.myclass .myclass-yes .add-class {
+    width: 534rpx;
+    height: 85rpx;
+    line-height: 85rpx;
+    border-radius: 40rpx;
+    font-size: 30rpx;
+    background-color: #2896fe;
+    color: #fff;
+    margin-top: 100rpx;
+    box-sizing: border-box;
+}
+
+.myclass .myclass-yes .add-tips {
+    font-size: 24rpx;
+    color: #999;
+    margin: 54rpx auto 0;
+    text-align: center;
+}
+.myclass .myclass-yes .img-right{
+    height: 30rpx;
+    width: 20rpx;
+    position: absolute;
+    right: 30rpx;
+    top: 80rpx;
+}
+.myclass .ul .li .right .mgt10{
+    margin-top: 10rpx;
+    font-size: 30rpx;
+    color: #999;
+}

@@ -1,0 +1,31 @@
+<view class="mybook">
+    <view class="mybook-picker">
+        <pickerSecond class="pickerSconed" bind:myEvent="getData"></pickerSecond>
+    </view>
+    <view class="mybook-main">
+        <image class="img-top" src="/images/my-book2.png"></image>
+        <view class="title" hover-class="none" hover-stop-propagation="false">
+            <image class="img-top" src="/images/my-book.png"></image>
+            <view class="text">我的图书</view>
+        </view>
+        <view class="mybook-content">
+            <view class="border">
+                <block wx:for="{{booklist}}" wx:for-item="item" wx:key="index">
+                    <view class="mybook-ul">
+                        <image class="img-top" mode="scaleToFill" lazy-load="false" src="{{item.books__book_img}}"></image>
+                        <view class="mybook-right">
+                            <view class="book-name">{{item.books__stage_name}}{{item.books__subject_name}}</view>
+                            <view class="book-name">{{item.books__book_name}}</view>
+                            <view class="taps" wx:if="{{false}}">
+                                <text class="em">八年级5班</text>
+                                <text class="em">八年级5班</text>
+                                <text class="em">八年级5班</text>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <!-- <view class="mybook-content"></view> -->
+    </view>
+</view>

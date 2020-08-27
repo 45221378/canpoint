@@ -1,0 +1,86 @@
+/* pages/mybook/mybook.wxss */
+.mybook {
+    background-color: #f9f9f9;
+    padding: 10rpx 0 0 0;
+}
+
+.mybook .mybook-picker {
+    margin: 0 0 10rpx 0;
+    background-color: #fff;
+}
+
+.mybook-main {
+    padding: 13rpx 27rpx 0 27rpx;
+    background-color: #fff;
+    position: relative;
+}
+
+.mybook-main .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 36rpx;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+.mybook-main .title image {
+    width: 34rpx;
+    height: 34rpx;
+    margin: 0 8rpx 0 0;
+}
+
+.mybook-main .title .text {
+    font-size: 30rpx;
+    color: #333;
+}
+
+.mybook-main .img-top {
+    height: 98rpx;
+    width: 100%;
+}
+
+.mybook-main .mybook-content {
+    padding: 0 12rpx 0 12rpx;
+    margin-top: -8rpx;
+}
+
+.mybook-main .mybook-content .border {
+    border: 1rpx solid #f2f2f2;
+    border-top: none;
+}
+
+.mybook-main .mybook-ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 20rpx 0 30rpx 30rpx;
+}
+
+.mybook-main .mybook-ul .img-top {
+    width: 123rpx;
+    height: 163rpx;
+    border-radius: 10rpx;
+    margin: 0 24rpx 0 0;
+}
+
+.mybook-main .mybook-ul .mybook-right .book-name {
+    font-size: 30rpx;
+    color: #333;
+    margin: 0 0 18rpx;
+}
+
+.mybook-main .mybook-ul .mybook-right .taps {
+    margin: 12rpx 0 0 0;
+}
+
+.mybook-main .mybook-ul .mybook-right .em {
+    font-size: 20rpx;
+    color: #333;
+    padding: 4rpx 10rpx;
+    background-color: #e2f1ff;
+    margin: 0 20rpx 0 0;
+}

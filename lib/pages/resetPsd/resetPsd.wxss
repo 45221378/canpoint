@@ -1,0 +1,101 @@
+.resetPsd {
+  padding: 100rpx 70rpx 140rpx 70rpx;
+  background-color: #f9f9f9;
+  height: 100vh;
+  width: 100vw;
+}
+
+.resetPsd .title {
+  font-weight: 600;
+  font-size: 38rpx;
+  color: #333;
+}
+
+.resetPsd .resetPsd-form {
+  margin-top: 20rpx;
+}
+
+.resetPsd .border {
+  border-bottom: 1px solid #ddd;
+}
+
+.resetPsd .border input {
+  font-size: 24rpx;
+  padding: 40rpx 0 10rpx 0;
+  height: 110rpx;
+}
+
+.resetPsd .border .userCode {
+  width: 240rpx;
+}
+
+.black {
+  color: #e6e6e6;
+}
+
+.resetPsd .border .getCode {
+  font-size: 24rpx;
+  color: #999;
+  float: right;
+  width: 160rpx;
+  background-color: #f7f7f7;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  margin: 46rpx 10rpx 0 0;
+}
+
+.resetPsd .resetPsd-form .reg {
+  width: 560rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  background-color: #2896fe;
+  color: #fff;
+  margin-top: 60rpx;
+  box-sizing: border-box;
+}
+
+.resetPsd .resetPsd-form .disabledColor {
+  opacity: 0.6;
+}
+
+.resetPsd .padt40 {
+  padding-top: 40rpx !important;
+}
+
+.resetPsd .hint-form .input_row {
+  margin: 50rpx auto 100rpx;
+  width: 580rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.resetPsd .hint-form .input_row .pwd_item {
+  width: 74rpx;
+  height: 74rpx;
+  border: 2rpx solid #999;
+  text-align: center;
+  line-height: 70rpx;
+}
+
+.resetPsd .hint-form .input_control {
+  position: absolute;
+  left: -500rpx;
+}
+
+.resetPsd .findPsd {
+  font-size: 28rpx;
+  color: #2896fe;
+  margin-right: 30rpx 0;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.resetPsd .tips {
+  color: #999;
+  font-size: 26rpx;
+  margin-top: 60rpx;
+}

@@ -1,0 +1,10 @@
+/* pages/sortWrongList/arrageWrongList.wxss */
+@import './sortWrongList.wxss';
+.content1{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.pad30{
+  padding: 30rpx;
+}

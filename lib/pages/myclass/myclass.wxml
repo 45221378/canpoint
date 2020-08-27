@@ -1,0 +1,22 @@
+<!-- <view class="myclass"></view> -->
+<view class="myclass">
+    <view class="myclass-no" wx:if="{{!haveClass}}">
+        <image class="no-bear" src="/images/bear/no-bear.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false"></image>
+        <view class="no-tips">暂无班级信息</view>
+        <button class="button add-class" bindtap="sureMark">加入班级</button>
+    </view>
+    <view class="myclass-yes" wx:if="{{haveClass}}">
+        <view class="ul">
+            <view class="li">
+                <image class="know-bear" src="/images/bear/know-bear.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false"></image>
+                <view class="right">
+                    <view class="title">八年级5班（19233）</view>
+                    <view class="title mgt10">管理员：安安</view>
+                </view>
+                <image class="img-right" src="../../images/right.png"></image>
+            </view>
+        </view>
+        <button class="button add-class" bindtap="sureMark">加入其它班级</button>
+        <view class="add-tips">一位用户允许加入多个班级</view>
+    </view>
+</view>

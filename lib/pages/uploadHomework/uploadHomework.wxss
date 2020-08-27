@@ -1,0 +1,148 @@
+/* pages/uploadHomework/uploadHomework.wxss */
+.uploadHomework {
+  height: 100vh;
+  background: #f9f9f9;
+  padding: 20rpx 0 0 0;
+}
+
+.uploadHomework .top {
+  text-align: left;
+  font-size: 28rpx;
+  display: block;
+  padding: 20rpx 40rpx 30rpx 40rpx;
+  background-color: #fff;
+  width: 100%;
+  z-index: 999;
+}
+
+.uploadHomework .uploadHomework-content {
+  padding: 30rpx 30rpx 0 30rpx;
+  background-color: #fff;
+  height: calc(100vh - 134rpx);
+  margin: 20rpx 0 0 0;
+}
+
+.uploadHomework .uploadHomework-content .warn .warn-img {
+  width: 64rpx;
+  height: 64rpx;
+  vertical-align: middle;
+
+}
+
+.uploadHomework .uploadHomework-content .warn text {
+  font-size: 32rpx;
+  color: #333;
+  margin-left: 22rpx;
+}
+
+.uploadHomework .uploadHomework-content .warn-list {
+  border-radius: 1rpx solid #ddd;
+  padding-bottom: 20rpx;
+}
+
+.uploadHomework .uploadHomework-content .warn-list text {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 60rpx;
+}
+
+.uploadHomework .uploadHomework-content .add-img .add-title {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.uploadHomework .uploadHomework-content .add-img .add-btn {
+  height: 50rpx;
+  width: 50rpx;
+  border-radius: 50%;
+  background-color: #2896fe;
+  color: #fff;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 34rpx;
+  margin-left: 20rpx;
+
+}
+
+.uploadHomework .uploadHomework-content .add-img .picall {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 150rpx;
+}
+
+.uploadHomework .uploadHomework-content .add-img .pic {
+  height: 150rpx;
+  width: 126rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.uploadHomework .uploadHomework-content .add-img .pic .delete-btn {
+  position: absolute;
+  right: 0rpx;
+  top: 0rpx;
+  color: #333;
+}
+
+.uploadHomework .uploadHomework-content .add-img .pic .weui-uploader__img {
+  height: 110rpx;
+  width: 86rpx;
+
+}
+
+.uploadHomework .uploadHomework-content .sureImg {
+  width: 546rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  background-color: #2896fe;
+  color: #fff;
+  margin-top: 100rpx;
+  box-sizing: border-box;
+}
+
+.uploadHomework .uploadHomework-content .disablebtn {
+  opacity: 0.6;
+}
+
+.uploadHomework .uploadHomework-content .jumpUpImg {
+  width: 546rpx;
+  height: 72rpx;
+  line-height: 70rpx;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  background-color: #fff;
+  color: #2896fe;
+  border: 1px solid #2896fe;
+  margin-top: 40rpx;
+  box-sizing: border-box;
+}
+
+.hint .hint-name {
+  text-align: center;
+}
+
+.hint .tip {
+  font-size: 24rpx;
+  color: #999;
+  line-height: 38rpx;
+}
+
+.tips-title {
+  text-align: center;
+  color: #333;
+  font-size: 28rpx;
+  margin: 20rpx 0 20rpx 0;
+}
+
+.successHint {
+  padding-top: 30rpx !important;
+  height: 364rpx !important;
+}

@@ -1,0 +1,63 @@
+<wxs src="./../scanWork/scanWork.wxs" module="scan" />
+
+<view class="errorList" hover-class="none" hover-stop-propagation="false">
+    <view class="scroll">
+        <view class="download">
+            下载已生成的错题
+            <view class="download-btn" bindtap="downpdf">
+                <image class="download-img" src="/images/down.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false"></image>
+                去下载
+            </view>
+        </view>
+        <movable-area class="area">
+            <movable-view x="{{x}}" y="{{y}}" direction="all" class="view" bind:touchmove="{{scan.touchmove}}">
+                <view class="scan" style="background-color: rgba(126, 192, 254, 0.6)" bindtap='scancode' bind:touchend='{{scan.touchend}}'>
+                    <image src="/images/scan.png"></image>
+                    <text>扫一扫</text>
+                </view>
+            </movable-view>
+            <view class="check-title">
+                <view class="ul">
+                    <view class="li">
+                        <view class="li-left">小学</view>
+                        <view class="li-content">
+                            <block wx:for="{{primary}}" wx:key="index">
+                                <view class="li-content-dot" bindtap="goWrongList" data-subjectid="{{item.id}}" data-stageid="1">
+                                    <view class="dot-left">
+                                        <image class="img{{index+1}}" src="{{item.img}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false"></image>
+                                        <view class="bio">{{item.name}}</view>
+                                    </view>
+                                    <view class="dot-right">
+                                        <view class="nums">23</view>
+                                        <view class="recall">错题数</view>
+                                    </view>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                    <view class="li">
+                        <view class="li-left blue">初中</view>
+                        <view class="li-content">
+                            <block wx:for="{{middle}}" wx:key="index">
+                                <view class="li-content-dot" bindtap="goWrongList" data-subjectid="{{item.id}}" data-stageid="2">
+                                    <view class="dot-left">
+                                        <image class="img{{index+1}}" src="{{item.img}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false"></image>
+                                        <view class="bio">{{item.name}}</view>
+                                    </view>
+                                    <view class="dot-right">
+                                        <view class="nums">23</view>
+                                        <view class="recall">错题数</view>
+                                    </view>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </movable-area>
+    </view>
+    <view class="gologin {{bounceInUp}}" wx:if="{{!loginFlag}}">
+    <view class="tips">请先登录再扫码交作业哦~</view>
+    <view class="gobtn" bindtap="gologin">去登录 ></view>
+  </view>
+</view>

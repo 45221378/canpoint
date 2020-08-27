@@ -1,0 +1,50 @@
+<view class="uploadHomework" >
+    <text class="top">当前作业：{{section_name}}</text>
+    <view class="uploadHomework-content">
+      <view class="warn">
+        <image class="warn-img" src="../../images/laba.png" ></image>
+        <text>提醒</text>
+      </view>
+      <view class="warn-list">
+        <text>独立思考的过程比完美的结果更重要哦~</text>
+        <text>1、作业核对两步走，先提交作业图像再核对答案；</text>
+        <text>2、作业图像提交后，不可修改；</text>
+        <text>3、请先添加作业图像，再点击提交按钮。</text>
+      </view>
+      <view class="add-img">
+        <text class="add-title">添加作业图像</text>
+        <view class='picall' >
+          <view class='pic' wx:for="{{imgs}}" wx:for-item="item" wx:key="index">
+            <image class='weui-uploader__img '
+              src="{{item}}"
+              data-index="{{index}}" mode="aspectFill" bindtap="previewImg">
+            </image>
+            <icon type='cancel' class="delete-btn" size="20" color="#333" data-index="{{index}}" catchtap="deleteImg"></icon>
+          </view>
+          <view class="add-btn" bindtap="addImg" wx:if="{{imgs.length>10?false:true}}">+</view>
+        </view>
+      </view>
+      <button class="button sureImg {{disableBtn?'disablebtn':''}}"  bindtap="sureImg">提交作业图像</button>
+      <button class="button jumpUpImg"  bindtap="sureMark">跳过此步，直接对答案，标错题</button>
+    </view>
+</view>
+
+
+<view class="hint" wx:if="{{successHint}}">
+  <view class="hint-name successHint">
+      <icon class="icon-box-img" type="success" color="#2896fe" size="26"></icon>
+      <view class="tips-title" >
+        图像上传成功
+      </view>
+      <view class="tip" >
+        为你的努力点赞！
+      </view>
+      <view class="tip" >
+        接下来请认真核对答案标记错题哦~
+      </view>
+      <view class="bottom-btn clearfix" >
+        <!-- <view class="btn-left left" bindtap="close">关闭</view> -->
+        <view class="btn-right right" style="width:100%" bindtap="sureMark" >去标错</view>
+      </view>
+  </view>
+</view>

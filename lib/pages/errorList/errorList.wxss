@@ -1,0 +1,225 @@
+/* pages/errorList/errorList.wxss */
+/* 按章节页面的css */
+.errorList .download {
+  font-size: 28rpx;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100rpx;
+  width: 100%;
+  padding: 0 40rpx;
+  background-color: #f9f9f9;
+}
+
+.errorList .download .download-img {
+  height: 26rpx;
+  width: 26rpx;
+  margin: 0 4rpx 0 0;
+}
+
+.errorList .download .download-btn {
+  width: 176rpx;
+  height: 50rpx;
+  background-color: #2896fe;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  border-radius: 24rpx;
+}
+
+.errorList .check-title {
+  height: 100%;
+}
+
+.errorList .check-title .choose-title {
+  font-size: 30rpx;
+  color: #333;
+  padding: 20rpx 0 0 40rpx;
+
+}
+.errorList .check-title .ul{
+  background-color: #f9f9f9;
+
+}
+
+.errorList .check-title .ul .li {
+  padding: 48rpx 15rpx 44rpx 15rpx;
+  background-color: #fff;
+  margin: 0 0 10rpx 0;
+}
+
+.errorList .check-title .ul .li-left {
+  font-size: 32rpx;
+  color: #fff;
+  background-color: #00c8bc;
+  border-radius: 4rpx;
+  width: 84rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  margin: 0 15rpx 30rpx 15rpx;
+
+}
+
+.blue {
+  background-color: #385dff !important;
+}
+
+.errorList .check-title .ul .li-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.errorList .check-title .ul .li-content .li-content-dot {
+  width: 210rpx;
+  height: 82rpx;
+  border: 1px solid #2896fe;
+  margin: 14rpx;
+}
+
+.errorList .check-title .ul .li-content .li-content-dot .dot-left {
+  background-color: #3a9efd;
+  float: left;
+  height: 100%;
+  width: 68rpx;
+  text-align: center;
+}
+
+.li-content-dot .dot-left .bio {
+  font-size: 20rpx;
+  color: #fff;
+}
+
+.errorList .check-title .ul .li-content .li-content-dot .dot-right {
+  background-color: #f7fbff;
+  float: right;
+  height: 100%;
+  width: 138rpx;
+  text-align: center;
+}
+
+.li-content-dot .dot-right .nums {
+  font-size: 30rpx;
+  color: #3a9efd;
+  margin: 8rpx 0 0 0;
+
+}
+
+.li-content-dot .dot-right .recall {
+  font-size: 20rpx;
+  color: #666;
+}
+
+.errorList .check-title .ul .li-content-dot image {
+  margin: 10rpx 0 0 0;
+}
+
+.errorList .check-title .ul .li-content-dot .img1 {
+  width: 30rpx;
+  height: 31rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img2 {
+  width: 30rpx;
+  height: 31rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img3 {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img4 {
+  width: 31rpx;
+  height: 30rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img5 {
+  width: 31rpx;
+  height: 30rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img6 {
+  width: 31rpx;
+  height: 30rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img7 {
+  width: 31rpx;
+  height: 30rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img8 {
+  width: 29rpx;
+  height: 28rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img9 {
+  width: 29rpx;
+  height: 28rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img10 {
+  width: 27rpx;
+  height: 31rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img11 {
+  width: 31rpx;
+  height: 26rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img12 {
+  width: 25rpx;
+  height: 29rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img13 {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.errorList .check-title .ul .li-content-dot .img14 {
+  width: 28rpx;
+  height: 29rpx;
+}
+
+/* 扫一扫按钮样式 */
+.area {
+  width: 100vw;
+  height: calc(100vh - 100rpx);
+  position: fixed;
+  bottom: 0;
+  z-index: 9999;
+  border-top: 1rpx solid #f9f9f9;
+}
+
+.view {
+  height: 200rpx;
+  width: 200rpx;
+  z-index: 999;
+}
+
+.errorList .scan {
+  height: 200rpx;
+  width: 200rpx;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorList .scan image {
+  height: 60rpx;
+  width: 60rpx;
+}
+
+.errorList .scan text {
+  font-size: 30rpx;
+  color: #fff;
+  margin-top: 14rpx;
+}

@@ -1,0 +1,21 @@
+<!-- 用户开启了家长监管模式，进行首次登录的时候，就需要输入监管密码 -->
+<!-- 免登录的情况下，不需要输入 -->
+<view class="resetPsd">
+  <text class="title">请输入监管密码</text>
+  <view class="resetPsd-form">
+    <view class="hint-form">
+      <view class="input_row" catchtap="getFocus">
+        <view class="pwd_item" wx:for="{{4}}" wx:key="item" wx:for-index="i">
+          <text wx:if="{{pwdVal.length>i}}">{{pwdVal[i]}}</text>
+        </view>
+      </view>
+      <input class="input_control" password focus="{{psdFocus}}" bindinput="inputPwd" value="{{pwdVal}}" maxlength="4"/>
+    </view>
+    <button class="button findPsd" bindtap="findPsd">忘记密码</button>
+    <button class="button reg {{inputDis?'disabledColor':''}}" disabled="{{inputDis}}" bindtap="resetPsdSubmit">确定</button>
+  </view>
+  <view class="tips">
+    提示：如孩子自控能力较强或已得到老师允许，可点击“我的”关闭家长密码。
+  </view>
+</view>
+  

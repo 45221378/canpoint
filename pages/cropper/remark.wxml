@@ -1,0 +1,4 @@
+<view class="remark">
+  <textarea class="textarea" maxlength="30" bindinput='getTextareaValue' value="{{remarks}}" placeholder="最多可录入30个字" placeholder-class="black"></textarea>
+  <button class="button reg" bindtap="changeAnswer">确定</button>
+</view>

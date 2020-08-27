@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "pickerSecond": "/component/pickerSecond/pickerSecond"
+  },
+  "navigationBarTitleText": "我的图书"
+
+}

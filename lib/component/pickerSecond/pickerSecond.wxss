@@ -1,0 +1,15 @@
+.section {
+    padding: 20rpx 0 20rpx 40rpx;
+    font-size: 28rpx;
+    color: #333;
+
+}
+
+
+
+.section-check {
+    width: 16rpx;
+    height: 14rpx;
+    display: inline-block;
+    margin-left: 12rpx;
+}

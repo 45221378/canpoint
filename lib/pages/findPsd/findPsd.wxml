@@ -1,0 +1,25 @@
+<view class="findPsd">
+  <text class="title">重置监管密码</text>
+  <view class="findPsd-form">
+    <view class="border">
+      <input placeholder="请输入手机号" bindinput='getPhoneValue' disabled="{{true}}" value="{{userPhone}}" name="userPhone" placeholder-class="black" type="number" maxlength="11" auto-focus />
+    </view>
+    <view class="border clearfix">
+      <input class="left userCode" placeholder="请输入验证码" bindinput='getuserCode' value="{{userCode}}" name="userCode" max-length="6" placeholder-class="black" auto-focus />
+      <button class="button getCode" bindtap="getCode" disabled="{{phoneCode}}">{{codename}}</button>
+    </view>
+    <view class="hint-form">
+      <view class="resetpsd">
+        重置密码
+      </view>
+      <view class="input_row" catchtap="getFocus">
+        <view class="pwd_item" wx:for="{{4}}" wx:key="item" wx:for-index="i">
+          <text wx:if="{{pwdVal.length>i}}">{{pwdVal[i]}}</text>
+          <!-- <input type="text" value="{{pwdVal[i]}}" maxlength="1" /> -->
+        </view>
+      </view>
+      <input class="input_control " password focus="{{psdFocus}}" bindinput="inputPwd" maxlength="4" />
+    </view>
+  </view>
+  <button class="button reg" bindtap="findPsd">确定</button>
+</view>

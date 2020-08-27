@@ -1,0 +1,61 @@
+<!-- pages/mine/userLenge.wxml -->
+<view class="userLenge">
+    <view class="title">
+        <view class="border-right"></view>
+        <!-- 本应用所支持图书-->
+        作业小助手使用说明 
+    </view>
+    <view class="explain">
+        <view class="one">
+            <view class="num-left">1</view>
+            <view class="text">打开“全品作业小助手”小程序</view>
+            <view class="line"></view>
+        </view>
+        <view class="one">
+            <view class="num-left">2</view>
+            <view class="text">使用“扫一扫”扫描作业标题处的二维码</view>
+            <view class="line"></view>
+        </view>
+        <view class="one">
+            <view class="num-left">3</view>
+            <view class="text">上传作业图像，对答案，看解析</view>
+            <view class="line"></view>
+        </view>
+        <view class="one">
+            <view class="num-left">4</view>
+            <view class="text">下载针对训练和定制错题集</view>
+            <view class="line"></view>
+        </view>
+        <view class="one">
+            <view class="num-left">5</view>
+            <view class="text">登录“全品同学辅导”，随时随地直播答疑</view>
+        </view>
+    </view>
+    <view class="title">
+        <view class="border-right"></view>
+        使用范围
+    </view>
+    <view class="area">
+        <view class="area-title"  bindtap="bookshop">1.《智能诊断练测考》图书<text class="colorblue">（可到图书商城购买）</text></view>
+        <image src="http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/1.png" class="img img1"></image>
+        <view class="area-title"  bindtap="bookshop">2.《温故知新寒暑假》图书<text class="colorblue">（可到图书商城购买）</text></view>
+        <image src="http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/2.png" class="img img2"></image>
+        <view class="area-title">3.《全品学练考》图书</view>
+        <view class="area-tips" style="margin-top:30rpx">
+            初中：数学、物理、化学、英语的“自我综合评价”
+        </view>
+        <image src="http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/3.png" class="img img3"></image>
+        <view class="area-tips">小学3~6年级：语文、数学的作业测试卷</view>
+        <image src="http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/4.png" class="img img4"></image>
+        <view class="area-title">
+            4.复制网址
+            <image src="http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/6.png" class="img6"></image>
+            到电脑，使用“全品作业小助手”小程序扫码登录“全品同学辅导”直播答疑。
+        </view>
+        <view class="net" data-content="{{downNet}}" bindtap="copyText">
+            <text class="net-work">{{downNet}}</text>
+            <text class="copy">复制</text>
+        </view>
+        <image src="http://znwy.oss-cn-beijing.aliyuncs.com/zyzs/images/5.png" class="img5"></image>
+    </view>
+</view>

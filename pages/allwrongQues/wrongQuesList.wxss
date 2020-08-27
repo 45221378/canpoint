@@ -1,0 +1,99 @@
+/* pages/wrongQuesList/wrongQuesList.wxss */
+.wrongQuesList .noData {
+  padding: 11vh 0 0 0;
+}
+
+.wrongQuesList .noData image {
+  width: 370rpx;
+  height: 280rpx;
+  margin: 100rpx auto 20rpx;
+  display: block;
+}
+
+.wrongQuesList .noData .say {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.wrongQuesList .noData .say text {
+  display: block;
+  line-height: 50rpx;
+  text-align: center;
+}
+.wrongQuesList {
+  background-color: #f9f9f9;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  padding-top: 20rpx;
+} 
+.wrongQuesList .wrongQuesList-title{
+  font-size: 28rpx;
+  color: #333;
+  padding-left: 50rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0 0 20rpx 0;
+  text-align: left;
+  background-color: #fff;
+}
+.wrongQuesList .wrongQuesList-ul{
+  padding: 0 0 20rpx 0;
+  background-color: #f9f9f9;
+}
+.wrongQuesList .wrongQuesList-ul .wrongQuesList-li{
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20rpx 40rpx;
+  position: relative;
+  margin-bottom: 20rpx;
+}
+
+.wrongQuesList .wrongQuesList-ul .wrongQuesList-li .img{
+  width: 114rpx;
+  height: 114rpx;
+  border-radius: 6rpx;
+  background-color: #2896fe;
+}
+.wrongQuesList .wrongQuesList-ul .wrongQuesList-li .img-fixed{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 114rpx;
+  width: 114rpx;
+}
+.wrongQuesList .wrongQuesList-ul .wrongQuesList-li .img image{
+  width: 70rpx;
+  height: 70rpx;
+  display: block;
+  margin: 10rpx auto 0;
+}
+.wrongQuesList .wrongQuesList-ul .wrongQuesList-li .img .img-text{
+  font-size: 22rpx;
+  color: #fff;
+  text-align: center;
+}
+.wrongQuesList .wrongQuesList-ul .wrongQuesList-li .img-content{
+  flex: 1;
+  padding-left: 40rpx;
+}
+.wrongQuesList .wrongQuesList-ul .wrongQuesList-li .img-content .time {
+  font-size: 30rpx;
+  color: #333;
+  text-align: left;
+}
+.wrongQuesList .wrongQuesList-ul .wrongQuesList-li .img-content .stage{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.wrongQuesList .wrongQuesList-ul .wrongQuesList-li .img-content .stage view{
+  font-size: 22rpx;
+  color: #333;
+}
+.wrongQuesList .wrongQuesList-ul .wrongQuesList-li .img-content .second{
+  margin-left: 40rpx;
+}

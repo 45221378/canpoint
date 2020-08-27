@@ -1,0 +1,85 @@
+/* pages/mine/explain.wxss */
+.explain-banner {
+    width: 100%;
+    height: 396rpx;
+}
+
+.explain .main {
+    padding: 40rpx 0;
+
+}
+
+.explain .main .one {
+    margin-bottom: 6rpx;
+    padding-left: 38rpx;
+    position: relative;
+}
+.explain .main .one .line{
+    position: absolute;
+    left: 56rpx;
+    top: 56rpx;
+    width: 16rpx;
+    height: 465rpx;
+}
+.explain .main .one .explain2{
+    width: 313rpx;
+    height: 267rpx;
+    margin: 60rpx auto;
+    display: block;
+}
+.explain .main .one .explain3{
+    width: 545rpx;
+    height: 316rpx;
+    margin: 60rpx auto;
+    display: block;
+
+}
+.explain .main .one .explain4{
+    width: 557rpx;
+    height: 452rpx;
+    margin: 60rpx auto;
+    display: block;
+
+}
+.explain .main .one .num-left {
+    height: 56rpx;
+    width: 56rpx;
+    border-radius: 50%;
+    background-color: #2896fe;
+    color: #fff;
+    font-size: 30rpx;
+    text-align: center;
+    line-height: 54rpx;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.explain .main .one .text {
+    font-size: 26rpx;
+    color: #333;
+    padding: 0 40rpx;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.explain .main .net {
+    padding: 10rpx 20rpx 10rpx 96rpx;
+}
+
+.explain .main .net .net-work {
+    font-size: 26rpx;
+    color: #2896fe;
+}
+
+.explain .main .net .copy {
+    font-size: 22rpx;
+    color: #333;
+    height: 38rpx;
+    width: 82rpx;
+    line-height: 38rpx;
+    text-align: center;
+    background-color: #ddd;
+    display: inline-block;
+    border-radius: 10px;
+    margin: 20rpx 0 0 20rpx;
+}

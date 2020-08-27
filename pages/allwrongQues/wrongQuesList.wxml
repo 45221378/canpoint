@@ -1,0 +1,33 @@
+<!-- pages/wrongQuesList/wrongQuesList.wxml -->
+<view class="wrongQuesList">
+<view class="noData" wx:if="{{contentlist.length==0}}">
+    <image src="/images/nodata.png"></image>
+    <view class="say">
+      <text>错题集空空如也~</text>
+      <text>将题目加入错题集可以方便复习哦</text>
+    </view>
+  </view>
+  <view wx:if="{{contentlist.length>0}}">
+    <view class="wrongQuesList-title">下载我定制的错题集</view>
+  <view class="wrongQuesList-ul">
+  <block wx:for="{{contentlist}}" wx:for-item="item" wx:key="index">
+    <view class="wrongQuesList-li" bindtap ="gotodown" data-download="{{item.download_link}}">
+        <image class="img-fixed" src="../../images/out.png" wx:if="{{item.status==2}}"></image>
+        <view class="img">
+          <image src="{{imgList[item.subject_id]}}" lazy-load="{{true}}"></image>
+          <view class="img-text">错题集</view>
+        </view>
+        <view class="img-content">
+          <view class="time">{{item.pdf_name}}</view>
+          <view class="stage">
+            <view class="">学段：{{item.stage_name}}{{item.subject_name}}</view>
+            <view class="second">题数：{{item.wrong_question_count}}题</view>
+          </view>
+        </view>
+      </view>
+  </block>
+    
+  </view>
+  </view>
+  
+</view>
